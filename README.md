@@ -6,13 +6,13 @@ This component library contains charts for the standard DORA metrics.
 
 You can install these components using the following command:
 
-```
+```sh
 npm install https://github.com/liatrio/react-dora-charts/releases/download/v1.0.0/react-dora-charts-1.0.0.tgz
 ```
 
 Or
 
-```
+```sh
 yarn add react-dora-charts@https://github.com/liatrio/react-dora-charts/releases/download/v1.0.0/react-dora-charts-1.0.0.tgz
 ```
 
@@ -20,7 +20,7 @@ yarn add react-dora-charts@https://github.com/liatrio/react-dora-charts/releases
 
 To use these charts, you can do as follows:
 
-```
+```js
 import { DeploymentFrequency, fetchData } from `react-dora-charts`
 ...
 const fetchedData = fetchData(fetchProps, onSuccess, onFailure)
@@ -120,7 +120,7 @@ This function returns a `DoraState` object with information about each DORA Metr
 
 It takes the following values as parameters:
 
-* `props` - An object contianing the [Component Properties](https://github.com/liatrio/react-dora-charts?tab=readme-ov-file#component-properties)
+* `props` - An object contianing the [Component Properties](#component-properties)
 * `data` - The data supplied by the `fetchData` function
 * `start` - The start date of the period you want to know the trend for
 * `end` - The end date of the period you want to know the trend for
@@ -196,7 +196,7 @@ These functions are just shortcuts to get a Date a certain number of days in the
 
 ## Dependencies
 
-These components rely on `data` being supplied to them.  We supply the [liatrio-dora-api](https://github.com/liatrio/liatrio-dora-api) to gather this data out of a Loki DB that is fed by our [liatrio-otel-collector](https://github.com/liatrio/liatrio-otel-collector).  If you want to create your own API, it just needs to return the [Data Schema](https://github.com/liatrio/react-dora-charts?tab=readme-ov-file#data-schemas).
+These components rely on `data` being supplied to them.  We supply the [liatrio-dora-api](https://github.com/liatrio/liatrio-dora-api) to gather this data out of a Loki DB that is fed by our [liatrio-otel-collector](https://github.com/liatrio/liatrio-otel-collector).  If you want to create your own API, it just needs to return the [Data Schema](#data-schemas)
 
 We also expose the `fetchData` function to fetch this data for you and do some preprocessing of the data before sending it into the components.  If you would like to use your own function you will need to examine the preprocessing done by this function and replicate it for yours.
 
@@ -204,7 +204,7 @@ We also expose the `fetchData` function to fetch this data for you and do some p
 
 The data schema for each chart is as follows:
 
-```
+```schema
 {
     records: [{
       repository: string
