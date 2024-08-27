@@ -39,43 +39,43 @@ It is important that the chart component be wrapped in an element of some size s
 
 This is a component to display an At a Glance board for the 4 DORA Metrics and can be setup to either display trends or color coded scores.
 
-![Board](/screenshots/board_hover.png?raw=true "Board")
+![Board](/screenshots/board_hover.png?raw=true 'Board')
 
-![Board with details](/screenshots/board_with_details.png?raw=true "Board with details")
+![Board with details](/screenshots/board_with_details.png?raw=true 'Board with details')
 
-![Board with trends](/screenshots/board_with_trends.png?raw=true "Board with trends")
+![Board with trends](/screenshots/board_with_trends.png?raw=true 'Board with trends')
 
 ### `DeploymentFrequencyGraph`
 
 This is a component to display a graph of your deployments over the specified time period.
 
-![DeploymentFrequency](/screenshots/deployment_frequency.png?raw=true "DeploymentFrequency")
+![DeploymentFrequency](/screenshots/deployment_frequency.png?raw=true 'DeploymentFrequency')
 
 ### `ChangeLeadTimeGraph`
 
 This is a component to display a graph of your change lead time over the specified time period.
 
-![Change Lead Time](/screenshots/change_lead_time.png?raw=true "Change Lead Time")
+![Change Lead Time](/screenshots/change_lead_time.png?raw=true 'Change Lead Time')
 
 ### `ChangeFailureRateGraph`
 
 This is a component to display a graph of your change failure rate over the specified time period.
 
-![Change Failure Rate](/screenshots/change_failure_rate.png?raw=true "Change Failure Rate")
+![Change Failure Rate](/screenshots/change_failure_rate.png?raw=true 'Change Failure Rate')
 
 ### `RecoverTimeGraph`
 
 This is a component to display a graph of your recover time over the specified time period.
 
-![Recover Time](/screenshots/recover_time.png?raw=true "Recover Time")
+![Recover Time](/screenshots/recover_time.png?raw=true 'Recover Time')
 
 ### `TrendGraph`
 
 This is a component to display an the overall trend of the data supplied.
 
-![Overall Trend](/screenshots/trend_overall.png?raw=true "Overall Trend")
+![Overall Trend](/screenshots/trend_overall.png?raw=true 'Overall Trend')
 
-![Overall Trend with individual Metric Trends](/screenshots/trend_with_metrics.png?raw=true "Overall Trend with individual Metric Trends")
+![Overall Trend with individual Metric Trends](/screenshots/trend_with_metrics.png?raw=true 'Overall Trend with individual Metric Trends')
 
 ### `TrendIndicator`
 
@@ -90,7 +90,7 @@ Use this function to create the `data` parameter for the components.
 This function takes a (`FetchProps`) object with the following properties.
 
 | Field                           | Required | Description                                                                                                                                                                                                        |
-|---------------------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `api`                           | true     | This is the url to the API for gathering data.                                                                                                                                                                     |
 | `getAuthHeaderValue`            | false    | This is a function that should provide the value of the `Authorization` HTTP Header for the `api`.<br>If not specified, no auth will be used.                                                                      |
 | `team`                          | false    | The name of the team to show pull data for.                                                                                                                                                                        |
@@ -106,23 +106,23 @@ This function returns a `DoraState` object with information about each DORA Metr
 It takes the following values as parameters:
 
 | Parameter | Description                                                            |
-|-----------|------------------------------------------------------------------------|
+| --------- | ---------------------------------------------------------------------- |
 | `props`   | An object containing the [Component Properties](#component-properties) |
 | `data`    | The data supplied by the `fetchData` function                          |
 | `start`   | The start date of the period you want to know the trend for            |
 | `end`     | The end date of the period you want to know the trend for              |
 
-To get the trend value, the evaluation will use the previous period of the same length agains your request period.
+To get the trend value, the evaluation will use the previous period of the same length against your request period.
 
 The `DoraState` object that is returned contains the following for each metric:
 
-| Field     | Description                                                                                                                        |
-|-----------|------------------------------------------------------------------------------------------------------------------------------------|
-| `average` | The average of the metric of the supplied time frame.                                                                              |
+| Field     | Description                                                                                                                         |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `average` | The average of the metric of the supplied time frame.                                                                               |
 | `display` | A formatted display string for `average` field including a postfix of hrs, days, mins, or % depending on the metric and time scale. |
-| `color`   | The color for the displays string based on the `colors` supplied in the component properties.                                      |
-| `trend`   | Whether this period measured is improving, falling behind, or staying even with the requested period.                              |
-| `rank`    | An enum of `Rank` that provides whether you are elite, high, medium, low or unknown for this metric.                               |
+| `color`   | The color for the displays string based on the `colors` supplied in the component properties.                                       |
+| `trend`   | Whether this period measured is improving, falling behind, or staying even with the requested period.                               |
+| `rank`    | An enum of `Rank` that provides whether you are elite, high, medium, low or unknown for this metric.                                |
 
 ### `getDateDaysInPast` and `getDateDaysInPastUtc`
 
@@ -133,7 +133,7 @@ These functions are just shortcuts to get a Date a certain number of days in the
 ### Graph Component Properties
 
 | Property                        | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-|---------------------------------|:--------:|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ------------------------------- | :------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `data`                          |   true   | An array of `DoraRecord` objects used to display the graphs.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | `graphStart`                    |  false   | If not supplied this will default to 30 days in the past.<br>This value is used to determine the starting date for the charts.                                                                                                                                                                                                                                                                                                                                                                                                                        |
 | `graphEnd`                      |  false   | If not supplied, this will default to 1 day in the past.<br>This value is used to determine the ending date for the charts.                                                                                                                                                                                                                                                                                                                                                                                                                           |
@@ -145,24 +145,24 @@ These functions are just shortcuts to get a Date a certain number of days in the
 
 ### Board Component Properties
 
-* All the `Common Properties`
+- All the `Common Properties`
 
 | Property            | Required | Description                                                                                                                          |
-|---------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------|
+| ------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------ |
 | `alwaysShowDetails` | false    | This field controls whether the `Board` component shows the details on hover or statically below the icon.                           |
 | `showTrends`        | false    | This field controls whether trends or rank base coloring is shown in the `Board` component.                                          |
 | `hideColors`        | false    | This allows you to change the `Board` component to hide the rank based coloring on the icons and instead just use a shade of purple. |
 
 ### Trend Component Properties
 
-| Property              | Required | Description                                                                                                     |
-|-----------------------|----------|-----------------------------------------------------------------------------------------------------------------|
+| Property               | Required | Description                                                                                                     |
+| ---------------------- | -------- | --------------------------------------------------------------------------------------------------------------- |
 | `showIndividualTrends` | false    | Enabling this property will show a line for each individual metric trend in addition to the overall DORA trend. |
 
 ### TrendIndicator Component Properties
 
 | Property | Required | Description                                                          |
-|----------|----------|----------------------------------------------------------------------|
+| -------- | -------- | -------------------------------------------------------------------- |
 | `trend`  | true     | This is a `Trend` enum value that controls what is displayed inside. |
 
 ## Dependencies
