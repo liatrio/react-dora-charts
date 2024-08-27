@@ -1,3 +1,5 @@
+# Badges
+
 [![CodeQL](https://github.com/liatrio/react-dora-charts/actions/workflows/codeql.yml/badge.svg)](https://github.com/liatrio/react-dora-charts/actions/workflows/codeql.yml)
 
 # Introduction
