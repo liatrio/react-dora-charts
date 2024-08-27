@@ -2,25 +2,25 @@
 
 This component library contains charts for the standard DORA metrics.
 
-# Installation
+## Installation
 
 You can install these components using the following command:
 
-```
+```sh
 npm install https://github.com/liatrio/react-dora-charts/releases/download/v1.0.0/react-dora-charts-1.0.0.tgz
 ```
 
 Or
 
-```
+```sh
 yarn add react-dora-charts@https://github.com/liatrio/react-dora-charts/releases/download/v1.0.0/react-dora-charts-1.0.0.tgz
 ```
 
-# Usage
+## Usage
 
 To use these charts, you can do as follows:
 
-```
+```js
 import { DeploymentFrequency, fetchData } from `react-dora-charts`
 ...
 const fetchedData = fetchData(fetchProps, onSuccess, onFailure)
@@ -33,121 +33,119 @@ const fetchedData = fetchData(fetchProps, onSuccess, onFailure)
 
 It is important that the chart component be wrapped in an element of some size somewhere up the tree, otherwise the chart may have unexpected behavior.
 
-# Exposed Components
+## Exposed Components
 
-- `Board`
+### `Board`
 
-  This is a component to display an At a Glance board for the 4 DORA Metrics and can be setup to either display trends or color coded scores
+This is a component to display an At a Glance board for the 4 DORA Metrics and can be setup to either display trends or color coded scores.
 
-  ![Board](/screenshots/board_hover.png?raw=true 'Board')
+![Board](/screenshots/board_hover.png?raw=true "Board")
 
-  ![Board with details](/screenshots/board_with_details.png?raw=true 'Board with details')
+![Board with details](/screenshots/board_with_details.png?raw=true "Board with details")
 
-  ![Board with trends](/screenshots/board_with_trends.png?raw=true 'Board with trends')
+![Board with trends](/screenshots/board_with_trends.png?raw=true "Board with trends")
 
-- `DeploymentFrequencyGraph`
+### `DeploymentFrequencyGraph`
 
-  This is a component to display a graph of your deployments over the specified time period
+This is a component to display a graph of your deployments over the specified time period.
 
-  ![DeploymentFrequency](/screenshots/deployment_frequency.png?raw=true 'DeploymentFrequency')
+![DeploymentFrequency](/screenshots/deployment_frequency.png?raw=true "DeploymentFrequency")
 
-- `ChangeLeadTimeGraph`
+### `ChangeLeadTimeGraph`
 
-  This is a component to display a graph of your change lead time over the specified time period
+This is a component to display a graph of your change lead time over the specified time period.
 
-  ![Change Lead Time](/screenshots/change_lead_time.png?raw=true 'Change Lead Time')
+![Change Lead Time](/screenshots/change_lead_time.png?raw=true "Change Lead Time")
 
-- `ChangeFailureRateGraph`
+### `ChangeFailureRateGraph`
 
-  This is a component to display a graph of your change failure rate over the specified time period
+This is a component to display a graph of your change failure rate over the specified time period.
 
-  ![Change Failure Rate](/screenshots/change_failure_rate.png?raw=true 'Change Failure Rate')
+![Change Failure Rate](/screenshots/change_failure_rate.png?raw=true "Change Failure Rate")
 
-- `RecoverTimeGraph`
+### `RecoverTimeGraph`
 
-  This is a component to display a graph of your recover time over the specified time period
+This is a component to display a graph of your recover time over the specified time period.
 
-  ![Recover Time](/screenshots/recover_time.png?raw=true 'Recover Time')
+![Recover Time](/screenshots/recover_time.png?raw=true "Recover Time")
 
-- `TrendGraph`
+### `TrendGraph`
 
-  This is a component to display an the overall trend of the data supplied
+This is a component to display an the overall trend of the data supplied.
 
-  ![Overall Trend](/screenshots/trend_overall.png?raw=true 'Overall Trend')
+![Overall Trend](/screenshots/trend_overall.png?raw=true "Overall Trend")
 
-  ![Overall Trend with individual Metric Trends](/screenshots/trend_with_metrics.png?raw=true 'Overall Trend with individual Metric Trends')
+![Overall Trend with individual Metric Trends](/screenshots/trend_with_metrics.png?raw=true "Overall Trend with individual Metric Trends")
 
-- `TrendIndicator`
+### `TrendIndicator`
 
-  This component is a trend indicator you can use to display in parent components
+This component is a trend indicator you can use to display in parent components.
 
-# Exposed Functionality
+## Exposed Functions
 
-- `fetchData`
+### `fetchData`
 
-  This is the function your parent component should use to pull data to supply in the `data` property of the components
+Use this function to create the `data` parameter for the components.
 
-  The parameters of this function are as follows:
+This function takes a (`FetchProps`) object with the following properties.
 
-  An object (`FetchProps`) containing the following properties
+- `api`:
 
-  - `api`:
+  - This is the url to the API for gathering data.
 
-    - This is the url to the API for gathering data.
+- `getAuthHeaderValue` (_optional_):
 
-  - `getAuthHeaderValue` (_optional_):
+  - This is a function that should provide the value of the `Authorization` HTTP Header for the `api`.
+  - If not specified, no auth will be used
 
-    - This is a function that should provide the value of the `Authorization` HTTP Header for the `api`.
-    - If not specified, no auth will be used
+- `team` (_optional_):
 
-  - `team` (_optional_):
+  - The name of the team to show pull data for.
 
-    - The name of the team to show pull data for.
+- `repositories` (_optional_):
 
-  - `repositories` (_optional_):
+  - A list of repository names to pull data for.
 
-    - A list of repository names to pull data for.
+- `daysToPull` (_optional_):
 
-  - `daysToPull` (_optional_):
+  - The number of days in the past from the current date to pull data for
+  - If not specified, 365 is the default
 
-    - The number of days in the past from the current date to pull data for
-    - If not specified, 365 is the default
+- `includeWeekendsInCalculations` (_optional_):
 
-  - `includeWeekendsInCalculations` (_optional_):
+  - When calculating the averages for each metric in the `Board` component, this setting allows you to include/exclude weekends in those calculations. This is useful when you don't have teams that work weekends.
 
-    - When calculating the averages for each metric in the `Board` component, this setting allows you to include/exclude weekends in those calculations. This is useful when you don't have teams that work weekends.
+- `holidays` (_optional_):
+  - This field allows you to specify holidays for that your organization follows to exclude from the calculations for the `Board` component.
 
-  - `holidays` (_optional_):
-    - This field allows you to specify holidays for that your organization follows to exclude from the calculations for the `Board` component.
+### `buildDoraStateForPeriod`
 
-- `buildDoraStateForPeriod`
+This function returns a `DoraState` object with information about each DORA Metric.
 
-  This function returns a `DoraState` object with information about each DORA Metric.
+It takes the following values as parameters:
 
-  It takes the following values as parameters:
+- `props` - An object contianing the [Component Properties](https://github.com/liatrio/react-dora-charts?tab=readme-ov-file#component-properties)
+- `data` - The data supplied by the `fetchData` function
+- `start` - The start date of the period you want to know the trend for
+- `end` - The end date of the period you want to know the trend for
 
-  - `props` - An object contianing the [Component Properties](https://github.com/liatrio/react-dora-charts?tab=readme-ov-file#component-properties)
-  - `data` - The data supplied by the `fetchData` function
-  - `start` - The start date of the period you want to know the trend for
-  - `end` - The end date of the period you want to know the trend for
+To get the trend value, the evaluation will use the previous period of the same length agains your request period.
 
-  To get the trend value, the evaluation will use the previous period of the same length agains your request period.
+The `DoraState` object that is returned contains the following for each metric:
 
-  The `DoraState` object that is returned contains the following for each metric:
+- `average` - Is the average of the metric of the supplied time frame
+- `display` - Is a formated display string for `average` field including a postfix of hrs, days, mins, or % depending on the metric and time scale
+- `color` - Is the color for the displays string based on the `colors` supplied in the component properties
+- `trend` - Is whether this period measured is improving, falling behind, or staying even with the requested period
+- `rank` - Is a enum of `Rank` that provides whether you are elite, high, medium, low or unknown for this metric
 
-  - `average` - Is the average of the metric of the supplied time frame
-  - `display` - Is a formated display string for `average` field including a postfix of hrs, days, mins, or % depending on the metric and time scale
-  - `color` - Is the color for the displays string based on the `colors` supplied in the component properties
-  - `trend` - Is whether this period measured is improving, falling behind, or staying even with the requested period
-  - `rank` - Is a enum of `Rank` that provides whether you are elite, high, medium, low or unknown for this metric
+### `getDateDaysInPast` and `getDateDaysInPastUtc`
 
-- `getDateDaysInPast` and `getDateDaysInPastUtc`
+These functions are just shortcuts to get a Date a certain number of days in the past
 
-  These functions are just shortcuts to get a Date a certain number of days in the past
+## Component Properties
 
-# Component Properties
-
-## ...Graph Component Properties
+### Graph Component Properties
 
 - `data`:
 
@@ -179,12 +177,12 @@ It is important that the chart component be wrapped in an element of some size s
 
 - `message` (_optional_):
 
-  - This allows a parent component to display a custom message while it does something. This setting overrides `loading` and the nodata state that happens if `data` is empty or the `api` returns no data
+  - This allows a parent component to display a custom message while it does something. This setting overrides `loading` and the no data state that happens if `data` is empty or the `api` returns no data
 
 - `holidays` (_optional_):
   - This field allows you to specify holidays for that your organization follows to exclude from the calculations for the components
 
-## Board Component Properties
+### Board Component Properties
 
 - All the `Common Properties`
 
@@ -199,27 +197,27 @@ It is important that the chart component be wrapped in an element of some size s
 - `hideColors` (_optional_):
   - This allows you to change the `Board` component to hide the rank based coloring on the icons and instead just use a shade of purple
 
-## Trend Component Properties
+### Trend Component Properties
 
 - `showIndividualTrends` (_optional_):
   - Enabling this property will show a line for each individual metric trend in addition to the overall DORA trend
 
-## TrendIndicator Component Properties
+### TrendIndicator Component Properties
 
 - `trend`:
   - This is a `Trend` enum value that controls what is displayed inside
 
-# Dependencies
+## Dependencies
 
-These components rely on `data` being supplied to them. We supply the [liatrio-dora-api](https://github.com/liatrio/liatrio-dora-api) to gather this data out of a Loki DB that is fed by our [liatrio-otel-collector](https://github.com/liatrio/liatrio-otel-collector). If you want to create your own API, it just needs to return the [Data Schema](https://github.com/liatrio/react-dora-charts?tab=readme-ov-file#data-schemas).
+These components rely on `data` being supplied to them. We supply the [liatrio-dora-api](https://github.com/liatrio/liatrio-dora-api) to gather this data out of a Loki DB that is fed by our [liatrio-otel-collector](https://github.com/liatrio/liatrio-otel-collector). If you want to create your own API, it just needs to return the [Data Schema](#data-schemas).
 
 We also expose the `fetchData` function to fetch this data for you and do some preprocessing of the data before sending it into the components. If you would like to use your own function you will need to examine the preprocessing done by this function and replicate it for yours.
 
-# Data Schemas
+## Data Schemas
 
 The data schema for each chart is as follows:
 
-```
+```schema
 {
     records: [{
       repository: string
