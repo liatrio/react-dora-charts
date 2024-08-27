@@ -49,7 +49,7 @@ export const generateTicks = (start: Date, end: Date, numIntervals: number) => {
   for (let i = 0; i <= numIntervals; i++) {
     ticks.push(new Date(start.getTime() + interval * i).getTime())
   }
-  
+
   return ticks
 }
 
@@ -133,16 +133,16 @@ export const useSharedLogic = (componentProps: ChartProps, graphDataComposer: (c
     }
 
     setGraphData(composedData)
-    
+
     const repositories = extractUniqueRepositories(filteredData)
-    
+
     setRepositories(repositories)
 
     setColors(generateDistinctColors(repositories.length))
   }
 
   useEffect(() => {
-    const start = componentProps.graphStart || getDateDaysInPast(defaultGraphStart) 
+    const start = componentProps.graphStart || getDateDaysInPast(defaultGraphStart)
     const end = componentProps.graphEnd || getDateDaysInPast(defaultGraphEnd)
 
     setStartDate(start)

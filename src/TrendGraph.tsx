@@ -124,7 +124,7 @@ const filterGraphData = (data: GraphData[], start: number, end: number) : GraphD
   const filtered = data.filter((entry: GraphData) => {
     return entry.date >= start && entry.date <= end
   })
-  
+
   return filtered
 }
 

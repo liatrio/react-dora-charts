@@ -17,7 +17,7 @@ export const expandFetchedData = (props: FetchProps, data: DoraRecord[]) => {
       const deployedAt = record.fixed_at ? record.fixed_at : record.created_at
 
       let diff = deployedAt.getTime() - mergedAt.getTime()
-      
+
       if(!props.includeWeekendsInCalculations) {
         diff = subtractWeekends(diff, mergedAt, deployedAt)
       }

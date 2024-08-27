@@ -14,7 +14,7 @@ const CustomDot: React.FC<CustomDotProps> = ({ cx, cy, fill, repository, payload
   if(!repositoryData) {
     return
   }
-  
+
   const mOver = (e: any) => {
     if(mouseOver) {
       mouseOver(e, payload, repository)

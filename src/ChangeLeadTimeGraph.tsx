@@ -77,7 +77,7 @@ const ChangeLeadTimeGraph : React.FC<ChartProps> = (props: ChartProps) => {
       multiplier = 60
       label = " mins"
     }
-      
+
     composedData.forEach((repositories: ProcessRepository[], key: string) => {
       repositories.forEach((repository: ProcessRepository) => {
         repository.graphCycleTime *= multiplier
@@ -186,14 +186,14 @@ const ChangeLeadTimeGraph : React.FC<ChartProps> = (props: ChartProps) => {
               shape={(props: any) =>
                 <CustomShape
                   {...props}
-                  tooltipId="cltTooltip"  
+                  tooltipId="cltTooltip"
                   mouseOver={(event: any, payload: ProcessRepository) => handleMouseOverDot(event, payload, repository)}
                 />
               }
               activeShape={(props: any) =>
                 <CustomShape
                   {...props}
-                  tooltipId="cltTooltip"  
+                  tooltipId="cltTooltip"
                   mouseOver={(event: any, payload: ProcessRepository) => handleMouseOverDot(event, payload, repository)}
                 />
               }

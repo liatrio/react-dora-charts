@@ -21,7 +21,7 @@ export interface GraphProperties {
   changeMessage: (event: any) => void
   changeDateRange: (event: any) => void
   changeThreshold: (event: any) => void
-  changeHolidays: (event: any) => void 
+  changeHolidays: (event: any) => void
 }
 
 export const useGraph = (dataSet: any[]) : GraphProperties => {
@@ -31,7 +31,7 @@ export const useGraph = (dataSet: any[]) : GraphProperties => {
     start = new Date(start.getTime() - millisecondsToDays)
     end = new Date(end.getTime() + millisecondsToDays)
   }
-  
+
   const [data, setData] = useState<any>(dataSet[0])
   const [loading, setLoading] = useState<boolean>(false)
   const [includeWeekends, setIncludeWeekends] = useState<boolean>(false)
@@ -51,7 +51,7 @@ export const useGraph = (dataSet: any[]) : GraphProperties => {
     setData(dataSet[event.target.value])
 
     let {start, end} = getDateRange(dataSet[event.target.value])
-    
+
     if(end.getTime() - start.getTime() < millisecondsToDays) {
       start = new Date(start.getTime() - millisecondsToDays)
       end = new Date(end.getTime() + millisecondsToDays)
@@ -105,7 +105,7 @@ export const useGraph = (dataSet: any[]) : GraphProperties => {
       const def = defaultMetricThresholdSet as any
 
       const newValue = event.target.value ?? def[metric][rank]
-      
+
       if(obj[metric][rank] === newValue) {
         return prev
       }

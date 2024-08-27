@@ -18,7 +18,7 @@ const calculateChangeFailureRateAverage = (_: ChartProps, data: DoraRecord[]) : 
 const calculateChangeLeadTimeAverage = (_: ChartProps, data: DoraRecord[]) : number => {
   let totalSuccessfulRecords = 0
   let totalLeadTime = 0
-  
+
   data.forEach(record => {
     if(record.totalCycle === undefined) {
       return

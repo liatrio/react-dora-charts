@@ -35,7 +35,7 @@ const Template: StoryFn<ChartProps> = () => {
     setData(data)
 
     const {start, end} = getDateRange(data)
-    
+
     setCalendarStartDate(start)
     setCalendarEndDate(end)
 

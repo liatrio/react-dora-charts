@@ -81,7 +81,7 @@ export const composeGraphData = (_: ChartProps, data: DoraRecord[]) => {
       const repoData = data.repositories.get(key)!
 
       const total = repoData.failed + repoData.successful
-  
+
       repoData.total = repoData.failed / (total < 1 ? 1 : total)
 
       repoData.date += index
@@ -119,7 +119,7 @@ const ChangeFailureRateGraph : React.FC<ChartProps> = (props: ChartProps) => {
     const body = (<>
       <p key={uuidv4()}>{payload.repository}: {(payload.total * 100).toFixed(2)}%</p>
       {payload.successful > 0 &&
-        <span key={uuidv4()} className="toolTipSpan">Successes: 
+        <span key={uuidv4()} className="toolTipSpan">Successes:
           {successUrls.map((url: string, index: number) => {
             return <a key={uuidv4()} className="toolTipLink" target='_blank' href={url}>{index + 1}</a>
           })}{successDots}
@@ -129,17 +129,17 @@ const ChangeFailureRateGraph : React.FC<ChartProps> = (props: ChartProps) => {
         <br key={uuidv4()}/>
       }
       {payload.failed > 0 &&
-        <span key={uuidv4()} className="toolTipSpan">Issues: 
+        <span key={uuidv4()} className="toolTipSpan">Issues:
           {failureUrls.map((url: string, index: number) => {
             return <a key={uuidv4()} className="toolTipLink" target='_blank' href={url}>{index + 1}</a>
           })}{failureDots}
         </span>
       }
     </>)
-    
+
     const date = new Date(payload.date).toISOString().split("T")[0]
     const title = (<h3>{date}</h3>)
-    
+
     setTooltipContent(<TooltipContent body={body} title={title}/>)
   }
 

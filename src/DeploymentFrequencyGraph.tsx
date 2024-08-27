@@ -107,7 +107,7 @@ const DeploymentFrequencyGraph : React.FC<ChartProps> = (props: ChartProps) => {
     const dots = repositoryData.urls.length > 5 ? '...' : ''
 
     const body = (<>
-      <p>{repository}: 
+      <p>{repository}:
         {urls.map((url: string, index: number) => {
           return <a key={uuidv4()} className="toolTipLink" href={url} target="_blank">{index + 1}</a>
         })}{dots}
@@ -116,13 +116,13 @@ const DeploymentFrequencyGraph : React.FC<ChartProps> = (props: ChartProps) => {
 
     const date = new Date(payload.date).toISOString().split("T")[0]
     const title = (<h3>{date}</h3>)
-    
+
     setTooltipContent(<TooltipContent body={body} title={title}/>)
   }
 
   const dataKeyFunc = (obj: ProcessData, repository: string) : any => {
     const repositoryData = obj.repositories.get(repository)
-    
+
     if(!repositoryData) {
       return 0
     }

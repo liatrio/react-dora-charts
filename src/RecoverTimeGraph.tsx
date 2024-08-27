@@ -90,7 +90,7 @@ const RecoverTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
     composedData.forEach((entry: ProcessData) => {
       entry.repositories.forEach((repositoryData: ProcessRepository, key: string) => {
         repositories.push(key)
-        
+
         repositoryData.avgTime *= multiplier
         repositoryData.avgLabel = " days"
       })
@@ -124,13 +124,13 @@ const RecoverTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
 
     const date = new Date(payload.date).toISOString().split("T")[0]
     const title = (<h3>{date}</h3>)
-    
+
     setTooltipContent(<TooltipContent body={body} title={title}/>)
   }
 
   const dataKeyFunc = (obj: ProcessData, repository: string) : any => {
     const repositoryData = obj.repositories.get(repository)
-    
+
     if(!repositoryData) {
       return NaN
     }
