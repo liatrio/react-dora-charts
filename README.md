@@ -89,34 +89,15 @@ Use this function to create the `data` parameter for the components.
 
 This function takes a (`FetchProps`) object with the following properties.
 
-- `api`:
-
-  - This is the url to the API for gathering data.
-
-- `getAuthHeaderValue` (_optional_):
-
-  - This is a function that should provide the value of the `Authorization` HTTP Header for the `api`.
-  - If not specified, no auth will be used
-
-- `team` (_optional_):
-
-  - The name of the team to show pull data for.
-
-- `repositories` (_optional_):
-
-  - A list of repository names to pull data for.
-
-- `daysToPull` (_optional_):
-
-  - The number of days in the past from the current date to pull data for
-  - If not specified, 365 is the default
-
-- `includeWeekendsInCalculations` (_optional_):
-
-  - When calculating the averages for each metric in the `Board` component, this setting allows you to include/exclude weekends in those calculations. This is useful when you don't have teams that work weekends.
-
-- `holidays` (_optional_):
-  - This field allows you to specify holidays for that your organization follows to exclude from the calculations for the `Board` component.
+| Field                           | Required | Description                                                                                                                                                                                                        |
+|---------------------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `api`                           | true     | This is the url to the API for gathering data.                                                                                                                                                                     |
+| `getAuthHeaderValue`            | false    | This is a function that should provide the value of the `Authorization` HTTP Header for the `api`.<br>If not specified, no auth will be used.                                                                      |
+| `team`                          | false    | The name of the team to show pull data for.                                                                                                                                                                        |
+| `repositories`                  | false    | A list of repository names to pull data for.                                                                                                                                                                       |
+| `daysToPull`                    | false    | The number of days in the past from the current date to pull data for<br>If not specified, 365 is the default.                                                                                                     |
+| `includeWeekendsInCalculations` | false    | When calculating the averages for each metric in the `Board` component, this setting allows you to include/exclude weekends in those calculations.<br>This is useful when you don't have teams that work weekends. |
+| `holidays`                      | false    | This field allows you to specify holidays that your organization follows to exclude from the calculations for the `Board` component.                                                                               |
 
 ### `buildDoraStateForPeriod`
 
@@ -124,20 +105,24 @@ This function returns a `DoraState` object with information about each DORA Metr
 
 It takes the following values as parameters:
 
-- `props` - An object contianing the [Component Properties](https://github.com/liatrio/react-dora-charts?tab=readme-ov-file#component-properties)
-- `data` - The data supplied by the `fetchData` function
-- `start` - The start date of the period you want to know the trend for
-- `end` - The end date of the period you want to know the trend for
+| Parameter | Description                                                            |
+|-----------|------------------------------------------------------------------------|
+| `props`   | An object containing the [Component Properties](#component-properties) |
+| `data`    | The data supplied by the `fetchData` function                          |
+| `start`   | The start date of the period you want to know the trend for            |
+| `end`     | The end date of the period you want to know the trend for              |
 
 To get the trend value, the evaluation will use the previous period of the same length agains your request period.
 
 The `DoraState` object that is returned contains the following for each metric:
 
-- `average` - Is the average of the metric of the supplied time frame
-- `display` - Is a formated display string for `average` field including a postfix of hrs, days, mins, or % depending on the metric and time scale
-- `color` - Is the color for the displays string based on the `colors` supplied in the component properties
-- `trend` - Is whether this period measured is improving, falling behind, or staying even with the requested period
-- `rank` - Is a enum of `Rank` that provides whether you are elite, high, medium, low or unknown for this metric
+| Field     | Description                                                                                                                        |
+|-----------|------------------------------------------------------------------------------------------------------------------------------------|
+| `average` | The average of the metric of the supplied time frame.                                                                              |
+| `display` | A formatted display string for `average` field including a postfix of hrs, days, mins, or % depending on the metric and time scale. |
+| `color`   | The color for the displays string based on the `colors` supplied in the component properties.                                      |
+| `trend`   | Whether this period measured is improving, falling behind, or staying even with the requested period.                              |
+| `rank`    | An enum of `Rank` that provides whether you are elite, high, medium, low or unknown for this metric.                               |
 
 ### `getDateDaysInPast` and `getDateDaysInPastUtc`
 
@@ -147,65 +132,38 @@ These functions are just shortcuts to get a Date a certain number of days in the
 
 ### Graph Component Properties
 
-- `data`:
-
-  - An array of `DoraRecord` objects used to display the graphs.
-
-- `graphStart` (_optional_):
-
-  - If not supplied this will default to 30 days in the past.
-  - This value is used to determine the starting date for the charts.
-
-- `graphEnd` (_optional_):
-
-  - If not supplied, this will default to 1 day in the past.
-  - This value is used to determine the ending date for the charts.
-
-- `loading` (_optional_):
-
-  - Boolean to allow a container component to control the loading status if it wants to supply `data`
-
-- `includeWeekendsInCalculations` (_optional_):
-
-  - When calculating the averages for each metric, this setting allows you to include/exclude weekends in those calculations. This is useful when you don't have teams that work weekends.
-
-- `metricThresholdSet` (_optional_):
-
-  - This allows you to customize the metric thresholds used for determining the rank of each metric. You only have to override the ones you need. There are defaults based on the official DORA Report that are used when these are not supplied. This takes in a `MetricThresholdSet` object which contains a `MetricThresholds` object for each metric.
-
-  The threshold values for `elite`, `high` and `medium` are measured in hours. `low` is considered anything longer than medium, so it is not able to be supplied as a value in this object.
-
-- `message` (_optional_):
-
-  - This allows a parent component to display a custom message while it does something. This setting overrides `loading` and the no data state that happens if `data` is empty or the `api` returns no data
-
-- `holidays` (_optional_):
-  - This field allows you to specify holidays for that your organization follows to exclude from the calculations for the components
+| Property                        | Required | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+|---------------------------------|:--------:|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `data`                          |   true   | An array of `DoraRecord` objects used to display the graphs.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| `graphStart`                    |  false   | If not supplied this will default to 30 days in the past.<br>This value is used to determine the starting date for the charts.                                                                                                                                                                                                                                                                                                                                                                                                                        |
+| `graphEnd`                      |  false   | If not supplied, this will default to 1 day in the past.<br>This value is used to determine the ending date for the charts.                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| `loading`                       |  false   | Boolean to allow a container component to control the loading status as it waits to supply `data`.                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| `includeWeekendsInCalculations` |  false   | When calculating the averages for each metric, this setting allows you to include/exclude weekends in those calculations.<br>This is useful when you don't have teams that work weekends.                                                                                                                                                                                                                                                                                                                                                             |
+| `metricThresholdSet`            |  false   | This allows you to customize the metric thresholds used for determining the rank of each metric. You only have to override the ones you need. There are defaults based on the official DORA Report that are used when these are not supplied.<br>This takes in a `MetricThresholdSet` object which contains a `MetricThresholds` object for each metric.<br>The threshold values for `elite`, `high` and `medium` are measured in hours. `low` is considered anything longer than medium, so it is not able to be supplied as a value in this object. |
+| `message`                       |  false   | This allows a parent component to display a custom message while it does something. This setting overrides `loading` and the no data state that happens if `data` is empty or the `api` returns no data.                                                                                                                                                                                                                                                                                                                                              |
+| `holidays`                      |  false   | This field allows you to specify holidays that your organization follows to exclude from the calculations for the components.                                                                                                                                                                                                                                                                                                                                                                                                                         |
 
 ### Board Component Properties
 
-- All the `Common Properties`
+* All the `Common Properties`
 
-- `alwaysShowDetails` (_optional_):
-
-  - This field controls whether the `Board` component shows the details on hover or statically below the icon
-
-- `showTrends` (_optional_):
-
-  - This field controls whether trends or rank base coloring is shown in the `Board` component
-
-- `hideColors` (_optional_):
-  - This allows you to change the `Board` component to hide the rank based coloring on the icons and instead just use a shade of purple
+| Property            | Required | Description                                                                                                                          |
+|---------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------|
+| `alwaysShowDetails` | false    | This field controls whether the `Board` component shows the details on hover or statically below the icon.                           |
+| `showTrends`        | false    | This field controls whether trends or rank base coloring is shown in the `Board` component.                                          |
+| `hideColors`        | false    | This allows you to change the `Board` component to hide the rank based coloring on the icons and instead just use a shade of purple. |
 
 ### Trend Component Properties
 
-- `showIndividualTrends` (_optional_):
-  - Enabling this property will show a line for each individual metric trend in addition to the overall DORA trend
+| Property              | Required | Description                                                                                                     |
+|-----------------------|----------|-----------------------------------------------------------------------------------------------------------------|
+| `showIndividualTrends` | false    | Enabling this property will show a line for each individual metric trend in addition to the overall DORA trend. |
 
 ### TrendIndicator Component Properties
 
-- `trend`:
-  - This is a `Trend` enum value that controls what is displayed inside
+| Property | Required | Description                                                          |
+|----------|----------|----------------------------------------------------------------------|
+| `trend`  | true     | This is a `Trend` enum value that controls what is displayed inside. |
 
 ## Dependencies
 
