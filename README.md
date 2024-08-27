@@ -195,3 +195,11 @@ The data schema for each chart is as follows:
     }, ...]
 }
 ```
+
+## Testing
+
+⚠️ WIP
+
+## Contributing
+
+See [Contributing to React Dora Charts](./CONTRIBUTING).
