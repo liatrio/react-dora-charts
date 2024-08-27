@@ -1,0 +1,10 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: react-dora-charts
+  annotations:
+    github.com/project-slug: liatrio/react-dora-charts
+spec:
+  type: other
+  lifecycle: unknown
+  owner: backstage-foundations

@@ -1,0 +1,46 @@
+.surround {
+  width: 100%;
+  height: 100%;
+}
+
+.icon {
+  position: absolute;
+  width: 33%;
+  height: 33%;
+}
+
+.icon_container {
+  width: 96px;
+  height: 96px;
+  position: relative;
+}
+
+.board {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  align-items: center;
+  color: white;
+}
+
+.popover-content {
+  background-color: #494949;
+  border: 2px solid #494949;
+  border-radius: 10px;
+  padding: 10px;
+  color: white;
+}
+
+.detail-content {
+  padding: 10px;
+  text-align: center;
+}
+
+.score_container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
