@@ -41,21 +41,22 @@ jobs:
 
       - name: npm tsc
         run: npm run tsc:full
-#  test:
-#    name: Unit Tests
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v4
-#
-#      - name: Setup node
-#        id: node
-#        uses: actions/setup-node@v4
-#        with:
-#          node-version-file: '.nvmrc'
-#          cache: 'npm'
-#
-#      - name: Install dependencies
-#        run: npm install
-#
-#      - name: npm test
-#        run: npm run test
+
+  test:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup node
+        id: node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: npm test
+        run: npm run test
