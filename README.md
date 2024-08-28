@@ -1,4 +1,6 @@
-# Introduction
+# React DORA Charts
+
+[![CodeQL](https://github.com/liatrio/react-dora-charts/actions/workflows/codeql.yml/badge.svg)](https://github.com/liatrio/react-dora-charts/actions/workflows/codeql.yml)
 
 This component library contains charts for the standard DORA metrics.
 
