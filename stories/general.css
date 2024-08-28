@@ -1,0 +1,45 @@
+/* Hide arrows in WebKit browsers (Chrome;
+  Safari) */
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Hide arrows in Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+.editorFieldContainer {
+  flex: 1 0 48%;
+  box-sizing: border-box;
+  margin: 5px;
+}
+
+.editorSplit {
+  flex-basis: 100%;
+  height: 0;
+  margin: 0;
+}
+
+.editor {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(172, 172, 172);
+  flex-wrap: wrap;
+}
+
+.editorFieldContainer > :first-child {
+  color: white;
+}
+
+.editorMetricInput {
+  width: 30px;
+}
+
+.graphContainer {
+  height: 200px;
+  width: 600px;
+}
