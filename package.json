@@ -76,6 +76,7 @@
     "typescript": "^5.4.5"
   },
   "dependencies": {
+    "js-yaml": "^4.1.0",
     "react-tooltip": "^5.28.0",
     "recharts": "^2.12.7",
     "uuid": "^10.0.0"

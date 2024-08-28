@@ -1,0 +1,10 @@
+testParams:
+  - page_url: '/?path=/story/board--example'
+    checkbox_labels:
+      - 'NO_CHECKBOX'
+      - 'Always Show Details'
+      - 'Hide Colors'
+      - 'Include Weekends'
+      - 'Loading'
+      - 'Show Trends'
+    has_message_field: true
