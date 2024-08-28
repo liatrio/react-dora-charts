@@ -47,4 +47,10 @@ test.describe('Board Component: ', () => {
       });
     });
   });
+
+  // Test the message functionality
+  test('Message', async ({ page }) => {
+    await utils.setMessageBox(page.context.storyBookRoot, 'Test Message');
+    await expect(page).toHaveScreenshot();
+  });
 });

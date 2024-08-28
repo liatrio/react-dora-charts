@@ -88,3 +88,9 @@ export async function setCheckBox(storyBookRoot, label, value) {
     .locator(`//label[contains(text(), "${label}")]/following-sibling::input`)
     .setChecked(value);
 }
+
+export async function setMessageBox(storyBookRoot, message) {
+  await storyBookRoot
+    .locator('//label[contains(text(), "Message")]/following-sibling::input')
+    .fill(message);
+}
