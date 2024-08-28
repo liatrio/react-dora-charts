@@ -61,3 +61,30 @@ export async function waitForStorybookRootToLoad(page) {
     throw error;
   }
 }
+
+/**
+ * Selects the specified data set in the Storybook preview.
+ *
+ * @param {Locator} storyBookRoot - The Locator object for the Storybook root div.
+ * @param {string} dataSet - The label of the data set to select.
+ * @return {Promise<void>} - A promise that resolves when the data set is selected.
+ */
+export async function selectDataSet(storyBookRoot, dataSet) {
+  await storyBookRoot
+    .locator('//label[contains(text(), "Data Set")]/following-sibling::select')
+    .selectOption({ label: dataSet });
+}
+
+/**
+ * Sets the value of the specified checkbox in the Storybook preview.
+ *
+ * @param {Locator} storyBookRoot - The Locator object for the Storybook root div.
+ * @param {string} label - The label of the checkbox to select.
+ * @param {boolean} value - The value to set the checkbox to.
+ * @return {Promise<void>} - A promise that resolves when the checkbox is set.
+ */
+export async function setCheckBox(storyBookRoot, label, value) {
+  await storyBookRoot
+    .locator(`//label[contains(text(), "${label}")]/following-sibling::input`)
+    .setChecked(value);
+}

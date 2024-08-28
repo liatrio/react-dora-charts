@@ -2,29 +2,49 @@ import { test, expect } from '@playwright/test';
 import * as utils from '../helpers/utils';
 import * as constants from '../helpers/constants';
 
+const PAGE_URL = '/?path=/story/board--example';
+const CHECKBOX_LABELS = [
+  'NO_CHECKBOX',
+  'Always Show Details',
+  'Hide Colors',
+  'Include Weekends',
+  'Loading',
+  'Show Trends',
+];
+
 test.describe.configure({ mode: 'parallel' });
 
-constants.DATA_SET_VALUES.forEach(dataSetValue => {
-  test.describe('Board Component: ', () => {
-    test(`Data Set: ${dataSetValue}`, async ({ page }, testInfo) => {
-      await page.goto('/?path=/story/board--example');
-      const storyBookRoot = await utils.waitForStorybookRootToLoad(page);
+test.describe('Board Component: ', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto(PAGE_URL);
+    page.context.storyBookRoot = await utils.waitForStorybookRootToLoad(page);
+  });
 
-      // set the Data set
-      await storyBookRoot
-        .locator(
-          '//label[contains(text(), "Data Set")]/following-sibling::select',
-        )
-        .selectOption({ label: dataSetValue });
+  // Test all data sets
+  constants.DATA_SET_VALUES.forEach(dataset => {
+    CHECKBOX_LABELS.forEach(checkboxLabel => {
+      test(`Data Set: ${dataset} | Checkbox: ${checkboxLabel}`, async ({
+        page,
+      }) => {
+        await utils.selectDataSet(page.context.storyBookRoot, dataset);
 
-      // Set Always Show Details to true
-      await storyBookRoot
-        .locator(
-          '//label[contains(text(), "Always Show Details")]/following-sibling::input',
-        )
-        .check();
+        if (checkboxLabel === 'NO_CHECKBOX') {
+          await expect(page).toHaveScreenshot();
+          return;
+        }
 
-      await expect(page).toHaveScreenshot();
+        await utils.setCheckBox(
+          page.context.storyBookRoot,
+          checkboxLabel,
+          true,
+        );
+        await expect(page).toHaveScreenshot();
+        await utils.setCheckBox(
+          page.context.storyBookRoot,
+          checkboxLabel,
+          false,
+        );
+      });
     });
   });
 });
