@@ -18,12 +18,12 @@ export default defineConfig({
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
-  retries: process.env.CI ? 2 : 0,
+  retries: 0,
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
+  workers: process.env.CI ? 2 : undefined,
   // 'github' for GitHub Actions CI to generate annotations, plus a concise 'dot'
   // default 'list' when running locally
-  reporter: process.env.CI ? 'github' : 'html',
+  reporter: 'html',
   // Set default action timeout to 2 seconds
   actionTimeout: 2 * 1000,
   // Set default navigation timeout to 5 seconds
