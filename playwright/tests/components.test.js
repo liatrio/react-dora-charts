@@ -9,6 +9,7 @@ constants.TEST_PARAMS.forEach(testParams => {
   const PAGE_URL = testParams.page_url;
   const CHECKBOX_LABELS = testParams.checkbox_labels;
   const HAS_MESSAGE_FIELD = testParams.has_message_field;
+
   test.describe(`${COMPONENT_NAME}: `, () => {
     test.beforeEach(async ({ page }) => {
       await page.goto(PAGE_URL);
@@ -18,23 +19,32 @@ constants.TEST_PARAMS.forEach(testParams => {
     // Test all data sets/checkbox combinations
     constants.DATA_SET_VALUES.forEach(dataset => {
       CHECKBOX_LABELS.forEach(checkboxLabel => {
-        test(`Data Set: ${dataset} | Checkbox: ${checkboxLabel}`, async ({
-          page,
-        }) => {
-          await utils.selectDataSet(page.context.storyBookRoot, dataset);
+        const testTagDetails = {
+          tag: [
+            `@component-${COMPONENT_NAME.toLowerCase().replace(/ /g, '-')}`,
+            `@dataset-${dataset.toLowerCase().replace(/ /g, '-')}`,
+            `@checkbox-${checkboxLabel.toLowerCase().replace(/ /g, '-')}`,
+          ],
+        };
+        test(
+          `Data Set: ${dataset} | Checkbox: ${checkboxLabel}`,
+          testTagDetails,
+          async ({ page }) => {
+            await utils.selectDataSet(page.context.storyBookRoot, dataset);
 
-          if (checkboxLabel === 'NO_CHECKBOX_CHANGE') {
+            if (checkboxLabel === 'NO_CHECKBOX_CHANGE') {
+              await expect(page).toHaveScreenshot();
+              return;
+            }
+
+            await utils.setCheckBox(
+              page.context.storyBookRoot,
+              checkboxLabel,
+              true,
+            );
             await expect(page).toHaveScreenshot();
-            return;
-          }
-
-          await utils.setCheckBox(
-            page.context.storyBookRoot,
-            checkboxLabel,
-            true,
-          );
-          await expect(page).toHaveScreenshot();
-        });
+          },
+        );
       });
     });
 
