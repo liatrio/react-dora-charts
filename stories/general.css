@@ -32,7 +32,7 @@ input[type='number'] {
 }
 
 .editorFieldContainer > :first-child {
-  color: white;
+  color: rgb(172, 172, 172);
 }
 
 .editorMetricInput {

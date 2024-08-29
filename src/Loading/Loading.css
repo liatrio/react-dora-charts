@@ -14,7 +14,7 @@
   display: block;
   margin: 15px auto;
   position: relative;
-  color: #fff;
+  color: rgb(172, 172, 172);
   box-sizing: border-box;
   animation: animloader 1s linear infinite alternate;
 }
