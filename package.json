@@ -16,7 +16,7 @@
     "test": "jest",
     "test:playwright": "playwright test --config=playwright/playwright.config.js",
     "test:playwright:html": "playwright test --config=playwright/playwright.config.js --reporter html",
-    "test:playwright:ci": "playwright test --config=playwright/playwright.config.js --reporter list",
+    "test:playwright:ui": "playwright test --config=playwright/playwright.config.js --ui",
     "test:playwright:update-snapshots": "playwright test --config=playwright/playwright.config.js --update-snapshots",
     "storybook": "storybook dev -p 6006",
     "storybook-ci": "storybook dev -p 6006 --no-open",
