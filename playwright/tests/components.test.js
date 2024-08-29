@@ -5,10 +5,11 @@ import * as constants from '../helpers/constants';
 test.describe.configure({ mode: 'parallel' });
 
 constants.TEST_PARAMS.forEach(testParams => {
+  const COMPONENT_NAME = testParams.component_name;
   const PAGE_URL = testParams.page_url;
   const CHECKBOX_LABELS = testParams.checkbox_labels;
   const HAS_MESSAGE_FIELD = testParams.has_message_field;
-  test.describe('Board Component: ', () => {
+  test.describe(`${COMPONENT_NAME}: `, () => {
     test.beforeEach(async ({ page }) => {
       await page.goto(PAGE_URL);
       page.context.storyBookRoot = await utils.waitForStorybookRootToLoad(page);
