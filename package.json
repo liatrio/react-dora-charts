@@ -15,6 +15,7 @@
     "clean": "rimraf dist",
     "test": "jest",
     "playwright": "playwright test --config=playwright/playwright.config.js",
+    "playwright:smoke-test": "playwright test --config=playwright/playwright.config.js --grep @component-board --grep @dataset-low --grep @checkbox-always-show-details",
     "playwright:show-report": "playwright show-report",
     "playwright:update-snapshots": "playwright test --config=playwright/playwright.config.js --update-snapshots",
     "playwright:docker:build": "docker build -t playwright-image -f playwright/playwright.dockerfile .",
