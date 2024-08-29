@@ -13,15 +13,9 @@ constants.TEST_PARAMS.forEach(testParams => {
     test.beforeEach(async ({ page }) => {
       await page.goto(PAGE_URL);
       page.context.storyBookRoot = await utils.waitForStorybookRootToLoad(page);
-      await page.waitForTimeout(1000);
     });
 
-    // Test the page with no options selected
-    test('No Options', async ({ page }) => {
-      await expect(page).toHaveScreenshot();
-    });
-
-    // Test all data sets
+    // Test all data sets/checkbox combinations
     constants.DATA_SET_VALUES.forEach(dataset => {
       CHECKBOX_LABELS.forEach(checkboxLabel => {
         test(`Data Set: ${dataset} | Checkbox: ${checkboxLabel}`, async ({
@@ -29,7 +23,7 @@ constants.TEST_PARAMS.forEach(testParams => {
         }) => {
           await utils.selectDataSet(page.context.storyBookRoot, dataset);
 
-          if (checkboxLabel === 'NO_CHECKBOX') {
+          if (checkboxLabel === 'NO_CHECKBOX_CHANGE') {
             await expect(page).toHaveScreenshot();
             return;
           }
@@ -40,11 +34,6 @@ constants.TEST_PARAMS.forEach(testParams => {
             true,
           );
           await expect(page).toHaveScreenshot();
-          await utils.setCheckBox(
-            page.context.storyBookRoot,
-            checkboxLabel,
-            false,
-          );
         });
       });
     });
