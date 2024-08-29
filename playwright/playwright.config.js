@@ -23,7 +23,7 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   // 'github' for GitHub Actions CI to generate annotations, plus a concise 'dot'
   // default 'list' when running locally
-  reporter: process.env.CI ? 'github' : 'list',
+  reporter: process.env.CI ? 'github' : 'html',
   // Set default action timeout to 2 seconds
   actionTimeout: 2 * 1000,
   // Set default navigation timeout to 5 seconds
