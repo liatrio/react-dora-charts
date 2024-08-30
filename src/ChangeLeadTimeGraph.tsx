@@ -11,7 +11,7 @@ import TooltipContent from './ToolTip/TooltipContent';
 import { Tooltip } from 'react-tooltip';
 import CustomShape from './CustomShape';
 import { DoraRecord } from './interfaces/apiInterfaces';
-import { ChartProps } from './interfaces/propInterfaces';
+import { ChartProps, Theme } from './interfaces/propInterfaces';
 import {
   buildNonGraphBody,
   formatDateTicks,
@@ -205,12 +205,15 @@ const ChangeLeadTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
     }
   };
 
+  const tickColor = props.theme === Theme.Dark ? '#FFF' : '#000';
+
   return (
     <div
       data-testid={changeLeadTimeName}
       className={styles.chartWrapper}
       onMouseMove={handleMouseMoveContainer}
       onMouseOut={handleMouseOut}
+      data-theme={props.theme === Theme.Dark ? 'dark' : 'light'}
     >
       <ResponsiveContainer width="100%" height="100%">
         <ScatterChart
@@ -229,7 +232,7 @@ const ChangeLeadTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
             dataKey="mergeTime"
             tickSize={15}
             type={'number'}
-            tick={{ fill: '#FFFFFF' }}
+            tick={{ fill: tickColor }}
             ticks={ticks}
             domain={[startDate.getTime(), endDate.getTime()]}
             tickFormatter={formatDateTicks}
@@ -239,7 +242,7 @@ const ChangeLeadTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
             dataKey="graphCycleTime"
             name="Time"
             unit={yLabel}
-            tick={{ fill: '#FFFFFF' }}
+            tick={{ fill: tickColor }}
           />
           {Array.from(graphData.keys()).map(
             (repository: string, idx: number) => (

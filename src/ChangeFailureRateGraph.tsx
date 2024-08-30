@@ -10,7 +10,7 @@ import {
 import CustomLayeredBar from './CustomLayeredBar';
 import { Tooltip } from 'react-tooltip';
 import TooltipContent from './ToolTip/TooltipContent';
-import { ChartProps } from './interfaces/propInterfaces';
+import { ChartProps, Theme } from './interfaces/propInterfaces';
 import { DoraRecord } from './interfaces/apiInterfaces';
 import {
   buildNonGraphBody,
@@ -201,8 +201,10 @@ const ChangeFailureRateGraph: React.FC<ChartProps> = (props: ChartProps) => {
     setTooltipContent(<TooltipContent body={body} title={title} />);
   };
 
+  const tickColor = props.theme === Theme.Dark ? '#FFF' : '#000';
+
   return (
-    <div data-testid={changeFailureRateName} className={styles.chartWrapper}>
+    <div data-testid={changeFailureRateName} className={styles.chartWrapper} data-theme={props.theme === Theme.Dark ? 'dark' : 'light'}>
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
           width={500}
@@ -216,7 +218,7 @@ const ChangeFailureRateGraph: React.FC<ChartProps> = (props: ChartProps) => {
           <CartesianGrid strokeDasharray="3 3" vertical={false} />
           <YAxis
             type="number"
-            tick={{ fill: '#FFFFFF' }}
+            tick={{ fill: tickColor }}
             tickFormatter={tick => tick * 100 + '%'}
           />
           <XAxis
@@ -224,7 +226,7 @@ const ChangeFailureRateGraph: React.FC<ChartProps> = (props: ChartProps) => {
             dataKey="date"
             tickSize={15}
             type="number"
-            tick={{ fill: '#FFFFFF' }}
+            tick={{ fill: tickColor }}
             ticks={ticks}
             domain={[startDate.getTime(), endDate.getTime()]}
             tickFormatter={formatDateTicks}

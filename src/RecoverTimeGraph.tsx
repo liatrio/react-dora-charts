@@ -11,7 +11,7 @@ import CustomDot from './CustomDot';
 import './general.css';
 import TooltipContent from './ToolTip/TooltipContent';
 import { Tooltip } from 'react-tooltip';
-import { ChartProps } from './interfaces/propInterfaces';
+import { ChartProps, Theme } from './interfaces/propInterfaces';
 import { DoraRecord } from './interfaces/apiInterfaces';
 import {
   buildNonGraphBody,
@@ -182,8 +182,10 @@ const RecoverTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
     return repositoryData.avgTime;
   };
 
+  const tickColor = props.theme === Theme.Dark ? '#FFF' : '#000';
+
   return (
-    <div data-testid={recoverTimeName} className={styles.chartWrapper}>
+    <div data-testid={recoverTimeName} className={styles.chartWrapper} data-theme={props.theme === Theme.Dark ? 'dark' : 'light'}>
       <ResponsiveContainer width="100%" height="100%">
         <LineChart
           width={500}
@@ -200,12 +202,12 @@ const RecoverTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
             dataKey="date"
             tickSize={15}
             type={'number'}
-            tick={{ fill: '#FFFFFF' }}
+            tick={{ fill: tickColor }}
             ticks={ticks}
             domain={[startDate.getTime(), endDate.getTime()]}
             tickFormatter={formatDateTicks}
           />
-          <YAxis name="Time" unit={yLabel} tick={{ fill: '#FFFFFF' }} />
+          <YAxis name="Time" unit={yLabel} tick={{ fill: tickColor }} />
           {usedRepositories.map((repository, idx) => (
             <Line
               connectNulls={true}

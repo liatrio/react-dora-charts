@@ -8,7 +8,7 @@ import {
   CartesianGrid,
   ResponsiveContainer,
 } from 'recharts';
-import { TrendProps } from './interfaces/propInterfaces';
+import { Theme, TrendProps } from './interfaces/propInterfaces';
 import { DoraRecord } from './interfaces/apiInterfaces';
 import {
   buildNonGraphBody,
@@ -256,8 +256,10 @@ const TrendGraph: React.FC<TrendProps> = (props: TrendProps) => {
 
   const ticks = generateTicks(startDate, endDate, 5);
 
+  const tickColor = props.theme === Theme.Dark ? '#FFF' : '#000';
+
   return (
-    <div data-testid={trendName} className={styles.chartWrapper}>
+    <div data-testid={trendName} className={styles.chartWrapper} data-theme={props.theme === Theme.Dark ? 'dark' : 'light'}>
       <ResponsiveContainer width="100%" height="100%">
         <ComposedChart
           width={500}
@@ -286,14 +288,14 @@ const TrendGraph: React.FC<TrendProps> = (props: TrendProps) => {
             tickSize={15}
             interval={0}
             type={'number'}
-            tick={{ fill: '#FFFFFF' }}
+            tick={{ fill: tickColor }}
             ticks={ticks}
             domain={[startDate.getTime(), endDate.getTime()]}
             tickFormatter={formatDateTicks}
           />
           <YAxis
             type={'number'}
-            tick={{ fill: '#FFFFFF' }}
+            tick={{ fill: tickColor }}
             allowDecimals={false}
             domain={[0, 4]}
             tickFormatter={formatRankTicks}

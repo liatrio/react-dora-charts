@@ -22,6 +22,7 @@ export type {
   MetricThresholdSet,
   MetricThresholds,
   ChartProps,
+  Theme,
   BoardProps,
   TrendProps,
 } from './interfaces/propInterfaces';
