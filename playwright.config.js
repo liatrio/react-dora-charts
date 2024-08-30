@@ -1,5 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
-import * as constants from './helpers/constants';
+import * as constants from './playwright/helpers/constants';
 
 /**
  * Read environment variables from file.
@@ -12,7 +12,7 @@ import * as constants from './helpers/constants';
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: './tests',
+  testDir: './playwright/tests',
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
