@@ -81,10 +81,10 @@ const Board: React.FC<BoardProps> = props => {
         </TrendIcon>
         {!props.alwaysShowDetails && (
           <Tooltip
-            className="scoreTooltip"
+            className={styles.boardTooltip}
             id="scoreTooltip"
-            border="1px solid white"
-            opacity="1"
+            classNameArrow={styles.boardTooltipArrow}
+            border="1"
             content={tooltipContent}
           />
         )}
@@ -131,9 +131,10 @@ const Board: React.FC<BoardProps> = props => {
         </MetricIcon>
         {!props.alwaysShowDetails && (
           <Tooltip
-            className="scoreTooltip"
+            className={styles.boardTooltip}
             id="scoreTooltip"
-            border="1px solid white"
+            classNameArrow={styles.boardTooltipArrow}
+            border="1"
             opacity="1"
             content={tooltipContent}
           />

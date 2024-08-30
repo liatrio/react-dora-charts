@@ -8,3 +8,13 @@
   align-items: center;
   color: var(--react-dora-charts-text-color);
 }
+
+.boardTooltip {
+  border: 1px solid var(--react-dora-charts-primary-color) !important;
+  background-color: var(----react-dora-charts-background-color);
+}
+
+.boardTooltipArrow {
+  border-right: 1px solid var(--react-dora-charts-primary-color) !important;
+  border-bottom: 1px solid var(--react-dora-charts-primary-color) !important;
+}
