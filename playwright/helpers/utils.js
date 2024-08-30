@@ -1,3 +1,4 @@
+import { expect } from '@playwright/test';
 import * as path from 'path';
 import * as constants from './constants';
 
@@ -89,8 +90,35 @@ export async function setCheckBox(storyBookRoot, label, value) {
     .setChecked(value);
 }
 
+/**
+ * Sets the value of the "Message" text input in the Storybook preview.
+ *
+ * @param {Locator} storyBookRoot - The Locator object for the Storybook root div.
+ * @param {string} message - The value to set the text input to.
+ * @return {Promise<void>} - A promise that resolves when the text input is set.
+ */
 export async function setMessageBox(storyBookRoot, message) {
   await storyBookRoot
     .locator('//label[contains(text(), "Message")]/following-sibling::input')
     .fill(message);
+}
+
+/**
+ * Verifies that the Storybook preview is visible and takes a screenshot of it.
+ *
+ * @param {Page} page - The Playwright Page object.
+ * @return {Promise<void>} - A promise that resolves when the screenshot is taken.
+ * @throws {Error} If the Storybook preview is not found.
+ */
+export async function verifyStorybookPreview(page) {
+  const storybookPreview = await page.locator('#storybook-preview-wrapper');
+  if ((await storybookPreview.count()) === 0) {
+    throw new Error('Storybook preview not found');
+  }
+  try {
+    await expect(storybookPreview).toHaveScreenshot();
+  } catch (error) {
+    console.error('Error taking screenshot of Storybook preview:', error);
+    throw error;
+  }
 }

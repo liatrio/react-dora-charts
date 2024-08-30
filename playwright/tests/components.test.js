@@ -33,7 +33,7 @@ constants.TEST_PARAMS.forEach(testParams => {
             await utils.selectDataSet(page.context.storyBookRoot, dataset);
 
             if (checkboxLabel === 'NO_CHECKBOX_CHANGE') {
-              await expect(page).toHaveScreenshot();
+              await utils.verifyStorybookPreview(page);
               return;
             }
 
@@ -42,7 +42,7 @@ constants.TEST_PARAMS.forEach(testParams => {
               checkboxLabel,
               true,
             );
-            await expect(page).toHaveScreenshot();
+            await utils.verifyStorybookPreview(page);
           },
         );
       });
@@ -52,7 +52,7 @@ constants.TEST_PARAMS.forEach(testParams => {
     if (HAS_MESSAGE_FIELD) {
       test('Message', async ({ page }) => {
         await utils.setMessageBox(page.context.storyBookRoot, 'Test Message');
-        await expect(page).toHaveScreenshot();
+        await utils.verifyStorybookPreview(page);
       });
     }
   });
