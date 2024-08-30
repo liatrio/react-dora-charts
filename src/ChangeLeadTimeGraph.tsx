@@ -35,7 +35,7 @@ interface ProcessRepository {
 }
 
 export const composeGraphData = (_: ChartProps, data: DoraRecord[]) => {
-  let reduced = data.reduce(
+  return data.reduce(
     (acc: Map<string, ProcessRepository[]>, record: DoraRecord) => {
       if (!record.merged_at) {
         return acc;
@@ -68,8 +68,6 @@ export const composeGraphData = (_: ChartProps, data: DoraRecord[]) => {
     },
     new Map<string, ProcessRepository[]>(),
   );
-
-  return reduced;
 };
 
 const ChangeLeadTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {

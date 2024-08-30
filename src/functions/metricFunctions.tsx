@@ -118,9 +118,7 @@ const calculateDeploymentFrequencyAverage = (
     totalDeployTime += diff;
   }
 
-  let avgDeployTime = totalDeployTime / sorted.length / millisecondsToHours;
-
-  return avgDeployTime;
+  return totalDeployTime / sorted.length / millisecondsToHours;
 };
 
 const calculateRecoverTimeAverage = (
