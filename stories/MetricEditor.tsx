@@ -9,7 +9,7 @@ interface Props {
   postFix?: string;
 }
 
-const capitalizeCamelCase = camelCaseString => {
+const capitalizeCamelCase = (camelCaseString: string) => {
   const words = camelCaseString.replace(/([a-z])([A-Z])/g, '$1 $2').split(' ');
 
   const capitalizedWords = words.map(
