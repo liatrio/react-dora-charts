@@ -1,0 +1,45 @@
+testParams:
+  - component_name: Board
+    page_url: '/?path=/story/board--example'
+    has_message_field: true
+    checkbox_labels:
+      - 'NO_CHECKBOX_CHANGE' # This is used to  capture state when no checkbox is selected
+      - 'Always Show Details'
+      - 'Hide Colors'
+      - 'Include Weekends'
+      - 'Loading'
+      - 'Show Trends'
+  - component_name: ChangeFailureRateGraph
+    page_url: '/?path=/story/changefailurerategraph--example'
+    has_message_field: true
+    checkbox_labels:
+      - 'NO_CHECKBOX_CHANGE' # This is used to  capture state when no checkbox is selected
+      - 'Include Weekends'
+      - 'Loading'
+  - component_name: ChangeLeadTimeGraph
+    page_url: '/?path=/story/changeleadtimegraph--example'
+    has_message_field: true
+    checkbox_labels:
+      - 'NO_CHECKBOX_CHANGE' # This is used to  capture state when no checkbox is selected
+      - 'Include Weekends'
+      - 'Loading'
+  - component_name: DeploymentFrequencyGraph
+    page_url: '/?path=/story/deploymentfrequencygraph--example'
+    has_message_field: true
+    checkbox_labels:
+      - 'NO_CHECKBOX_CHANGE' # This is used to  capture state when no checkbox is selected
+      - 'Include Weekends'
+      - 'Loading'
+  - component_name: RecoverTimeGraph
+    page_url: '/?path=/story/recovertimegraph--example'
+    has_message_field: true
+    checkbox_labels:
+      - 'NO_CHECKBOX_CHANGE' # This is used to  capture state when no checkbox is selected
+      - 'Include Weekends'
+      - 'Loading'
+  - component_name: TrendGraph
+    page_url: '/?path=/story/trendgraph--example'
+    has_message_field: false
+    checkbox_labels:
+      - 'NO_CHECKBOX_CHANGE' # This is used to  capture state when no checkbox is selected
+      - Show Metric Trends

@@ -60,3 +60,32 @@ jobs:
 
       - name: npm test
         run: npm run test
+
+  test-playwright:
+    name: Playwright Tests
+    timeout-minutes: 30
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.46.1-jammy
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup node
+        id: node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Playwright tests
+        run: npm run playwright
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
