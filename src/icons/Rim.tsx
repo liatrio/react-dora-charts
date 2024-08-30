@@ -1,4 +1,4 @@
-import React, { Children, ReactNode, useMemo } from 'react';
+import React, { ReactNode, useMemo } from 'react';
 
 interface Props {
   color?: string;

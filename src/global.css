@@ -1,0 +1,17 @@
+:root {
+  --react-dora-charts-primary-color: #000000;
+  --react-dora-charts-background-color: #ffffff;
+  --react-dora-charts-text-color: #333333;
+}
+
+[data-theme='dark'] {
+  --react-dora-charts-primary-color: #ffffff;
+  --react-dora-charts-background-color: #000000;
+  --react-dora-charts-text-color: #dddddd;
+}
+
+[data-theme='light'] {
+  --react-dora-charts-primary-color: #000000;
+  --react-dora-charts-background-color: #ffffff;
+  --react-dora-charts-text-color: #333333;
+}

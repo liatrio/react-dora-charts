@@ -1,6 +1,6 @@
 import React, { ReactNode, Dispatch, SetStateAction } from 'react';
 import { DoraMetric } from '../interfaces/metricInterfaces';
-import './Trend.css';
+import styles from './icon.module.css';
 import TrendIndicator from './TrendIndicator';
 
 interface Props {
@@ -21,7 +21,7 @@ const TrendIcon: React.FC<Props> = (props: Props) => {
 
   return (
     <div
-      className="score_container"
+      className={styles.metricContainer}
       data-tooltip-id="scoreTooltip"
       onMouseOver={() =>
         props.setTooltipContent(`${props.metricTitle}: ${props.metric.display}`)
@@ -41,7 +41,7 @@ const TrendIcon: React.FC<Props> = (props: Props) => {
         <TrendIndicator trend={props.metric.trend} />
       </div>
       {props.alwaysShowDetails && (
-        <div className="detail-content">
+        <div className={styles.detailContent}>
           <span>
             {props.metricTitle}:<br />
             {props.metric.display}

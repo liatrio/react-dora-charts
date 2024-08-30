@@ -1,0 +1,56 @@
+.metricIcon {
+  fill: var(--react-dora-charts-primary-color);
+  stroke: var(--react-dora-charts-primary-color);
+}
+
+.surround {
+  width: 100%;
+  height: 100%;
+}
+
+.icon {
+  position: absolute;
+  width: 33%;
+  height: 33%;
+}
+
+.iconContainer {
+  width: 96px;
+  height: 96px;
+  position: relative;
+}
+
+.metricContainer {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.detailContent {
+  padding: 10px;
+  text-align: center;
+}
+
+.arrowIndicator {
+  position: absolute;
+  right: -10px;
+  bottom: -10px;
+  width: 24px;
+  height: 24px;
+}
+
+.neutralIndicator {
+  position: absolute;
+  right: -20px;
+  bottom: -20px;
+  width: 36px;
+  height: 36px;
+}
+
+.unknownIndicator {
+  position: absolute;
+  right: -20px;
+  bottom: -20px;
+  width: 42px;
+  height: 42px;
+}
