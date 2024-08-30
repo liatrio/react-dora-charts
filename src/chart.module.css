@@ -15,15 +15,6 @@
   color: var(--react-dora-charts-link-color);
 }
 
-.toolTipList {
-  padding-left: 20px;
-  margin: 2px;
-}
-
-.toolTipList li {
-  text-indent: -5px;
-}
-
 .toolTipSpan {
   margin-left: 10px;
   color: var(--react-dora-charts-text-color);
@@ -36,7 +27,6 @@
   z-index: 100;
   background-color: var(--react-dora-charts-background-color);
   border: 1px solid var(--react-dora-charts-primary-color) !important;
-  background-color: var(--react-dora-charts-background-color);
 }
 
 .chartTooltipArrow {
