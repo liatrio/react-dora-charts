@@ -1,7 +1,7 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
 import DeploymentFrequencyGraph from '../src/DeploymentFrequencyGraph';
-import { ChartProps, Theme } from '../src/interfaces/propInterfaces';
+import { ChartProps, Theme } from '../src';
 import dataSet from './data';
 import { deploymentFrequencyName } from '../src/constants';
 import './general.css';

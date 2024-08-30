@@ -1,5 +1,5 @@
 import React from 'react';
-import { MetricThresholds } from '../src/interfaces/propInterfaces';
+import { MetricThresholds } from '../src';
 import './general.css';
 
 interface Props {

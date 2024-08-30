@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StoryFn, Meta } from '@storybook/react';
 import TrendGraph from '../src/TrendGraph';
-import { ChartProps, Theme } from '../src/interfaces/propInterfaces';
+import { ChartProps, Theme } from '../src';
 import dataSet from './data';
 import { getDateRange, isWeekend } from '../src/functions/dateFunctions';
 import DatePicker from 'react-datepicker';
