@@ -120,7 +120,7 @@ const ChangeLeadTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
 
   const ticks = generateTicks(startDate, endDate, 5);
 
-  const nonGraphBody = buildNonGraphBody(props, noData, changeLeadTimeName);
+  const nonGraphBody = buildNonGraphBody(props, noData, changeLeadTimeName, styles.messageContainer);
 
   if (nonGraphBody) {
     return nonGraphBody;

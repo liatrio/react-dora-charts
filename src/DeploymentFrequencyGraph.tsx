@@ -125,6 +125,7 @@ const DeploymentFrequencyGraph: React.FC<ChartProps> = (props: ChartProps) => {
     props,
     noData,
     deploymentFrequencyName,
+    styles.messageContainer,
   );
 
   if (nonGraphBody) {

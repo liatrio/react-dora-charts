@@ -138,7 +138,7 @@ const ChangeFailureRateGraph: React.FC<ChartProps> = (props: ChartProps) => {
     [startDate, endDate],
   );
 
-  const nonGraphBody = buildNonGraphBody(props, noData, changeFailureRateName);
+  const nonGraphBody = buildNonGraphBody(props, noData, changeFailureRateName, styles.messageContainer);
 
   if (nonGraphBody) {
     return nonGraphBody;

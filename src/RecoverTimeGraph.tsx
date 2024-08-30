@@ -139,7 +139,7 @@ const RecoverTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
 
   const ticks = generateTicks(startDate, endDate, 5);
 
-  const nonGraphBody = buildNonGraphBody(props, noData, recoverTimeName);
+  const nonGraphBody = buildNonGraphBody(props, noData, recoverTimeName, styles.messageContainer);
 
   if (nonGraphBody) {
     return nonGraphBody;

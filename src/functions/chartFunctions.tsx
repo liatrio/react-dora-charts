@@ -60,40 +60,23 @@ export const buildNonGraphBody = (
   componentProps: ChartProps,
   noData: boolean,
   chartType: string,
+  messageContainerClassName: string
 ) => {
   if (componentProps.message) {
     return (
-      <div
-        data-testid={chartType}
-        style={{
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        <span style={{ color: 'white' }}>{componentProps.message}</span>
+      <div data-testid={chartType}  className={messageContainerClassName}>
+        <span>{componentProps.message}</span>
       </div>
     );
   } else if (componentProps.loading) {
     return (
-      <div data-testid={chartType} style={{ width: '100%', height: '100%' }}>
+      <div data-testid={chartType} className={messageContainerClassName}>
         <Loading enabled={componentProps.loading} />
       </div>
     );
   } else if (noData) {
     return (
-      <div
-        data-testid={chartType}
-        style={{
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
+      <div data-testid={chartType} className={messageContainerClassName}>
         <img
           alt="No Data"
           title="No Data"

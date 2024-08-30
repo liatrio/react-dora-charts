@@ -26,6 +26,7 @@
 
 .toolTipSpan {
   margin-left: 10px;
+  color: var(--react-dora-charts-text-color);
 }
 
 .chartTooltip {
@@ -41,4 +42,14 @@
 .chartTooltipArrow {
   border-right: 1px solid var(--react-dora-charts-primary-color) !important;
   border-bottom: 1px solid var(--react-dora-charts-primary-color) !important;
+}
+
+.messageContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  color: var(--react-dora-charts-text-color)
 }

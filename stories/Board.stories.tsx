@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StoryFn, Meta } from '@storybook/react';
 import Board from '../src/Boards/Board';
-import { ChartProps } from '../src/interfaces/propInterfaces';
+import { ChartProps, Theme } from '../src/interfaces/propInterfaces';
 import dataSet from './data';
 import {
   changeFailureRateName,
@@ -13,6 +13,7 @@ import './general.css';
 import { useGraph } from './useGraph';
 import EditPanel from './EditPanel';
 import MetricEditor from './MetricEditor';
+import { useDarkMode } from 'storybook-dark-mode';
 
 export default {
   title: 'Board',
@@ -21,6 +22,7 @@ export default {
 
 const Template: StoryFn<ChartProps> = () => {
   const graphArgs = useGraph(dataSet);
+  const isDark = useDarkMode();
 
   const [hideColors, setHideColors] = useState<boolean>(false);
   const [showTrends, setShowTrends] = useState<boolean>(false);
@@ -39,7 +41,7 @@ const Template: StoryFn<ChartProps> = () => {
   };
 
   return (
-    <div className="graphContainer">
+    <div className="graphContainer" data-theme={isDark ? 'dark' : 'light'}>
       <EditPanel args={graphArgs} showStandardFields>
         <MetricEditor
           metricName={deploymentFrequencyName}
@@ -98,6 +100,7 @@ const Template: StoryFn<ChartProps> = () => {
         message={graphArgs.message}
         data={graphArgs.data}
         holidays={graphArgs.holidays}
+        theme={isDark ? Theme.Dark : Theme.Light}
       />
     </div>
   );
