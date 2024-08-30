@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import './TooltipContent.css';
+import styles from './tooltipContent.module.css';
 
 export interface Props {
   onClose?: () => void;
@@ -11,9 +11,9 @@ export interface Props {
 const TooltipContent: React.FC<Props> = ({ title, body, footer }: Props) => {
   return (
     <div>
-      <div className="dora-tooltip-header">{title}</div>
-      <div className="dora-tooltip-body">{body}</div>
-      {footer && <div className="dora-tooltip-footer">{footer}</div>}
+      <div className={styles.tooltipHeader}>{title}</div>
+      <div className={styles.tooltipBody}>{body}</div>
+      {footer && <div className={styles.tooltipFooter}>{footer}</div>}
     </div>
   );
 };

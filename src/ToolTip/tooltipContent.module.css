@@ -1,4 +1,4 @@
-.dora-tooltip {
+.tooltip {
   background-color: black;
   border: 2px solid grey;
   border-radius: 8px;
@@ -7,41 +7,34 @@
   padding: 16px;
   display: flex;
   flex-direction: column;
-  color: #aaa;
+  color: var(--react-dora-charts-text-color);
   height: fit-content;
 }
 
-.dora-tooltip-header h3 {
+.tooltipHeader h3 {
   font-size: 16px;
   margin: 0;
-  color: #aaa;
+  color: var(--react-dora-charts-text-color);
 }
 
-.dora-tooltip-body p {
+.tooltipBody p {
   font-size: 14px;
-  color: #aaa;
+  color: var(--react-dora-charts-text-color);
   margin: 8px 0 0;
 }
 
-.dora-tooltip-footer {
+.tooltipFooter {
   display: flex;
   align-items: center;
   margin-top: 12px;
 }
 
-.dora-profile-image {
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  margin-right: 8px;
-}
-
-.dora-tooltip-footer span {
+.tooltipFooter span {
   font-size: 14px;
-  color: #aaa;
+  color: var(--react-dora-charts-text-color);
 }
 
-.dora-tooltip-wrapper {
+.tooltipWrapper {
   width: 100%;
   height: 100%;
   display: flex;
@@ -50,7 +43,7 @@
   position: absolute;
   top: -5px;
   left: -5px;
-  background-color: #aaaaaa33;
+  background-color: var(--react-dora-charts-background-color);
   border-radius: 10px;
   padding: 10px;
 }
