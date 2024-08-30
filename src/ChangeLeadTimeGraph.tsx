@@ -21,6 +21,7 @@ import {
 import { buildDoraState } from './functions/metricFunctions';
 import { changeLeadTimeName } from './constants';
 import { v4 as uuidv4 } from 'uuid';
+import styles from './chart.module.css';
 
 interface ProcessRepository {
   mergeTime: number;
@@ -150,7 +151,7 @@ const ChangeLeadTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
 
     const title = (
       <h3>
-        <a className="toolTipLink" href={payload.changeUrl} target="_blank">
+        <a className={styles.toolTipLink} href={payload.changeUrl} target="_blank">
           {payload.title}
         </a>
       </h3>
@@ -207,7 +208,7 @@ const ChangeLeadTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
   return (
     <div
       data-testid={changeLeadTimeName}
-      className="chart-wrapper"
+      className={styles.chartWrapper}
       onMouseMove={handleMouseMoveContainer}
       onMouseOut={handleMouseOut}
     >
@@ -271,14 +272,14 @@ const ChangeLeadTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
         </ScatterChart>
       </ResponsiveContainer>
       <Tooltip
-        className="chartTooltip"
+        className={styles.chartTooltip}
         offset={20}
         isOpen={tooltipOpen}
         position={position}
         clickable={true}
-        classNameArrow="chartTooltipArrow"
+        classNameArrow={styles.chartTooltipArrow}
         id="cltTooltip"
-        border="1px solid white"
+        border="1px"
         opacity="1"
         content={tooltipContent}
       />

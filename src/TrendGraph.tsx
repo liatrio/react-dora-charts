@@ -32,6 +32,7 @@ import {
   getStartOfWeek,
 } from './functions/dateFunctions';
 import { DoraRank } from './interfaces/metricInterfaces';
+import styles from './chart.module.css';
 
 interface GraphData {
   date: number;
@@ -256,7 +257,7 @@ const TrendGraph: React.FC<TrendProps> = (props: TrendProps) => {
   const ticks = generateTicks(startDate, endDate, 5);
 
   return (
-    <div data-testid={trendName} className="chart-wrapper">
+    <div data-testid={trendName} className={styles.chartWrapper}>
       <ResponsiveContainer width="100%" height="100%">
         <ComposedChart
           width={500}

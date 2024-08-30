@@ -22,6 +22,7 @@ import {
 import { buildDoraState } from './functions/metricFunctions';
 import { recoverTimeName } from './constants';
 import { v4 as uuidv4 } from 'uuid';
+import styles from './chart.module.css';
 
 interface ProcessRepository {
   count: number;
@@ -182,7 +183,7 @@ const RecoverTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
   };
 
   return (
-    <div data-testid={recoverTimeName} className="chart-wrapper">
+    <div data-testid={recoverTimeName} className={styles.chartWrapper}>
       <ResponsiveContainer width="100%" height="100%">
         <LineChart
           width={500}
@@ -235,12 +236,12 @@ const RecoverTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
         </LineChart>
       </ResponsiveContainer>
       <Tooltip
-        className="chartTooltip"
+        className={styles.chartTooltip}
         delayHide={2000}
         clickable={true}
-        classNameArrow="chartTooltipArrow"
+        classNameArrow={styles.chartTooltipArrow}
         id="rtTooltip"
-        border="1px solid white"
+        border="1px"
         opacity="1"
         content={tooltipContent}
       />

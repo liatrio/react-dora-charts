@@ -20,6 +20,7 @@ import {
   useSharedLogic,
 } from './functions/chartFunctions';
 import { v4 as uuidv4 } from 'uuid';
+import styles from './chart.module.css';
 
 interface ProcessRepository {
   count: number;
@@ -152,7 +153,7 @@ const DeploymentFrequencyGraph: React.FC<ChartProps> = (props: ChartProps) => {
             return (
               <a
                 key={uuidv4()}
-                className="toolTipLink"
+                className={styles.toolTipLink}
                 href={url}
                 target="_blank"
               >
@@ -182,7 +183,7 @@ const DeploymentFrequencyGraph: React.FC<ChartProps> = (props: ChartProps) => {
   };
 
   return (
-    <div data-testid={deploymentFrequencyName} className="chart-wrapper">
+    <div data-testid={deploymentFrequencyName} className={styles.chartWrapper}>
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
           width={500}
@@ -236,12 +237,12 @@ const DeploymentFrequencyGraph: React.FC<ChartProps> = (props: ChartProps) => {
         </BarChart>
       </ResponsiveContainer>
       <Tooltip
-        className="chartTooltip"
+        className={styles.chartTooltip}
         delayHide={2000}
         clickable={true}
-        classNameArrow="chartTooltipArrow"
+        classNameArrow={styles.chartTooltipArrow}
         id="dfTooltip"
-        border="1px solid white"
+        border="1px"
         opacity="1"
         content={tooltipContent}
       />
