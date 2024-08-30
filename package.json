@@ -14,6 +14,13 @@
     "rollup": "rollup -c --bundleConfigAsCjs",
     "clean": "rimraf dist",
     "test": "jest",
+    "playwright": "playwright test",
+    "playwright:smoke-test": "playwright test --grep @component-board --grep @dataset-low --grep @checkbox-always-show-details",
+    "playwright:show-report": "playwright show-report",
+    "playwright:update-snapshots": "playwright test --update-snapshots",
+    "playwright:docker:build": "docker build -t playwright-image -f playwright/playwright.dockerfile .",
+    "playwright:docker": "docker run -it --rm --name playwright -v $(pwd):/app playwright-image",
+    "playwright:docker:update-snapshots": "docker run -it --rm --name playwright -v $(pwd):/app playwright-image npm run playwright:update-snapshots",
     "storybook": "storybook dev -p 6006",
     "storybook-ci": "storybook dev -p 6006 --no-open",
     "build-storybook": "storybook build",
@@ -32,6 +39,7 @@
     "@babel/preset-env": "^7.24.5",
     "@babel/preset-react": "^7.24.1",
     "@babel/preset-typescript": "^7.24.1",
+    "@playwright/test": "^1.46.1",
     "@rollup/plugin-commonjs": "^25.0.8",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
@@ -48,6 +56,7 @@
     "@testing-library/jest-dom": "^6.4.5",
     "@testing-library/react": "^15.0.7",
     "@types/jest": "^29.5.12",
+    "@types/node": "^22.5.1",
     "@types/react": "^18.3.2",
     "@types/uuid": "^10.0.0",
     "babel-jest": "^29.7.0",
@@ -70,6 +79,7 @@
     "typescript": "^5.4.5"
   },
   "dependencies": {
+    "js-yaml": "^4.1.0",
     "react-tooltip": "^5.28.0",
     "recharts": "^2.12.7",
     "uuid": "^10.0.0"
