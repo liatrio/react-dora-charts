@@ -11,7 +11,7 @@ import CustomBar from './CustomBar';
 import { Tooltip } from 'react-tooltip';
 import TooltipContent from './ToolTip/TooltipContent';
 import { deploymentFrequencyName, millisecondsToDays } from './constants';
-import { ChartProps } from './interfaces/propInterfaces';
+import { ChartProps, Theme } from './interfaces/propInterfaces';
 import { DoraRecord } from './interfaces/apiInterfaces';
 import {
   buildNonGraphBody,
@@ -20,6 +20,7 @@ import {
   useSharedLogic,
 } from './functions/chartFunctions';
 import { v4 as uuidv4 } from 'uuid';
+import styles from './chart.module.css';
 
 interface ProcessRepository {
   count: number;
@@ -124,6 +125,7 @@ const DeploymentFrequencyGraph: React.FC<ChartProps> = (props: ChartProps) => {
     props,
     noData,
     deploymentFrequencyName,
+    styles.messageContainer,
   );
 
   if (nonGraphBody) {
@@ -152,7 +154,7 @@ const DeploymentFrequencyGraph: React.FC<ChartProps> = (props: ChartProps) => {
             return (
               <a
                 key={uuidv4()}
-                className="toolTipLink"
+                className={styles.toolTipLink}
                 href={url}
                 target="_blank"
               >
@@ -181,8 +183,14 @@ const DeploymentFrequencyGraph: React.FC<ChartProps> = (props: ChartProps) => {
     return repositoryData.count;
   };
 
+  const tickColor = props.theme === Theme.Dark ? '#FFF' : '#000';
+
   return (
-    <div data-testid={deploymentFrequencyName} className="chart-wrapper">
+    <div
+      data-testid={deploymentFrequencyName}
+      className={styles.chartWrapper}
+      data-theme={props.theme === Theme.Dark ? 'dark' : 'light'}
+    >
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
           width={500}
@@ -201,14 +209,14 @@ const DeploymentFrequencyGraph: React.FC<ChartProps> = (props: ChartProps) => {
             tickSize={15}
             interval={0}
             type={'number'}
-            tick={{ fill: '#FFFFFF' }}
+            tick={{ fill: tickColor }}
             ticks={ticks}
             domain={[startDate.getTime(), endDate.getTime()]}
             tickFormatter={formatDateTicks}
           />
           <YAxis
             type={'number'}
-            tick={{ fill: '#FFFFFF' }}
+            tick={{ fill: tickColor }}
             allowDecimals={false}
             domain={[0, maxDeploys]}
           />
@@ -236,12 +244,12 @@ const DeploymentFrequencyGraph: React.FC<ChartProps> = (props: ChartProps) => {
         </BarChart>
       </ResponsiveContainer>
       <Tooltip
-        className="chartTooltip"
+        className={styles.chartTooltip}
         delayHide={2000}
         clickable={true}
-        classNameArrow="chartTooltipArrow"
+        classNameArrow={styles.chartTooltipArrow}
         id="dfTooltip"
-        border="1px solid white"
+        border="1px"
         opacity="1"
         content={tooltipContent}
       />

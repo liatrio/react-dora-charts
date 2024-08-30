@@ -1,5 +1,10 @@
 import { DoraRecord } from './apiInterfaces';
 
+export enum Theme {
+  Light,
+  Dark,
+}
+
 export interface ChartProps {
   data: DoraRecord[];
   graphEnd?: Date;
@@ -9,6 +14,7 @@ export interface ChartProps {
   metricThresholdSet?: MetricThresholdSet;
   message?: string;
   holidays?: Date[];
+  theme?: Theme;
 }
 
 export interface ThresholdColors {

@@ -2,6 +2,7 @@ import React, { ReactNode, Dispatch, SetStateAction } from 'react';
 import { DoraMetric } from '../interfaces/metricInterfaces';
 import IconRim from './Rim';
 import { purple } from '../constants';
+import styles from './icon.module.css';
 
 interface Props {
   metric: DoraMetric;
@@ -12,7 +13,7 @@ interface Props {
   alwaysShowDetails?: boolean;
 }
 
-const ScoreIcon: React.FC<Props> = (props: Props) => {
+const MetricIcon: React.FC<Props> = (props: Props) => {
   const childrenWithOverriddenProps = React.Children.map(
     props.children,
     (child: any) => {
@@ -21,9 +22,9 @@ const ScoreIcon: React.FC<Props> = (props: Props) => {
   );
 
   return (
-    <div className="score_container">
+    <div className={styles.metricContainer}>
       <div
-        className="icon_container"
+        className={styles.iconContainer}
         data-tooltip-id="scoreTooltip"
         onMouseOver={() =>
           props.setTooltipContent(
@@ -36,7 +37,7 @@ const ScoreIcon: React.FC<Props> = (props: Props) => {
         </IconRim>
       </div>
       {props.alwaysShowDetails && (
-        <div className="detail-content">
+        <div className={styles.detailContent}>
           <span>
             {props.metricTitle}:<br />
             {props.metric.display}
@@ -47,4 +48,4 @@ const ScoreIcon: React.FC<Props> = (props: Props) => {
   );
 };
 
-export default ScoreIcon;
+export default MetricIcon;

@@ -27,12 +27,13 @@ input[type='number'] {
   display: flex;
   justify-content: center;
   align-items: center;
-  color: rgb(172, 172, 172);
+  color: var(--react-dora-charts-text-color);
   flex-wrap: wrap;
 }
 
 .editorFieldContainer > :first-child {
-  color: white;
+  color: var(--react-dora-charts-text-color);
+  font-weight: bold;
 }
 
 .editorMetricInput {

@@ -144,6 +144,7 @@ These functions are just shortcuts to get a Date a certain number of days in the
 | `metricThresholdSet`            |  false   | This allows you to customize the metric thresholds used for determining the rank of each metric. You only have to override the ones you need. There are defaults based on the official DORA Report that are used when these are not supplied.<br>This takes in a `MetricThresholdSet` object which contains a `MetricThresholds` object for each metric.<br>The threshold values for `elite`, `high` and `medium` are measured in hours. `low` is considered anything longer than medium, so it is not able to be supplied as a value in this object. |
 | `message`                       |  false   | This allows a parent component to display a custom message while it does something. This setting overrides `loading` and the no data state that happens if `data` is empty or the `api` returns no data.                                                                                                                                                                                                                                                                                                                                              |
 | `holidays`                      |  false   | This field allows you to specify holidays that your organization follows to exclude from the calculations for the components.                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| `theme`                         |  false   | This field allows you to supply the `Theme` (dark = 0, light = 1) to the chart for styling purposes. You can alternatively just make sure that `data-theme='light\|dark'` is used on an ancestor of the component.                                                                                                                                                                                                                                                                                                                                    |
 
 ### Board Component Properties
 
@@ -156,6 +157,8 @@ These functions are just shortcuts to get a Date a certain number of days in the
 | `hideColors`        | false    | This allows you to change the `Board` component to hide the rank based coloring on the icons and instead just use a shade of purple. |
 
 ### Trend Component Properties
+
+- All the `Common Properties`
 
 | Property               | Required | Description                                                                                                     |
 | ---------------------- | -------- | --------------------------------------------------------------------------------------------------------------- |

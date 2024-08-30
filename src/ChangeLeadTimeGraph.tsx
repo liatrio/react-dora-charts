@@ -11,7 +11,7 @@ import TooltipContent from './ToolTip/TooltipContent';
 import { Tooltip } from 'react-tooltip';
 import CustomShape from './CustomShape';
 import { DoraRecord } from './interfaces/apiInterfaces';
-import { ChartProps } from './interfaces/propInterfaces';
+import { ChartProps, Theme } from './interfaces/propInterfaces';
 import {
   buildNonGraphBody,
   formatDateTicks,
@@ -21,6 +21,7 @@ import {
 import { buildDoraState } from './functions/metricFunctions';
 import { changeLeadTimeName } from './constants';
 import { v4 as uuidv4 } from 'uuid';
+import styles from './chart.module.css';
 
 interface ProcessRepository {
   mergeTime: number;
@@ -119,7 +120,12 @@ const ChangeLeadTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
 
   const ticks = generateTicks(startDate, endDate, 5);
 
-  const nonGraphBody = buildNonGraphBody(props, noData, changeLeadTimeName);
+  const nonGraphBody = buildNonGraphBody(
+    props,
+    noData,
+    changeLeadTimeName,
+    styles.messageContainer,
+  );
 
   if (nonGraphBody) {
     return nonGraphBody;
@@ -150,7 +156,11 @@ const ChangeLeadTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
 
     const title = (
       <h3>
-        <a className="toolTipLink" href={payload.changeUrl} target="_blank">
+        <a
+          className={styles.toolTipLink}
+          href={payload.changeUrl}
+          target="_blank"
+        >
           {payload.title}
         </a>
       </h3>
@@ -204,12 +214,15 @@ const ChangeLeadTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
     }
   };
 
+  const tickColor = props.theme === Theme.Dark ? '#FFF' : '#000';
+
   return (
     <div
       data-testid={changeLeadTimeName}
-      className="chart-wrapper"
+      className={styles.chartWrapper}
       onMouseMove={handleMouseMoveContainer}
       onMouseOut={handleMouseOut}
+      data-theme={props.theme === Theme.Dark ? 'dark' : 'light'}
     >
       <ResponsiveContainer width="100%" height="100%">
         <ScatterChart
@@ -228,7 +241,7 @@ const ChangeLeadTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
             dataKey="mergeTime"
             tickSize={15}
             type={'number'}
-            tick={{ fill: '#FFFFFF' }}
+            tick={{ fill: tickColor }}
             ticks={ticks}
             domain={[startDate.getTime(), endDate.getTime()]}
             tickFormatter={formatDateTicks}
@@ -238,7 +251,7 @@ const ChangeLeadTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
             dataKey="graphCycleTime"
             name="Time"
             unit={yLabel}
-            tick={{ fill: '#FFFFFF' }}
+            tick={{ fill: tickColor }}
           />
           {Array.from(graphData.keys()).map(
             (repository: string, idx: number) => (
@@ -271,14 +284,14 @@ const ChangeLeadTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
         </ScatterChart>
       </ResponsiveContainer>
       <Tooltip
-        className="chartTooltip"
+        className={styles.chartTooltip}
         offset={20}
         isOpen={tooltipOpen}
         position={position}
         clickable={true}
-        classNameArrow="chartTooltipArrow"
+        classNameArrow={styles.chartTooltipArrow}
         id="cltTooltip"
-        border="1px solid white"
+        border="1px"
         opacity="1"
         content={tooltipContent}
       />

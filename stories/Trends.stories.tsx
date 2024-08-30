@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { StoryFn, Meta } from '@storybook/react';
 import TrendGraph from '../src/TrendGraph';
-import { ChartProps } from '../src/interfaces/propInterfaces';
+import { ChartProps, Theme } from '../src/interfaces/propInterfaces';
 import dataSet from './data';
 import { getDateRange, isWeekend } from '../src/functions/dateFunctions';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { millisecondsToDays } from '../src/constants';
+import { useDarkMode } from 'storybook-dark-mode';
 
 export default {
   title: 'TrendGraph',
@@ -15,6 +16,7 @@ export default {
 
 const Template: StoryFn<ChartProps> = () => {
   let { start, end } = getDateRange(dataSet[0]);
+  const isDark = useDarkMode();
 
   if (end.getTime() - start.getTime() < millisecondsToDays) {
     start = new Date(start.getTime() - millisecondsToDays);
@@ -65,7 +67,7 @@ const Template: StoryFn<ChartProps> = () => {
   };
 
   return (
-    <div className="graphContainer">
+    <div className="graphContainer" data-theme={isDark ? 'dark' : 'light'}>
       <div className="editor">
         <div className="editorFieldContainer">
           <label>Data Set:</label>
@@ -105,6 +107,7 @@ const Template: StoryFn<ChartProps> = () => {
         data={data}
         graphStart={graphStart}
         graphEnd={graphEnd}
+        theme={isDark ? Theme.Dark : Theme.Light}
       />
     </div>
   );

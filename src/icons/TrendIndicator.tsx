@@ -1,6 +1,7 @@
 import React from 'react';
 import { DoraTrend } from '../interfaces/metricInterfaces';
 import { green, grey, purple, yellow } from '../constants';
+import styles from './icon.module.css';
 
 interface Props {
   trend: DoraTrend;
@@ -12,7 +13,7 @@ const TrendIndicator: React.FC<Props> = (props: Props) => {
   if (props.trend === DoraTrend.Unknown) {
     indicator = (
       <svg
-        className="lrd_unknownIndicator"
+        className={styles.unknownIndicator}
         viewBox="0 0 24 24"
         fill={grey}
         xmlns="http://www.w3.org/2000/svg"
@@ -29,7 +30,7 @@ const TrendIndicator: React.FC<Props> = (props: Props) => {
   } else if (props.trend === DoraTrend.Neutral) {
     indicator = (
       <svg
-        className="lrd_neutralIndicator"
+        className={styles.neutralIndicator}
         fill={purple}
         viewBox="-3 0 19 19"
         xmlns="http://www.w3.org/2000/svg"
@@ -43,7 +44,7 @@ const TrendIndicator: React.FC<Props> = (props: Props) => {
 
     indicator = (
       <svg
-        className="lrd_arrowIndicator"
+        className={styles.arrowIndicator}
         fill={color}
         transform={`rotate(${rotation})`}
         xmlns="http://www.w3.org/2000/svg"

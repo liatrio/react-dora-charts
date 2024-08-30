@@ -1,0 +1,55 @@
+.chartWrapper {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.toolTipLink {
+  padding-left: 2px;
+  padding-right: 2px;
+  text-decoration-color: var(--react-dora-charts-link-color);
+  color: var(--react-dora-charts-link-color);
+}
+
+.toolTipList {
+  padding-left: 20px;
+  margin: 2px;
+}
+
+.toolTipList li {
+  text-indent: -5px;
+}
+
+.toolTipSpan {
+  margin-left: 10px;
+  color: var(--react-dora-charts-text-color);
+}
+
+.chartTooltip {
+  border-radius: 10px;
+  max-width: 300px;
+  padding: 10px;
+  z-index: 100;
+  background-color: var(--react-dora-charts-background-color);
+  border: 1px solid var(--react-dora-charts-primary-color) !important;
+  background-color: var(--react-dora-charts-background-color);
+}
+
+.chartTooltipArrow {
+  border-right: 1px solid var(--react-dora-charts-primary-color) !important;
+  border-bottom: 1px solid var(--react-dora-charts-primary-color) !important;
+}
+
+.messageContainer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  color: var(--react-dora-charts-text-color);
+}

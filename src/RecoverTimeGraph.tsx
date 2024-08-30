@@ -8,10 +8,9 @@ import {
   Line,
 } from 'recharts';
 import CustomDot from './CustomDot';
-import './general.css';
 import TooltipContent from './ToolTip/TooltipContent';
 import { Tooltip } from 'react-tooltip';
-import { ChartProps } from './interfaces/propInterfaces';
+import { ChartProps, Theme } from './interfaces/propInterfaces';
 import { DoraRecord } from './interfaces/apiInterfaces';
 import {
   buildNonGraphBody,
@@ -22,6 +21,7 @@ import {
 import { buildDoraState } from './functions/metricFunctions';
 import { recoverTimeName } from './constants';
 import { v4 as uuidv4 } from 'uuid';
+import styles from './chart.module.css';
 
 interface ProcessRepository {
   count: number;
@@ -139,7 +139,12 @@ const RecoverTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
 
   const ticks = generateTicks(startDate, endDate, 5);
 
-  const nonGraphBody = buildNonGraphBody(props, noData, recoverTimeName);
+  const nonGraphBody = buildNonGraphBody(
+    props,
+    noData,
+    recoverTimeName,
+    styles.messageContainer,
+  );
 
   if (nonGraphBody) {
     return nonGraphBody;
@@ -181,8 +186,14 @@ const RecoverTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
     return repositoryData.avgTime;
   };
 
+  const tickColor = props.theme === Theme.Dark ? '#FFF' : '#000';
+
   return (
-    <div data-testid={recoverTimeName} className="chart-wrapper">
+    <div
+      data-testid={recoverTimeName}
+      className={styles.chartWrapper}
+      data-theme={props.theme === Theme.Dark ? 'dark' : 'light'}
+    >
       <ResponsiveContainer width="100%" height="100%">
         <LineChart
           width={500}
@@ -199,12 +210,12 @@ const RecoverTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
             dataKey="date"
             tickSize={15}
             type={'number'}
-            tick={{ fill: '#FFFFFF' }}
+            tick={{ fill: tickColor }}
             ticks={ticks}
             domain={[startDate.getTime(), endDate.getTime()]}
             tickFormatter={formatDateTicks}
           />
-          <YAxis name="Time" unit={yLabel} tick={{ fill: '#FFFFFF' }} />
+          <YAxis name="Time" unit={yLabel} tick={{ fill: tickColor }} />
           {usedRepositories.map((repository, idx) => (
             <Line
               connectNulls={true}
@@ -235,12 +246,12 @@ const RecoverTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
         </LineChart>
       </ResponsiveContainer>
       <Tooltip
-        className="chartTooltip"
+        className={styles.chartTooltip}
         delayHide={2000}
         clickable={true}
-        classNameArrow="chartTooltipArrow"
+        classNameArrow={styles.chartTooltipArrow}
         id="rtTooltip"
-        border="1px solid white"
+        border="1px"
         opacity="1"
         content={tooltipContent}
       />

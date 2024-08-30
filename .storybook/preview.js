@@ -6,3 +6,5 @@ export const parameters = {
     light: { ...themes.normal, appBg: 'white', appPreviewBg: 'white' },
   },
 };
+
+import '../src/global.css';

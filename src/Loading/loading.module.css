@@ -14,12 +14,12 @@
   display: block;
   margin: 15px auto;
   position: relative;
-  color: #fff;
+  color: var(--react-dora-charts-primary-color);
   box-sizing: border-box;
-  animation: animloader 1s linear infinite alternate;
+  animation: react-dora-charts-loader 1s linear infinite alternate;
 }
 
-@keyframes animloader {
+@keyframes react-dora-charts-loader {
   0% {
     box-shadow: -38px -12px, -14px 0, 14px 0, 38px 0;
   }

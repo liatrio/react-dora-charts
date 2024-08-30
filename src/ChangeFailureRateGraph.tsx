@@ -10,7 +10,7 @@ import {
 import CustomLayeredBar from './CustomLayeredBar';
 import { Tooltip } from 'react-tooltip';
 import TooltipContent from './ToolTip/TooltipContent';
-import { ChartProps } from './interfaces/propInterfaces';
+import { ChartProps, Theme } from './interfaces/propInterfaces';
 import { DoraRecord } from './interfaces/apiInterfaces';
 import {
   buildNonGraphBody,
@@ -20,6 +20,7 @@ import {
 } from './functions/chartFunctions';
 import { changeFailureRateName, millisecondsToDays } from './constants';
 import { v4 as uuidv4 } from 'uuid';
+import styles from './chart.module.css';
 
 interface ProcessData {
   date: number;
@@ -137,7 +138,12 @@ const ChangeFailureRateGraph: React.FC<ChartProps> = (props: ChartProps) => {
     [startDate, endDate],
   );
 
-  const nonGraphBody = buildNonGraphBody(props, noData, changeFailureRateName);
+  const nonGraphBody = buildNonGraphBody(
+    props,
+    noData,
+    changeFailureRateName,
+    styles.messageContainer,
+  );
 
   if (nonGraphBody) {
     return nonGraphBody;
@@ -155,13 +161,13 @@ const ChangeFailureRateGraph: React.FC<ChartProps> = (props: ChartProps) => {
           {payload.repository}: {(payload.total * 100).toFixed(2)}%
         </p>
         {payload.successful > 0 && (
-          <span key={uuidv4()} className="toolTipSpan">
+          <span key={uuidv4()} className={styles.toolTipSpan}>
             Successes:
             {successUrls.map((url: string, index: number) => {
               return (
                 <a
                   key={uuidv4()}
-                  className="toolTipLink"
+                  className={styles.toolTipLink}
                   target="_blank"
                   href={url}
                 >
@@ -174,13 +180,13 @@ const ChangeFailureRateGraph: React.FC<ChartProps> = (props: ChartProps) => {
         )}
         {payload.failed > 0 && payload.successful > 0 && <br key={uuidv4()} />}
         {payload.failed > 0 && (
-          <span key={uuidv4()} className="toolTipSpan">
+          <span key={uuidv4()} className={styles.toolTipSpan}>
             Issues:
             {failureUrls.map((url: string, index: number) => {
               return (
                 <a
                   key={uuidv4()}
-                  className="toolTipLink"
+                  className={styles.toolTipLink}
                   target="_blank"
                   href={url}
                 >
@@ -200,8 +206,14 @@ const ChangeFailureRateGraph: React.FC<ChartProps> = (props: ChartProps) => {
     setTooltipContent(<TooltipContent body={body} title={title} />);
   };
 
+  const tickColor = props.theme === Theme.Dark ? '#FFF' : '#000';
+
   return (
-    <div data-testid={changeFailureRateName} className="chart-wrapper">
+    <div
+      data-testid={changeFailureRateName}
+      className={styles.chartWrapper}
+      data-theme={props.theme === Theme.Dark ? 'dark' : 'light'}
+    >
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
           width={500}
@@ -215,7 +227,7 @@ const ChangeFailureRateGraph: React.FC<ChartProps> = (props: ChartProps) => {
           <CartesianGrid strokeDasharray="3 3" vertical={false} />
           <YAxis
             type="number"
-            tick={{ fill: '#FFFFFF' }}
+            tick={{ fill: tickColor }}
             tickFormatter={tick => tick * 100 + '%'}
           />
           <XAxis
@@ -223,7 +235,7 @@ const ChangeFailureRateGraph: React.FC<ChartProps> = (props: ChartProps) => {
             dataKey="date"
             tickSize={15}
             type="number"
-            tick={{ fill: '#FFFFFF' }}
+            tick={{ fill: tickColor }}
             ticks={ticks}
             domain={[startDate.getTime(), endDate.getTime()]}
             tickFormatter={formatDateTicks}
@@ -246,12 +258,12 @@ const ChangeFailureRateGraph: React.FC<ChartProps> = (props: ChartProps) => {
         </BarChart>
       </ResponsiveContainer>
       <Tooltip
-        className="chartTooltip"
+        className={styles.chartTooltip}
         delayHide={1000}
         clickable={true}
-        classNameArrow="chartTooltipArrow"
+        classNameArrow={styles.chartTooltipArrow}
         id="cfrTooltip"
-        border="1px solid white"
+        border="1px"
         opacity="1"
         content={tooltipContent}
       />
