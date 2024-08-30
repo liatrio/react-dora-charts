@@ -203,7 +203,49 @@ The data schema for each chart is as follows:
 
 ## Testing
 
-⚠️ WIP
+### Unit Tests
+
+Basic unit tests can be found in the [tests](./tests/) directory. They can be run with `npm test`
+
+### Visual Diffs via Playwright
+
+This project includes visual diff tests that are run via Playwright. They are used to ensure that the components are functioning and displaying correctly. Each component has its own set of visual diff tests that test the functionality of that component.
+
+| File                                                                         | Description                                                                       |
+| ---------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| [playwright.config.js](./playwright/playwright.config.js)                    | This file contains the configuration for the Playwright tests.                    |
+| [playwright/test_parameters.yaml](./playwright/test_parameters.yaml)         | This file contains the test parameters.                                           |
+| [playwright/playwright.dockerfile](./playwright/playwright.dockerfile)       | This Dockerfile is used to build a Docker image for running the Playwright tests. |
+| [playwright/tests/components.test.js](./playwright/tests/components.test.js) | This file contains the main test logic.                                           |
+| [playwright/helpers/utils.js](./playwright/helpers/utils.js)                 | This file contains utility functions used by the tests.                           |
+| [playwright/helpers/constants.js](./playwright/helpers/constants.js)         | This file contains constants used by the tests.                                   |
+
+To run the Playwright tests, use the following commands:
+
+| Command                                      | Description                                                                                |
+| -------------------------------------------- | ------------------------------------------------------------------------------------------ |
+| `npm run playwright`                         | Runs all the tests. See [note about docker usage](#note-about-docker-usage).               |
+| `npm run playwright:smoke-test`              | Runs a subset of the tests.<br>Useful for debugging.                                       |
+| `npm run playwright:show-report`             | Shows the most recent test report.<br>Can be used to view reports for test run via Docker. |
+| `npm run playwright:update-snapshots`        | Updates the snapshots. See [note about docker usage](#note-about-docker-usage).            |
+| `npm run playwright:docker:build`            | Builds the Docker image.                                                                   |
+| `npm run playwright:docker`                  | Runs the tests in a Docker container.                                                      |
+| `npm run playwright:docker:update-snapshots` | Updates the snapshots in a Docker container.                                               |
+
+You can also run a subset of the tests using tags, for example:
+
+```sh
+npx playwright test --grep @component-board
+npx playwright test --grep @dataset-low
+```
+
+#### Note about updating snapshots
+
+⚠️ Be extra cautious when updating snapshots. Any changes to the snapshots need to be manually reviewed for accuracy before committing them.
+
+#### Note about Docker usage
+
+To ensure consistency in the snapshots across different machines (local dev vs. CI), the Playwright tests are run in a Docker container. Running the tests locally is useful for creating and debugging, but all snapshots should be updated via the `playwright:docker:update-snapshots` command.
 
 ## Contributing
 

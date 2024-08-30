@@ -17,6 +17,7 @@ dictionaries:
   - useCompounds
 ignorePaths:
   - .gitignore
+  - .dockerignore
   - .cspell.yaml
   - .git/
   - CHANGELOG.md
