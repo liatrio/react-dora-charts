@@ -8,7 +8,6 @@ import {
   Line,
 } from 'recharts';
 import CustomDot from './CustomDot';
-import './general.css';
 import TooltipContent from './ToolTip/TooltipContent';
 import { Tooltip } from 'react-tooltip';
 import { ChartProps, Theme } from './interfaces/propInterfaces';
