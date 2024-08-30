@@ -186,7 +186,11 @@ const DeploymentFrequencyGraph: React.FC<ChartProps> = (props: ChartProps) => {
   const tickColor = props.theme === Theme.Dark ? '#FFF' : '#000';
 
   return (
-    <div data-testid={deploymentFrequencyName} className={styles.chartWrapper} data-theme={props.theme === Theme.Dark ? 'dark' : 'light'}>
+    <div
+      data-testid={deploymentFrequencyName}
+      className={styles.chartWrapper}
+      data-theme={props.theme === Theme.Dark ? 'dark' : 'light'}
+    >
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
           width={500}

@@ -60,11 +60,11 @@ export const buildNonGraphBody = (
   componentProps: ChartProps,
   noData: boolean,
   chartType: string,
-  messageContainerClassName: string
+  messageContainerClassName: string,
 ) => {
   if (componentProps.message) {
     return (
-      <div data-testid={chartType}  className={messageContainerClassName}>
+      <div data-testid={chartType} className={messageContainerClassName}>
         <span>{componentProps.message}</span>
       </div>
     );

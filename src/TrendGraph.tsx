@@ -231,16 +231,19 @@ const TrendGraph: React.FC<TrendProps> = (props: TrendProps) => {
     setGraphData(filteredData);
   }, [props.graphEnd, props.graphStart, allData]);
 
-  const nonGraphBody = buildNonGraphBody(props, noData, trendName, styles.messageContainer);
+  const nonGraphBody = buildNonGraphBody(
+    props,
+    noData,
+    trendName,
+    styles.messageContainer,
+  );
 
   if (nonGraphBody) {
     return nonGraphBody;
   } else if (graphData.length <= 1) {
     return (
       <div className={styles.messageContainer}>
-        <span>
-          Not Enough Data to calculate a Trend
-        </span>
+        <span>Not Enough Data to calculate a Trend</span>
       </div>
     );
   }
@@ -250,7 +253,11 @@ const TrendGraph: React.FC<TrendProps> = (props: TrendProps) => {
   const tickColor = props.theme === Theme.Dark ? '#FFF' : '#000';
 
   return (
-    <div data-testid={trendName} className={styles.chartWrapper} data-theme={props.theme === Theme.Dark ? 'dark' : 'light'}>
+    <div
+      data-testid={trendName}
+      className={styles.chartWrapper}
+      data-theme={props.theme === Theme.Dark ? 'dark' : 'light'}
+    >
       <ResponsiveContainer width="100%" height="100%">
         <ComposedChart
           width={500}

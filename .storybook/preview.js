@@ -7,4 +7,4 @@ export const parameters = {
   },
 };
 
-import '../src/global.css'
+import '../src/global.css';

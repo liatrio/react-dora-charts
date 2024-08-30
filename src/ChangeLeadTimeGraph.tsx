@@ -120,7 +120,12 @@ const ChangeLeadTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
 
   const ticks = generateTicks(startDate, endDate, 5);
 
-  const nonGraphBody = buildNonGraphBody(props, noData, changeLeadTimeName, styles.messageContainer);
+  const nonGraphBody = buildNonGraphBody(
+    props,
+    noData,
+    changeLeadTimeName,
+    styles.messageContainer,
+  );
 
   if (nonGraphBody) {
     return nonGraphBody;
@@ -151,7 +156,11 @@ const ChangeLeadTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
 
     const title = (
       <h3>
-        <a className={styles.toolTipLink} href={payload.changeUrl} target="_blank">
+        <a
+          className={styles.toolTipLink}
+          href={payload.changeUrl}
+          target="_blank"
+        >
           {payload.title}
         </a>
       </h3>

@@ -38,7 +38,12 @@ const Board: React.FC<BoardProps> = props => {
     props.metricThresholdSet,
   ]);
 
-  const nonGraphBody = buildNonGraphBody(props, noData, boardName, styles.messageContainer);
+  const nonGraphBody = buildNonGraphBody(
+    props,
+    noData,
+    boardName,
+    styles.messageContainer,
+  );
 
   if (nonGraphBody) {
     return nonGraphBody;
@@ -46,7 +51,11 @@ const Board: React.FC<BoardProps> = props => {
 
   if (props.showTrends) {
     return (
-      <div data-testid={boardName} className={styles.board} data-theme={props.theme === Theme.Dark ? 'dark' : 'light'}>
+      <div
+        data-testid={boardName}
+        className={styles.board}
+        data-theme={props.theme === Theme.Dark ? 'dark' : 'light'}
+      >
         <TrendIcon
           metric={state.deploymentFrequency}
           metricTitle={'Deployment Frequency'}
@@ -92,7 +101,11 @@ const Board: React.FC<BoardProps> = props => {
     );
   } else {
     return (
-      <div data-testid={boardName} className={styles.board} data-theme={props.theme === Theme.Dark ? 'dark' : 'light'}>
+      <div
+        data-testid={boardName}
+        className={styles.board}
+        data-theme={props.theme === Theme.Dark ? 'dark' : 'light'}
+      >
         <MetricIcon
           metric={state.deploymentFrequency}
           metricTitle={'Deployment Frequency'}

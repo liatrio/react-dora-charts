@@ -139,7 +139,12 @@ const RecoverTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
 
   const ticks = generateTicks(startDate, endDate, 5);
 
-  const nonGraphBody = buildNonGraphBody(props, noData, recoverTimeName, styles.messageContainer);
+  const nonGraphBody = buildNonGraphBody(
+    props,
+    noData,
+    recoverTimeName,
+    styles.messageContainer,
+  );
 
   if (nonGraphBody) {
     return nonGraphBody;
@@ -184,7 +189,11 @@ const RecoverTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
   const tickColor = props.theme === Theme.Dark ? '#FFF' : '#000';
 
   return (
-    <div data-testid={recoverTimeName} className={styles.chartWrapper} data-theme={props.theme === Theme.Dark ? 'dark' : 'light'}>
+    <div
+      data-testid={recoverTimeName}
+      className={styles.chartWrapper}
+      data-theme={props.theme === Theme.Dark ? 'dark' : 'light'}
+    >
       <ResponsiveContainer width="100%" height="100%">
         <LineChart
           width={500}

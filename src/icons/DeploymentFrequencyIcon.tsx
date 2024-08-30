@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './icon.module.css';
 
-
 interface Props {
   scale?: number;
 }

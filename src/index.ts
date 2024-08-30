@@ -5,7 +5,7 @@ export { default as DeploymentFrequencyGraph } from './DeploymentFrequencyGraph'
 export { default as Board } from './Boards/Board';
 export { default as TrendGraph } from './TrendGraph';
 export { default as TrendIndicator } from './icons/TrendIndicator';
-import './global.css'
+import './global.css';
 export { fetchData } from './functions/fetchFunctions';
 export {
   getDateDaysInPast,
