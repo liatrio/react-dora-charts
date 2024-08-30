@@ -1,5 +1,4 @@
-import React from 'react';
-import './Loading.css';
+import styles from './loading.module.css';
 
 interface Props {
   enabled: boolean;
@@ -11,8 +10,8 @@ const Loading = (props: Props) => {
   }
 
   return (
-    <div className="overlay">
-      <span className="loader"></span>
+    <div className={styles.overlay}>
+      <span className={styles.loader}></span>
     </div>
   );
 };
