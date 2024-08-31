@@ -1,6 +1,6 @@
 import React, { useEffect, useState, Dispatch, SetStateAction } from 'react';
 import { DoraRecord } from '../interfaces/apiInterfaces';
-import { ChartProps } from '../interfaces/propInterfaces';
+import { ChartProps, Theme } from '../interfaces/propInterfaces';
 import Loading from '../Loading/Loading';
 import noDataImg from '../assets/no_data.png';
 import { getDateDaysInPast } from './dateFunctions';
@@ -61,33 +61,34 @@ export const buildNonGraphBody = (
   noData: boolean,
   chartType: string,
   messageContainerClassName: string,
+  theme?: Theme
 ) => {
+  let content: any = null
+
   if (componentProps.message) {
-    return (
-      <div data-testid={chartType} className={messageContainerClassName}>
-        <span>{componentProps.message}</span>
-      </div>
-    );
+    content = (<span>{componentProps.message}</span>);
   } else if (componentProps.loading) {
-    return (
-      <div data-testid={chartType} className={messageContainerClassName}>
-        <Loading enabled={componentProps.loading} />
-      </div>
-    );
+    return (<Loading enabled={componentProps.loading} />);
   } else if (noData) {
     return (
-      <div data-testid={chartType} className={messageContainerClassName}>
-        <img
+      <img
           alt="No Data"
           title="No Data"
           src={noDataImg}
           style={{ width: '150px' }}
         />
-      </div>
     );
-  } else {
-    return null;
   }
+
+  if(content === null) {
+    return null
+  }
+
+  return (
+    <div data-testid={chartType} className={messageContainerClassName} data-theme={theme}>
+      {content}
+    </div>
+  )
 };
 
 const filterGraphData = (data: DoraRecord[], start: Date, end: Date) => {
