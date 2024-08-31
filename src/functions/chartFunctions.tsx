@@ -4,7 +4,7 @@ import { ChartProps, Theme } from '../interfaces/propInterfaces';
 import Loading from '../Loading/Loading';
 import noDataImg from '../assets/no_data.png';
 import { getDateDaysInPast } from './dateFunctions';
-import { defaultGraphEnd, defaultGraphStart } from '../constants';
+import { defaultGraphEnd, defaultGraphStart, millisecondsToDays } from '../constants';
 
 const hslToHex = (h: number, s: number, l: number) => {
   const hue = Math.round(360 * h);
@@ -43,13 +43,15 @@ export const generateTicks = (start: Date, end: Date, numIntervals: number) => {
   const ticks = [];
   const diff = end.getTime() - start.getTime();
 
-  const interval = diff / numIntervals;
+  const interval = Math.round((diff / numIntervals) / millisecondsToDays);
 
-  for (let i = 0; i <= numIntervals; i++) {
-    ticks.push(new Date(start.getTime() + interval * i).getTime());
+  for (let i = 0; i < numIntervals; i++) {
+    ticks.push(new Date(start.getTime() + interval * i * millisecondsToDays).getTime());
   }
 
-  return ticks;
+  ticks.push(end.getTime());
+
+  return [...new Set(ticks)];
 };
 
 export const formatDateTicks = (tick: any): string => {
