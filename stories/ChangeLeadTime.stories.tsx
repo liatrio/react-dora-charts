@@ -20,7 +20,7 @@ const Template: StoryFn<ChartProps> = () => {
   const isDark = useDarkMode();
 
   return (
-    <div className="graphContainer" data-theme={isDark ? 'dark' : 'light'}>
+    <div className="graphContainer" data-theme={isDark ? Theme.Dark : Theme.Light}>
       <EditPanel args={graphArgs} showStandardFields>
         <MetricEditor
           metricName={changeLeadTimeName}

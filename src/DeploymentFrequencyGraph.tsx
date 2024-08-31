@@ -189,7 +189,7 @@ const DeploymentFrequencyGraph: React.FC<ChartProps> = (props: ChartProps) => {
     <div
       data-testid={deploymentFrequencyName}
       className={styles.chartWrapper}
-      data-theme={props.theme === Theme.Dark ? 'dark' : 'light'}
+      data-theme={props.theme}
     >
       <ResponsiveContainer width="100%" height="100%">
         <BarChart
