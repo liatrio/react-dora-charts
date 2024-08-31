@@ -42,6 +42,8 @@ export const recoverTimeName = 'recoverTime';
 export const trendName = 'trends';
 export const boardName = 'board';
 
+export const tooltipHideDelay = 1000;
+
 export const defaultDaysToPull = 356;
 export const defaultGraphStart = 30;
 export const defaultGraphEnd = 0;
