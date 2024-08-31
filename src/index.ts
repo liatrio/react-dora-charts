@@ -22,10 +22,10 @@ export type {
   MetricThresholdSet,
   MetricThresholds,
   ChartProps,
-  Theme,
   BoardProps,
-  TrendProps,
 } from './interfaces/propInterfaces';
+
+export { Theme } from './interfaces/propInterfaces';
 
 export type {
   DoraState,
