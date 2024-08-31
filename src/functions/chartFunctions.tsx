@@ -83,7 +83,7 @@ export const buildNonGraphBody = (
   if (content === null) {
     return null;
   }
-  
+
   return (
     <div
       data-testid={chartType}
