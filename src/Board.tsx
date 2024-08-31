@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import styles from './board.module.css';
+import styles from './chart.module.css';
 import { Tooltip } from 'react-tooltip';
-import DeployFrequencyIcon from '../icons/DeploymentFrequencyIcon';
-import ChangeLeadTimeIcon from '../icons/ChangeLeadTimeIcon';
-import ChangeFailureRateIcon from '../icons/ChangeFailureRateIcon';
-import RecoverTimeIcon from '../icons/RecoverTimeIcon';
-import { BoardProps, Theme } from '../interfaces/propInterfaces';
-import { DoraState } from '../interfaces/metricInterfaces';
-import { boardName, defaultDoraState } from '../constants';
-import { buildDoraState } from '../functions/metricFunctions';
-import { buildNonGraphBody } from '../functions/chartFunctions';
-import MetricIcon from '../icons/MetricIcon';
-import TrendIcon from '../icons/TrendIcon';
+import DeployFrequencyIcon from './icons/DeploymentFrequencyIcon';
+import ChangeLeadTimeIcon from './icons/ChangeLeadTimeIcon';
+import ChangeFailureRateIcon from './icons/ChangeFailureRateIcon';
+import RecoverTimeIcon from './icons/RecoverTimeIcon';
+import { BoardProps } from './interfaces/propInterfaces';
+import { DoraState } from './interfaces/metricInterfaces';
+import { boardName, defaultDoraState } from './constants';
+import { buildDoraState } from './functions/metricFunctions';
+import { buildNonGraphBody } from './functions/chartFunctions';
+import MetricIcon from './icons/MetricIcon';
+import TrendIcon from './icons/TrendIcon';
 
 const Board: React.FC<BoardProps> = props => {
   const [state, setState] = useState<DoraState>({ ...defaultDoraState });
@@ -43,6 +43,7 @@ const Board: React.FC<BoardProps> = props => {
     noData,
     boardName,
     styles.messageContainer,
+    props.theme
   );
 
   if (nonGraphBody) {
@@ -54,7 +55,7 @@ const Board: React.FC<BoardProps> = props => {
       <div
         data-testid={boardName}
         className={styles.board}
-        data-theme={props.theme === Theme.Dark ? 'dark' : 'light'}
+        data-theme={props.theme}
       >
         <TrendIcon
           metric={state.deploymentFrequency}
@@ -90,9 +91,9 @@ const Board: React.FC<BoardProps> = props => {
         </TrendIcon>
         {!props.alwaysShowDetails && (
           <Tooltip
-            className={styles.boardTooltip}
+            className={styles.tooltip}
             id="metricTooltip"
-            classNameArrow={styles.boardTooltipArrow}
+            classNameArrow={styles.tooltipArrow}
             border="1px"
             content={tooltipContent}
           />
@@ -104,7 +105,7 @@ const Board: React.FC<BoardProps> = props => {
       <div
         data-testid={boardName}
         className={styles.board}
-        data-theme={props.theme === Theme.Dark ? 'dark' : 'light'}
+        data-theme={props.theme}
       >
         <MetricIcon
           metric={state.deploymentFrequency}
@@ -144,9 +145,9 @@ const Board: React.FC<BoardProps> = props => {
         </MetricIcon>
         {!props.alwaysShowDetails && (
           <Tooltip
-            className={styles.boardTooltip}
+            className={styles.tooltip}
             id="metricTooltip"
-            classNameArrow={styles.boardTooltipArrow}
+            classNameArrow={styles.tooltipArrow}
             border="1px"
             opacity="1"
             content={tooltipContent}
