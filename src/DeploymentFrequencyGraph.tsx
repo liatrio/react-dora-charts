@@ -10,7 +10,11 @@ import {
 import CustomBar from './CustomBar';
 import { Tooltip } from 'react-tooltip';
 import TooltipContent from './ToolTip/TooltipContent';
-import { deploymentFrequencyName, millisecondsToDays, tooltipHideDelay } from './constants';
+import {
+  deploymentFrequencyName,
+  millisecondsToDays,
+  tooltipHideDelay,
+} from './constants';
 import { ChartProps, Theme } from './interfaces/propInterfaces';
 import { DoraRecord } from './interfaces/apiInterfaces';
 import {
@@ -126,7 +130,7 @@ const DeploymentFrequencyGraph: React.FC<ChartProps> = (props: ChartProps) => {
     noData,
     deploymentFrequencyName,
     styles.messageContainer,
-    props.theme
+    props.theme,
   );
 
   if (nonGraphBody) {

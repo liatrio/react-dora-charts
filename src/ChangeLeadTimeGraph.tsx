@@ -125,7 +125,7 @@ const ChangeLeadTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
     noData,
     changeLeadTimeName,
     styles.messageContainer,
-    props.theme
+    props.theme,
   );
 
   if (nonGraphBody) {

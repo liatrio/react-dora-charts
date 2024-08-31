@@ -144,7 +144,7 @@ const RecoverTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
     noData,
     recoverTimeName,
     styles.messageContainer,
-    props.theme
+    props.theme,
   );
 
   if (nonGraphBody) {

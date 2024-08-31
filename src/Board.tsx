@@ -43,7 +43,7 @@ const Board: React.FC<BoardProps> = props => {
     noData,
     boardName,
     styles.messageContainer,
-    props.theme
+    props.theme,
   );
 
   if (nonGraphBody) {

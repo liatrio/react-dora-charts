@@ -61,34 +61,38 @@ export const buildNonGraphBody = (
   noData: boolean,
   chartType: string,
   messageContainerClassName: string,
-  theme?: Theme
+  theme?: Theme,
 ) => {
-  let content: any = null
+  let content: any = null;
 
   if (componentProps.message) {
-    content = (<span>{componentProps.message}</span>);
+    content = <span>{componentProps.message}</span>;
   } else if (componentProps.loading) {
-    return (<Loading enabled={componentProps.loading} />);
+    return <Loading enabled={componentProps.loading} />;
   } else if (noData) {
     return (
       <img
-          alt="No Data"
-          title="No Data"
-          src={noDataImg}
-          style={{ width: '150px' }}
-        />
+        alt="No Data"
+        title="No Data"
+        src={noDataImg}
+        style={{ width: '150px' }}
+      />
     );
   }
 
-  if(content === null) {
-    return null
+  if (content === null) {
+    return null;
   }
 
   return (
-    <div data-testid={chartType} className={messageContainerClassName} data-theme={theme}>
+    <div
+      data-testid={chartType}
+      className={messageContainerClassName}
+      data-theme={theme}
+    >
       {content}
     </div>
-  )
+  );
 };
 
 const filterGraphData = (data: DoraRecord[], start: Date, end: Date) => {

@@ -236,14 +236,18 @@ const TrendGraph: React.FC<TrendProps> = (props: TrendProps) => {
     noData,
     trendName,
     styles.messageContainer,
-    props.theme
+    props.theme,
   );
 
   if (nonGraphBody) {
     return nonGraphBody;
   } else if (graphData.length <= 1) {
     return (
-      <div data-testid={trendName} className={styles.messageContainer} data-theme={props.theme}>
+      <div
+        data-testid={trendName}
+        className={styles.messageContainer}
+        data-theme={props.theme}
+      >
         <span>Not Enough Data to calculate a Trend</span>
       </div>
     );

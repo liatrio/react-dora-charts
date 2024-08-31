@@ -18,7 +18,11 @@ import {
   generateTicks,
   useSharedLogic,
 } from './functions/chartFunctions';
-import { changeFailureRateName, millisecondsToDays, tooltipHideDelay } from './constants';
+import {
+  changeFailureRateName,
+  millisecondsToDays,
+  tooltipHideDelay,
+} from './constants';
 import { v4 as uuidv4 } from 'uuid';
 import styles from './chart.module.css';
 
@@ -143,7 +147,7 @@ const ChangeFailureRateGraph: React.FC<ChartProps> = (props: ChartProps) => {
     noData,
     changeFailureRateName,
     styles.messageContainer,
-    props.theme
+    props.theme,
   );
 
   if (nonGraphBody) {
