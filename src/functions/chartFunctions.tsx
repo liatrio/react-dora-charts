@@ -68,9 +68,9 @@ export const buildNonGraphBody = (
   if (componentProps.message) {
     content = <span>{componentProps.message}</span>;
   } else if (componentProps.loading) {
-    return <Loading enabled={componentProps.loading} />;
+    content = <Loading enabled={componentProps.loading} />;
   } else if (noData) {
-    return (
+    content = (
       <img
         alt="No Data"
         title="No Data"
@@ -83,7 +83,7 @@ export const buildNonGraphBody = (
   if (content === null) {
     return null;
   }
-
+  
   return (
     <div
       data-testid={chartType}
