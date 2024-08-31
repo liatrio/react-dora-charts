@@ -29,19 +29,14 @@
   color: var(--react-dora-charts-text-color);
 }
 
-.chartTooltip {
+.tooltip {
   border-radius: 10px;
   max-width: 300px;
   padding: 10px;
   z-index: 100;
-  background-color: var(--react-dora-charts-background-color);
+  background-color: var(--react-dora-charts-background-color) !important;
   border: 1px solid var(--react-dora-charts-primary-color) !important;
-  background-color: var(--react-dora-charts-background-color);
-}
-
-.chartTooltipArrow {
-  border-right: 1px solid var(--react-dora-charts-primary-color) !important;
-  border-bottom: 1px solid var(--react-dora-charts-primary-color) !important;
+  color: var(--react-dora-charts-text-color) !important;
 }
 
 .messageContainer {
@@ -52,4 +47,20 @@
   align-items: center;
   position: relative;
   color: var(--react-dora-charts-text-color);
+}
+
+.board {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-evenly;
+  align-items: center;
+  color: var(--react-dora-charts-text-color);
+}
+
+.tooltipArrow {
+  border-right: 1px solid var(--react-dora-charts-primary-color) !important;
+  border-bottom: 1px solid var(--react-dora-charts-primary-color) !important;
 }
