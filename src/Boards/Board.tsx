@@ -91,7 +91,7 @@ const Board: React.FC<BoardProps> = props => {
         {!props.alwaysShowDetails && (
           <Tooltip
             className={styles.boardTooltip}
-            id="scoreTooltip"
+            id="metricTooltip"
             classNameArrow={styles.boardTooltipArrow}
             border="1px"
             content={tooltipContent}
@@ -145,7 +145,7 @@ const Board: React.FC<BoardProps> = props => {
         {!props.alwaysShowDetails && (
           <Tooltip
             className={styles.boardTooltip}
-            id="scoreTooltip"
+            id="metricTooltip"
             classNameArrow={styles.boardTooltipArrow}
             border="1px"
             opacity="1"
