@@ -18,7 +18,7 @@ import {
   generateTicks,
   useSharedLogic,
 } from './functions/chartFunctions';
-import { changeFailureRateName, millisecondsToDays } from './constants';
+import { changeFailureRateName, millisecondsToDays, tooltipHideDelay } from './constants';
 import { v4 as uuidv4 } from 'uuid';
 import styles from './chart.module.css';
 
@@ -143,6 +143,7 @@ const ChangeFailureRateGraph: React.FC<ChartProps> = (props: ChartProps) => {
     noData,
     changeFailureRateName,
     styles.messageContainer,
+    props.theme
   );
 
   if (nonGraphBody) {
@@ -258,10 +259,10 @@ const ChangeFailureRateGraph: React.FC<ChartProps> = (props: ChartProps) => {
         </BarChart>
       </ResponsiveContainer>
       <Tooltip
-        className={styles.chartTooltip}
-        delayHide={1000}
+        className={styles.tooltip}
+        delayHide={tooltipHideDelay}
         clickable={true}
-        classNameArrow={styles.chartTooltipArrow}
+        classNameArrow={styles.tooltipArrow}
         id="cfrTooltip"
         border="1px"
         opacity="1"

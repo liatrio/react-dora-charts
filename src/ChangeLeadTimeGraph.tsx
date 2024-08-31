@@ -19,7 +19,7 @@ import {
   useSharedLogic,
 } from './functions/chartFunctions';
 import { buildDoraState } from './functions/metricFunctions';
-import { changeLeadTimeName } from './constants';
+import { changeLeadTimeName, tooltipHideDelay } from './constants';
 import { v4 as uuidv4 } from 'uuid';
 import styles from './chart.module.css';
 
@@ -125,6 +125,7 @@ const ChangeLeadTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
     noData,
     changeLeadTimeName,
     styles.messageContainer,
+    props.theme
   );
 
   if (nonGraphBody) {
@@ -193,7 +194,7 @@ const ChangeLeadTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
         setNode(null);
         timeoutRef.current = setTimeout(() => {
           setTooltipOpen(false);
-        }, 1000);
+        }, tooltipHideDelay);
       }
     } else if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
@@ -210,7 +211,7 @@ const ChangeLeadTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
       setNode('');
       timeoutRef.current = setTimeout(() => {
         setTooltipOpen(false);
-      }, 1000);
+      }, tooltipHideDelay);
     }
   };
 
@@ -284,12 +285,12 @@ const ChangeLeadTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
         </ScatterChart>
       </ResponsiveContainer>
       <Tooltip
-        className={styles.chartTooltip}
+        className={styles.tooltip}
         offset={20}
         isOpen={tooltipOpen}
         position={position}
         clickable={true}
-        classNameArrow={styles.chartTooltipArrow}
+        classNameArrow={styles.tooltipArrow}
         id="cltTooltip"
         border="1px"
         opacity="1"

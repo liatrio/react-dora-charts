@@ -10,7 +10,7 @@ import {
 import CustomBar from './CustomBar';
 import { Tooltip } from 'react-tooltip';
 import TooltipContent from './ToolTip/TooltipContent';
-import { deploymentFrequencyName, millisecondsToDays } from './constants';
+import { deploymentFrequencyName, millisecondsToDays, tooltipHideDelay } from './constants';
 import { ChartProps, Theme } from './interfaces/propInterfaces';
 import { DoraRecord } from './interfaces/apiInterfaces';
 import {
@@ -126,6 +126,7 @@ const DeploymentFrequencyGraph: React.FC<ChartProps> = (props: ChartProps) => {
     noData,
     deploymentFrequencyName,
     styles.messageContainer,
+    props.theme
   );
 
   if (nonGraphBody) {
@@ -244,10 +245,10 @@ const DeploymentFrequencyGraph: React.FC<ChartProps> = (props: ChartProps) => {
         </BarChart>
       </ResponsiveContainer>
       <Tooltip
-        className={styles.chartTooltip}
-        delayHide={2000}
+        className={styles.tooltip}
+        delayHide={tooltipHideDelay}
         clickable={true}
-        classNameArrow={styles.chartTooltipArrow}
+        classNameArrow={styles.tooltipArrow}
         id="dfTooltip"
         border="1px"
         opacity="1"
