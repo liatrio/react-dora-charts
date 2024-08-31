@@ -41,7 +41,10 @@ const Template: StoryFn<ChartProps> = () => {
   };
 
   return (
-    <div className="graphContainer" data-theme={isDark ? Theme.Dark : Theme.Light}>
+    <div
+      className="graphContainer"
+      data-theme={isDark ? Theme.Dark : Theme.Light}
+    >
       <EditPanel args={graphArgs} showStandardFields>
         <MetricEditor
           metricName={deploymentFrequencyName}
