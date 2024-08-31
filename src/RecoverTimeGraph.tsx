@@ -192,7 +192,7 @@ const RecoverTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
     <div
       data-testid={recoverTimeName}
       className={styles.chartWrapper}
-      data-theme={props.theme === Theme.Dark ? 'dark' : 'light'}
+      data-theme={props.theme}
     >
       <ResponsiveContainer width="100%" height="100%">
         <LineChart

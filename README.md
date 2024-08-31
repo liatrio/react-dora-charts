@@ -9,13 +9,13 @@ This component library contains charts for the standard DORA metrics.
 You can install these components using the following command:
 
 ```sh
-npm install https://github.com/liatrio/react-dora-charts/releases/download/v1.0.0/react-dora-charts-1.0.0.tgz
+npm install https://github.com/liatrio/react-dora-charts/releases/download/v1.1.1/react-dora-charts-1.1.1.tgz
 ```
 
 Or
 
 ```sh
-yarn add react-dora-charts@https://github.com/liatrio/react-dora-charts/releases/download/v1.0.0/react-dora-charts-1.0.0.tgz
+yarn add react-dora-charts@https://github.com/liatrio/react-dora-charts/releases/download/v1.1.1/react-dora-charts-1.1.1.tgz
 ```
 
 ## Usage
@@ -144,7 +144,7 @@ These functions are just shortcuts to get a Date a certain number of days in the
 | `metricThresholdSet`            |  false   | This allows you to customize the metric thresholds used for determining the rank of each metric. You only have to override the ones you need. There are defaults based on the official DORA Report that are used when these are not supplied.<br>This takes in a `MetricThresholdSet` object which contains a `MetricThresholds` object for each metric.<br>The threshold values for `elite`, `high` and `medium` are measured in hours. `low` is considered anything longer than medium, so it is not able to be supplied as a value in this object. |
 | `message`                       |  false   | This allows a parent component to display a custom message while it does something. This setting overrides `loading` and the no data state that happens if `data` is empty or the `api` returns no data.                                                                                                                                                                                                                                                                                                                                              |
 | `holidays`                      |  false   | This field allows you to specify holidays that your organization follows to exclude from the calculations for the components.                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| `theme`                         |  false   | This field allows you to supply the `Theme` (dark = 0, light = 1) to the chart for styling purposes. You can alternatively just make sure that `data-theme='light\|dark'` is used on an ancestor of the component.                                                                                                                                                                                                                                                                                                                                    |
+| `theme`                         |  false   | This field allows you to supply the `Theme` (dark, light) to the chart for styling purposes. You can alternatively just make sure that `data-theme='light\|dark'` is used on an ancestor of the component.                                                                                                                                                                                                                                                                                                                                            |
 
 ### Board Component Properties
 

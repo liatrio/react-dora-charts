@@ -256,7 +256,7 @@ const TrendGraph: React.FC<TrendProps> = (props: TrendProps) => {
     <div
       data-testid={trendName}
       className={styles.chartWrapper}
-      data-theme={props.theme === Theme.Dark ? 'dark' : 'light'}
+      data-theme={props.theme}
     >
       <ResponsiveContainer width="100%" height="100%">
         <ComposedChart
