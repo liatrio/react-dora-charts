@@ -18,8 +18,14 @@ import {
   generateTicks,
   useSharedLogic,
 } from './functions/chartFunctions';
-import { buildDoraState } from './functions/metricFunctions';
-import { changeLeadTimeName, tooltipHideDelay } from './constants';
+import {
+  buildDoraState,
+  calculateCycleTime,
+} from './functions/metricFunctions';
+import {
+  changeLeadTimeName,
+  tooltipHideDelay,
+} from './constants';
 import { v4 as uuidv4 } from 'uuid';
 import styles from './chart.module.css';
 
@@ -34,25 +40,27 @@ interface ProcessRepository {
   id: string;
 }
 
-export const composeGraphData = (_: ChartProps, data: DoraRecord[]) => {
+export const composeGraphData = (props: ChartProps, data: DoraRecord[]) => {
   let reduced = data.reduce(
     (acc: Map<string, ProcessRepository[]>, record: DoraRecord) => {
       if (!record.merged_at) {
         return acc;
       }
 
-      const repository = record.repository;
+      const cycleTime = calculateCycleTime(props, record);
 
       let entry: ProcessRepository = {
         mergeTime: record.merged_at.getTime(),
-        originalCycleTime: record.totalCycle,
-        graphCycleTime: record.totalCycle,
+        originalCycleTime: cycleTime,
+        graphCycleTime: cycleTime,
         cycleLabel: ' hrs',
         changeUrl: record.change_url,
         title: record.title ?? '',
         user: record.user ?? '',
         id: uuidv4(),
       };
+
+      const repository = record.repository;
 
       let repositoryEntry = acc.get(repository);
 

@@ -9,8 +9,6 @@ export interface DoraRecord {
   merged_at?: Date;
   created_at: Date;
   fixed_at?: Date;
-  totalCycle: number;
-  recoverTime: number;
   deploy_url: string;
   fixed_url?: string;
   change_url: string;

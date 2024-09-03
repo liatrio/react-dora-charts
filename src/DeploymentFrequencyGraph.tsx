@@ -13,6 +13,7 @@ import TooltipContent from './ToolTip/TooltipContent';
 import {
   deploymentFrequencyName,
   millisecondsToDays,
+  millisecondsToMinutes,
   tooltipHideDelay,
 } from './constants';
 import { ChartProps, Theme } from './interfaces/propInterfaces';
@@ -25,6 +26,7 @@ import {
 } from './functions/chartFunctions';
 import { v4 as uuidv4 } from 'uuid';
 import styles from './chart.module.css';
+import { stripTimeUTC } from './functions/dateFunctions';
 
 interface ProcessRepository {
   count: number;
@@ -43,13 +45,9 @@ export const composeGraphData = (_: ChartProps, data: DoraRecord[]): any[] => {
         return acc;
       }
 
-      const date = new Date(
-        Date.UTC(
-          record.created_at.getUTCFullYear(),
-          record.created_at.getUTCMonth(),
-          record.created_at.getUTCDate(),
-        ),
-      ).getTime();
+      const date =
+        stripTimeUTC(record.created_at).getTime() +
+        new Date().getTimezoneOffset() * millisecondsToMinutes;
       let entry = acc.get(date);
 
       if (!entry) {
@@ -249,7 +247,7 @@ const DeploymentFrequencyGraph: React.FC<ChartProps> = (props: ChartProps) => {
         </BarChart>
       </ResponsiveContainer>
       <Tooltip
-        className={styles.tooltip}
+        className={styles.chartTooltip}
         delayHide={tooltipHideDelay}
         clickable={true}
         classNameArrow={styles.tooltipArrow}

@@ -25,6 +25,7 @@ import {
 } from './constants';
 import { v4 as uuidv4 } from 'uuid';
 import styles from './chart.module.css';
+import { stripTimeUTC } from './functions/dateFunctions';
 
 interface ProcessData {
   date: number;
@@ -47,13 +48,7 @@ export const composeGraphData = (_: ChartProps, data: DoraRecord[]) => {
   const processed = new Map<number, ProcessData>();
 
   data.forEach((record: DoraRecord) => {
-    const date = new Date(
-      Date.UTC(
-        record.created_at.getUTCFullYear(),
-        record.created_at.getUTCMonth(),
-        record.created_at.getUTCDate(),
-      ),
-    ).getTime();
+    const date = stripTimeUTC(record.created_at).getTime();
     let entry = processed.get(date);
 
     if (!entry) {
@@ -263,7 +258,7 @@ const ChangeFailureRateGraph: React.FC<ChartProps> = (props: ChartProps) => {
         </BarChart>
       </ResponsiveContainer>
       <Tooltip
-        className={styles.tooltip}
+        className={styles.chartTooltip}
         delayHide={tooltipHideDelay}
         clickable={true}
         classNameArrow={styles.tooltipArrow}
