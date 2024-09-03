@@ -46,17 +46,15 @@ export const generateDistinctColors = (count: number) => {
 export const generateTicks = (start: Date, end: Date, numIntervals: number) => {
   const ticks = [];
   const diff = end.getTime() - start.getTime();
-  
-  if(diff / millisecondsToDays < numIntervals) {
+
+  if (diff / millisecondsToDays < numIntervals) {
     numIntervals = diff / millisecondsToDays;
   }
-  
+
   const interval = diff / numIntervals;
 
   for (let i = 0; i < numIntervals; i++) {
-    ticks.push(
-      new Date(start.getTime() + interval * i).getTime(),
-    );
+    ticks.push(new Date(start.getTime() + interval * i).getTime());
   }
 
   ticks.push(end.getTime());

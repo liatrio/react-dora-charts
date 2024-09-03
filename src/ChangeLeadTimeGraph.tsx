@@ -22,10 +22,7 @@ import {
   buildDoraState,
   calculateCycleTime,
 } from './functions/metricFunctions';
-import {
-  changeLeadTimeName,
-  tooltipHideDelay,
-} from './constants';
+import { changeLeadTimeName, tooltipHideDelay } from './constants';
 import { v4 as uuidv4 } from 'uuid';
 import styles from './chart.module.css';
 
