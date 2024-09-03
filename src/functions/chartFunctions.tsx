@@ -3,8 +3,12 @@ import { DoraRecord } from '../interfaces/apiInterfaces';
 import { ChartProps } from '../interfaces/propInterfaces';
 import Loading from '../Loading/Loading';
 import noDataImg from '../assets/no_data.png';
-import { getDateDaysInPast } from './dateFunctions';
-import { defaultGraphEnd, defaultGraphStart } from '../constants';
+import { getDateDaysInPast, stripTime } from './dateFunctions';
+import {
+  defaultGraphEnd,
+  defaultGraphStart,
+  millisecondsToDays,
+} from '../constants';
 
 const hslToHex = (h: number, s: number, l: number) => {
   const hue = Math.round(360 * h);
@@ -43,6 +47,10 @@ export const generateTicks = (start: Date, end: Date, numIntervals: number) => {
   const ticks = [];
   const diff = end.getTime() - start.getTime();
 
+  if(diff / millisecondsToDays < numIntervals) {
+    numIntervals = diff / millisecondsToDays;
+  }
+  
   const interval = diff / numIntervals;
 
   for (let i = 0; i <= numIntervals; i++) {
@@ -98,7 +106,10 @@ const filterGraphData = (data: DoraRecord[], start: Date, end: Date) => {
 
     const recordTime = record.created_at.getTime();
 
-    if (recordTime < end.getTime() && recordTime >= start.getTime()) {
+    if (
+      recordTime < end.getTime() + millisecondsToDays &&
+      recordTime >= start.getTime()
+    ) {
       filteredData.push(record);
     }
   }
@@ -157,9 +168,12 @@ export const useSharedLogic = (
   };
 
   useEffect(() => {
-    const start =
+    let start =
       componentProps.graphStart || getDateDaysInPast(defaultGraphStart);
-    const end = componentProps.graphEnd || getDateDaysInPast(defaultGraphEnd);
+    let end = componentProps.graphEnd || getDateDaysInPast(defaultGraphEnd);
+
+    start = stripTime(start);
+    end = stripTime(end);
 
     setStartDate(start);
     setEndDate(end);
