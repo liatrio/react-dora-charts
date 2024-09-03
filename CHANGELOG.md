@@ -1,5 +1,57 @@
 # CHANGELOG
 
+## v1.1.2 (2024-09-03)
+
+### Chore
+
+* chore: add issue templates (#12) ([`24de7aa`](https://github.com/liatrio/react-dora-charts/commit/24de7aaef655cb0c3122d91d7b000654c34723b2))
+
+### Fix
+
+* fix: various styling and timing bugs (#17)
+
+* fix: update content build to accept styling
+
+* fix: make a constant for tooltip hide delay
+
+* fix: make default style the same as light theme
+
+* fix: merge these styles for simplicity
+
+* fix: move board out of it&#39;s unnecessary folder
+
+* fix: update graphs to send style to message box builder and use const tooltip hide delay
+
+* chore: run prettier
+
+* fix: don&#39;t return, fill content
+
+* chore: run prettier
+
+* fix: update playwright snapshots
+
+* fix: update playwright snapshots
+
+* fix: make sure ticks are equally distributed and include the proper end date
+
+* chore: run prettier
+
+* chore: moved this code from the fetch call to the calculations
+
+* chore: removed unused properties from the record interface
+
+* chore: tick interval now works for low splits, fixed filter not grabbing enough data, stippped time from input times
+
+* chore: added a strip time utc function
+
+* chore: incorporate previous changes into charts
+
+* chore: update playwright snapshots
+
+* fix: update playwright using docker
+
+* fix: prettier... ([`220ba3f`](https://github.com/liatrio/react-dora-charts/commit/220ba3f4b7eefd2d3c7af477fc5a4793bcbc9b58))
+
 ## v1.1.1 (2024-08-31)
 
 ### Chore
