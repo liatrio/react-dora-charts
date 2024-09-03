@@ -22,7 +22,7 @@ const TrendIcon: React.FC<Props> = (props: Props) => {
   return (
     <div
       className={styles.metricContainer}
-      data-tooltip-id="scoreTooltip"
+      data-tooltip-id="metricTooltip"
       onMouseOver={() =>
         props.setTooltipContent(`${props.metricTitle}: ${props.metric.display}`)
       }

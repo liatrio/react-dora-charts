@@ -46,7 +46,10 @@ export const defaultDaysToPull = 356;
 export const defaultGraphStart = 30;
 export const defaultGraphEnd = 0;
 
-export const millisecondsToHours = 60 * 60 * 1000;
+export const tooltipHideDelay = 1000;
+
+export const millisecondsToMinutes = 60 * 1000;
+export const millisecondsToHours = 60 * millisecondsToMinutes;
 export const millisecondsToDays = 24 * millisecondsToHours;
 export const millisecondsToWeeks = 7 * millisecondsToDays;
 export const millisecondsToMonth = 30 * millisecondsToDays;

@@ -25,7 +25,7 @@ const MetricIcon: React.FC<Props> = (props: Props) => {
     <div className={styles.metricContainer}>
       <div
         className={styles.iconContainer}
-        data-tooltip-id="scoreTooltip"
+        data-tooltip-id="metricTooltip"
         onMouseOver={() =>
           props.setTooltipContent(
             `${props.metricTitle}: ${props.metric.display}`,

@@ -2,7 +2,7 @@ export { default as RecoverTimeGraph } from './RecoverTimeGraph';
 export { default as ChangeFailureRateGraph } from './ChangeFailureRateGraph';
 export { default as ChangeLeadTimeGraph } from './ChangeLeadTimeGraph';
 export { default as DeploymentFrequencyGraph } from './DeploymentFrequencyGraph';
-export { default as Board } from './Boards/Board';
+export { default as Board } from './Board';
 export { default as TrendGraph } from './TrendGraph';
 export { default as TrendIndicator } from './icons/TrendIndicator';
 import './global.css';
@@ -22,10 +22,10 @@ export type {
   MetricThresholdSet,
   MetricThresholds,
   ChartProps,
-  Theme,
   BoardProps,
-  TrendProps,
 } from './interfaces/propInterfaces';
+
+export { Theme } from './interfaces/propInterfaces';
 
 export type {
   DoraState,
