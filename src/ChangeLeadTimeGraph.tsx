@@ -18,8 +18,11 @@ import {
   generateTicks,
   useSharedLogic,
 } from './functions/chartFunctions';
-import { buildDoraState } from './functions/metricFunctions';
-import { changeLeadTimeName } from './constants';
+import {
+  buildDoraState,
+  calculateCycleTime,
+} from './functions/metricFunctions';
+import { changeLeadTimeName, tooltipHideDelay } from './constants';
 import { v4 as uuidv4 } from 'uuid';
 import styles from './chart.module.css';
 
@@ -34,25 +37,27 @@ interface ProcessRepository {
   id: string;
 }
 
-export const composeGraphData = (_: ChartProps, data: DoraRecord[]) => {
+export const composeGraphData = (props: ChartProps, data: DoraRecord[]) => {
   let reduced = data.reduce(
     (acc: Map<string, ProcessRepository[]>, record: DoraRecord) => {
       if (!record.merged_at) {
         return acc;
       }
 
-      const repository = record.repository;
+      const cycleTime = calculateCycleTime(props, record);
 
       let entry: ProcessRepository = {
         mergeTime: record.merged_at.getTime(),
-        originalCycleTime: record.totalCycle,
-        graphCycleTime: record.totalCycle,
+        originalCycleTime: cycleTime,
+        graphCycleTime: cycleTime,
         cycleLabel: ' hrs',
         changeUrl: record.change_url,
         title: record.title ?? '',
         user: record.user ?? '',
         id: uuidv4(),
       };
+
+      const repository = record.repository;
 
       let repositoryEntry = acc.get(repository);
 
@@ -125,6 +130,7 @@ const ChangeLeadTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
     noData,
     changeLeadTimeName,
     styles.messageContainer,
+    props.theme,
   );
 
   if (nonGraphBody) {
@@ -193,7 +199,7 @@ const ChangeLeadTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
         setNode(null);
         timeoutRef.current = setTimeout(() => {
           setTooltipOpen(false);
-        }, 1000);
+        }, tooltipHideDelay);
       }
     } else if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
@@ -210,7 +216,7 @@ const ChangeLeadTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
       setNode('');
       timeoutRef.current = setTimeout(() => {
         setTooltipOpen(false);
-      }, 1000);
+      }, tooltipHideDelay);
     }
   };
 
@@ -284,12 +290,12 @@ const ChangeLeadTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
         </ScatterChart>
       </ResponsiveContainer>
       <Tooltip
-        className={styles.chartTooltip}
+        className={styles.tooltip}
         offset={20}
         isOpen={tooltipOpen}
         position={position}
         clickable={true}
-        classNameArrow={styles.chartTooltipArrow}
+        classNameArrow={styles.tooltipArrow}
         id="cltTooltip"
         border="1px"
         opacity="1"

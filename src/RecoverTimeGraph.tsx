@@ -18,10 +18,18 @@ import {
   generateTicks,
   useSharedLogic,
 } from './functions/chartFunctions';
-import { buildDoraState } from './functions/metricFunctions';
-import { recoverTimeName } from './constants';
+import {
+  buildDoraState,
+  calculateRecoverTime,
+} from './functions/metricFunctions';
+import {
+  millisecondsToMinutes,
+  recoverTimeName,
+  tooltipHideDelay,
+} from './constants';
 import { v4 as uuidv4 } from 'uuid';
 import styles from './chart.module.css';
+import { stripTimeUTC } from './functions/dateFunctions';
 
 interface ProcessRepository {
   count: number;
@@ -38,17 +46,13 @@ interface ProcessData {
 export const composeGraphData = (props: ChartProps, data: DoraRecord[]) => {
   let reduced = data.reduce(
     (acc: Map<number, ProcessData>, record: DoraRecord) => {
-      if (record.recoverTime === undefined) {
+      if (!record.failed_at) {
         return acc;
       }
 
-      const date = new Date(
-        Date.UTC(
-          record.created_at.getUTCFullYear(),
-          record.created_at.getUTCMonth(),
-          record.created_at.getUTCDate(),
-        ),
-      ).getTime();
+      const date =
+        stripTimeUTC(record.created_at).getTime() +
+        new Date().getTimezoneOffset() * millisecondsToMinutes;
       let entry = acc.get(date);
 
       if (!entry) {
@@ -62,16 +66,18 @@ export const composeGraphData = (props: ChartProps, data: DoraRecord[]) => {
 
       let payload = entry.repositories.get(record.repository);
 
+      const recoverTime = calculateRecoverTime(record);
+
       if (!payload) {
         entry.repositories.set(record.repository, {
           count: 1,
-          totalTime: record.recoverTime,
-          avgTime: record.recoverTime,
+          totalTime: recoverTime,
+          avgTime: recoverTime,
           avgLabel: ' hrs',
         });
       } else {
         payload.count++;
-        payload.totalTime += record.recoverTime;
+        payload.totalTime += recoverTime;
         payload.avgTime += payload.totalTime / payload.count;
       }
 
@@ -144,6 +150,7 @@ const RecoverTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
     noData,
     recoverTimeName,
     styles.messageContainer,
+    props.theme,
   );
 
   if (nonGraphBody) {
@@ -247,9 +254,9 @@ const RecoverTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
       </ResponsiveContainer>
       <Tooltip
         className={styles.chartTooltip}
-        delayHide={2000}
+        delayHide={tooltipHideDelay}
         clickable={true}
-        classNameArrow={styles.chartTooltipArrow}
+        classNameArrow={styles.tooltipArrow}
         id="rtTooltip"
         border="1px"
         opacity="1"

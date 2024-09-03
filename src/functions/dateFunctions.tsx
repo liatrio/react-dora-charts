@@ -11,6 +11,18 @@ export const stripTime = (date: Date, end?: boolean): Date => {
   return newDate;
 };
 
+export const stripTimeUTC = (date: Date, end?: boolean): Date => {
+  let newDate = new Date(
+    Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()),
+  );
+
+  if (end) {
+    newDate.setMilliseconds(date.getMilliseconds() - 1);
+  }
+
+  return newDate;
+};
+
 export const getDateDaysInPast = (
   daysInPast: number,
   dateOnly: boolean = true,
@@ -76,6 +88,21 @@ export const dateToUtc = (date: Date, dateOnly: boolean = true) => {
       ),
     );
   }
+};
+
+export const isUTC = (date: Date): boolean => {
+  return (
+    date.getTime() ===
+    Date.UTC(
+      date.getUTCFullYear(),
+      date.getUTCMonth(),
+      date.getUTCDate(),
+      date.getUTCHours(),
+      date.getUTCMinutes(),
+      date.getUTCSeconds(),
+      date.getUTCMilliseconds(),
+    )
+  );
 };
 
 export const getDateRange = (

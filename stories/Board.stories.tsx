@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StoryFn, Meta } from '@storybook/react';
-import Board from '../src/Boards/Board';
+import Board from '../src/Board';
 import { ChartProps, Theme } from '../src/interfaces/propInterfaces';
 import dataSet from './data';
 import {

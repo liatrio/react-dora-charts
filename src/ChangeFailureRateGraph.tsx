@@ -18,9 +18,14 @@ import {
   generateTicks,
   useSharedLogic,
 } from './functions/chartFunctions';
-import { changeFailureRateName, millisecondsToDays } from './constants';
+import {
+  changeFailureRateName,
+  millisecondsToDays,
+  tooltipHideDelay,
+} from './constants';
 import { v4 as uuidv4 } from 'uuid';
 import styles from './chart.module.css';
+import { stripTimeUTC } from './functions/dateFunctions';
 
 interface ProcessData {
   date: number;
@@ -43,13 +48,7 @@ export const composeGraphData = (_: ChartProps, data: DoraRecord[]) => {
   const processed = new Map<number, ProcessData>();
 
   data.forEach((record: DoraRecord) => {
-    const date = new Date(
-      Date.UTC(
-        record.created_at.getUTCFullYear(),
-        record.created_at.getUTCMonth(),
-        record.created_at.getUTCDate(),
-      ),
-    ).getTime();
+    const date = stripTimeUTC(record.created_at).getTime();
     let entry = processed.get(date);
 
     if (!entry) {
@@ -143,6 +142,7 @@ const ChangeFailureRateGraph: React.FC<ChartProps> = (props: ChartProps) => {
     noData,
     changeFailureRateName,
     styles.messageContainer,
+    props.theme,
   );
 
   if (nonGraphBody) {
@@ -259,9 +259,9 @@ const ChangeFailureRateGraph: React.FC<ChartProps> = (props: ChartProps) => {
       </ResponsiveContainer>
       <Tooltip
         className={styles.chartTooltip}
-        delayHide={1000}
+        delayHide={tooltipHideDelay}
         clickable={true}
-        classNameArrow={styles.chartTooltipArrow}
+        classNameArrow={styles.tooltipArrow}
         id="cfrTooltip"
         border="1px"
         opacity="1"
