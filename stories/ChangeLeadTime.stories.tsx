@@ -1,7 +1,7 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
 import ChangeLeadTimeGraph from '../src/ChangeLeadTimeGraph';
-import { ChartProps, Theme } from '../src';
+import { ChartProps, Theme } from '../src/interfaces/propInterfaces';
 import dataSet from './data';
 import { changeLeadTimeName } from '../src/constants';
 import './general.css';

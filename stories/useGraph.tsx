@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { getDateRange } from '../src/functions/dateFunctions';
-import { MetricThresholdSet, DoraRecord } from '../src';
+import { MetricThresholdSet } from '../src/interfaces/propInterfaces';
+import { DoraRecord } from '../src/interfaces/apiInterfaces';
 import {
   defaultMetricThresholdSet,
   millisecondsToDays,
