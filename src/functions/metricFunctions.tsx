@@ -100,7 +100,7 @@ const calculateChangeLeadTimeAverage = (
 ): number => {
   let totalSuccessfulRecords = 0;
   let totalLeadTime = 0;
-  
+
   data.forEach(record => {
     if (!record.merged_at) {
       return;
@@ -299,7 +299,7 @@ export const buildDoraStateForPeriod = (
 
   const filteredData = [...data].filter((record: DoraRecord) => {
     const createdAt = record.created_at.getTime();
-    
+
     return createdAt >= start.getTime() && createdAt < end.getTime();
   });
 
@@ -317,8 +317,8 @@ export const buildDoraState = (
   let start = props.graphStart ?? getDateDaysInPast(defaultGraphStart);
   let end = props.graphEnd ?? getDateDaysInPast(defaultGraphEnd);
 
-  start = stripTime(start)
-  end = stripTime(end, true)
+  start = stripTime(start);
+  end = stripTime(end, true);
 
   const period = (end.getTime() - start.getTime()) * millisecondsToDays;
 

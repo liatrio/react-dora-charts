@@ -24,11 +24,11 @@ const CustomBar: React.FC<CustomBarProps> = ({
   color,
 }) => {
   const mouseOver = (e: any) => {
-    const tooltipContent = tooltipContentBuilder(payload)
+    const tooltipContent = tooltipContentBuilder(payload);
     tooltipRef.current?.open({
-      content: tooltipContent
-    })
-  }
+      content: tooltipContent,
+    });
+  };
 
   return (
     <rect

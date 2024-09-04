@@ -238,8 +238,8 @@ const TrendGraph: React.FC<TrendProps> = (props: TrendProps) => {
       xDomain: [startDate.getTime(), endDate.getTime()],
       xPadding: { left: 9, right: 9 },
       yDomain: [0, 4],
-    }
-  }, [startDate, endDate, props.theme])
+    };
+  }, [startDate, endDate, props.theme]);
 
   const nonGraphBody = buildNonGraphBody(
     props,

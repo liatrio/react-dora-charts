@@ -20,10 +20,10 @@ const CustomBar: React.FC<CustomBarProps> = ({
   tooltipId,
 }) => {
   const mOver = (e: any) => {
-    const tooltipContent = tooltipContentBuilder()
+    const tooltipContent = tooltipContentBuilder();
     tooltipRef.current?.open({
-      content: tooltipContent
-    })
+      content: tooltipContent,
+    });
   };
 
   return (

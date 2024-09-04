@@ -99,8 +99,8 @@ const renderTooltip = (payload: ProcessRepository, repository: string) => {
 
   const footer = <span>Commit By: {payload.user}</span>;
 
-  return (<TooltipContent title={title} body={body} footer={footer} />);
-}
+  return <TooltipContent title={title} body={body} footer={footer} />;
+};
 
 const ChangeLeadTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
   const [graphData, setGraphData] = useState<Map<string, ProcessRepository[]>>(
@@ -117,8 +117,7 @@ const ChangeLeadTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
     const state = buildDoraState(componentProps, data);
 
     let graphMultiplier = 1;
-    
-    
+
     if (state.changeLeadTime.average > 48) {
       graphMultiplier = 1 / 24;
       setYLabel(' days');
@@ -132,19 +131,19 @@ const ChangeLeadTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
     composedData.forEach((repositories: ProcessRepository[], key: string) => {
       repositories.forEach((repository: ProcessRepository) => {
         repository.graphCycleTime *= graphMultiplier;
-        
+
         let multiplier = 1;
         let label = ' hrs';
 
-        if(repository.originalCycleTime > 48) {
-          multiplier = 1/24
-          label = ' days'
-        } else if(repository.originalCycleTime < 1) {
-          multiplier = 60
-          label = ' mins'
+        if (repository.originalCycleTime > 48) {
+          multiplier = 1 / 24;
+          label = ' days';
+        } else if (repository.originalCycleTime < 1) {
+          multiplier = 60;
+          label = ' mins';
         }
 
-        repository.originalCycleTime *= multiplier
+        repository.originalCycleTime *= multiplier;
         repository.cycleLabel = label;
       });
     });
@@ -162,9 +161,9 @@ const ChangeLeadTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
       fill: { fill: props.theme === Theme.Dark ? '#FFF' : '#000' },
       ticks: generateTicks(startDate, endDate, 5),
       domain: [startDate.getTime(), endDate.getTime()],
-      padding: { left: 9, right: 9 }
-    }
-  }, [startDate, endDate, props.theme])
+      padding: { left: 9, right: 9 },
+    };
+  }, [startDate, endDate, props.theme]);
 
   const nonGraphBody = buildNonGraphBody(
     props,
@@ -223,7 +222,9 @@ const ChangeLeadTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
                     {...props}
                     tooltipId="cltTooltip"
                     tooltipRef={tooltipRef}
-                    tooltipContentBuilder={() => renderTooltip(props.payload, repository)}
+                    tooltipContentBuilder={() =>
+                      renderTooltip(props.payload, repository)
+                    }
                   />
                 )}
                 activeShape={(props: any) => (
@@ -231,7 +232,9 @@ const ChangeLeadTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
                     {...props}
                     tooltipId="cltTooltip"
                     tooltipRef={tooltipRef}
-                    tooltipContentBuilder={() => renderTooltip(props.payload, repository)}
+                    tooltipContentBuilder={() =>
+                      renderTooltip(props.payload, repository)
+                    }
                   />
                 )}
               />

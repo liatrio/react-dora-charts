@@ -2,19 +2,27 @@ import { millisecondsToDays } from '../constants';
 import { DoraRecord } from '../interfaces/apiInterfaces';
 
 export const stripTime = (date: Date, end?: boolean): Date => {
-  if(!end) {
+  if (!end) {
     let newDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 
     return newDate;
   } else {
-    let newDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 23, 59, 59, 999);
+    let newDate = new Date(
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate(),
+      23,
+      59,
+      59,
+      999,
+    );
 
     return newDate;
   }
 };
 
 export const stripTimeUTC = (date: Date, end?: boolean): Date => {
-  if(!end) {
+  if (!end) {
     let newDate = new Date(
       Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()),
     );
@@ -22,7 +30,15 @@ export const stripTimeUTC = (date: Date, end?: boolean): Date => {
     return newDate;
   } else {
     let newDate = new Date(
-      Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), 23, 59, 59, 999),
+      Date.UTC(
+        date.getUTCFullYear(),
+        date.getUTCMonth(),
+        date.getUTCDate(),
+        23,
+        59,
+        59,
+        999,
+      ),
     );
 
     return newDate;

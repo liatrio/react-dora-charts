@@ -97,10 +97,7 @@ export const composeGraphData = (props: ChartProps, data: DoraRecord[]) => {
   return result;
 };
 
-const renderTooltip = (
-  payload: ProcessData,
-  repository: string,
-) => {
+const renderTooltip = (payload: ProcessData, repository: string) => {
   const repositoryData = payload.repositories.get(repository);
 
   if (!repositoryData) {
@@ -119,7 +116,7 @@ const renderTooltip = (
   const date = new Date(payload.date).toISOString().split('T')[0];
   const title = <h3>{date}</h3>;
 
-  return (<TooltipContent body={body} title={title} />);
+  return <TooltipContent body={body} title={title} />;
 };
 
 const dataKeyFunc = (obj: ProcessData, repository: string): any => {
@@ -146,14 +143,14 @@ const RecoverTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
     const state = buildDoraState(componentProps, data);
 
     const repositories: string[] = [];
-    
-    let graphMultiplier = 1
+
+    let graphMultiplier = 1;
 
     if (state.recoverTime.average > 48) {
-      graphMultiplier = 1/24
+      graphMultiplier = 1 / 24;
       setYLabel(' days');
     } else if (state.recoverTime.average < 1) {
-      graphMultiplier = 60
+      graphMultiplier = 60;
       setYLabel(' mins');
     } else {
       setYLabel(' hrs');
@@ -167,16 +164,17 @@ const RecoverTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
           let multiplier = 1;
           let label = ' hrs';
 
-          if(repositoryData.avgTime > 48) {
-            multiplier = 1/24
-            label = ' days'
-          } else if(repositoryData.avgTime < 1) {
-            multiplier = 60
-            label = ' mins'
+          if (repositoryData.avgTime > 48) {
+            multiplier = 1 / 24;
+            label = ' days';
+          } else if (repositoryData.avgTime < 1) {
+            multiplier = 60;
+            label = ' mins';
           }
 
-          repositoryData.graphAvgTime = repositoryData.avgTime * graphMultiplier;
-          repositoryData.avgTime *= multiplier
+          repositoryData.graphAvgTime =
+            repositoryData.avgTime * graphMultiplier;
+          repositoryData.avgTime *= multiplier;
           repositoryData.avgLabel = label;
         },
       );
@@ -198,8 +196,8 @@ const RecoverTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
       xTicks: generateTicks(startDate, endDate, 5),
       xDomain: [startDate.getTime(), endDate.getTime()],
       xPadding: { left: 9, right: 9 },
-    }
-  }, [startDate, endDate, props.theme])
+    };
+  }, [startDate, endDate, props.theme]);
 
   const nonGraphBody = buildNonGraphBody(
     props,
@@ -256,7 +254,9 @@ const RecoverTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
                   repository={repository}
                   tooltipId="rtTooltip"
                   tooltipRef={tooltipRef}
-                  tooltipContentBuilder={() => renderTooltip(props.payload, repository)}
+                  tooltipContentBuilder={() =>
+                    renderTooltip(props.payload, repository)
+                  }
                 />
               )}
               activeDot={(props: any) => (
@@ -265,7 +265,9 @@ const RecoverTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
                   repository={repository}
                   tooltipId="rtTooltip"
                   tooltipRef={tooltipRef}
-                  tooltipContentBuilder={() => renderTooltip(props.payload, repository)}
+                  tooltipContentBuilder={() =>
+                    renderTooltip(props.payload, repository)
+                  }
                 />
               )}
             />

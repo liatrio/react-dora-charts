@@ -87,10 +87,7 @@ export const composeGraphData = (_: ChartProps, data: DoraRecord[]): any[] => {
   return result;
 };
 
-const renderTooltip = (
-  payload: ProcessData,
-  repository: string,
-) => {
+const renderTooltip = (payload: ProcessData, repository: string) => {
   const repositoryData = payload.repositories.get(repository);
 
   if (!repositoryData) {
@@ -124,7 +121,7 @@ const renderTooltip = (
   const date = new Date(payload.date).toISOString().split('T')[0];
   const title = <h3>{date}</h3>;
 
-  return (<TooltipContent body={body} title={title} />);
+  return <TooltipContent body={body} title={title} />;
 };
 
 const dataKeyFunc = (obj: ProcessData, repository: string): any => {
@@ -174,9 +171,12 @@ const DeploymentFrequencyGraph: React.FC<ChartProps> = (props: ChartProps) => {
       xDomain: [startDate.getTime(), endDate.getTime()],
       xPadding: { left: 9, right: 9 },
       yDomain: [0, maxDeploys],
-      maxBarWidth: (1 / ((endDate.getTime() - startDate.getTime()) / millisecondsToDays)) * 33 + '%',
-    }
-  }, [startDate, endDate, props.theme, maxDeploys])
+      maxBarWidth:
+        (1 / ((endDate.getTime() - startDate.getTime()) / millisecondsToDays)) *
+          33 +
+        '%',
+    };
+  }, [startDate, endDate, props.theme, maxDeploys]);
 
   const nonGraphBody = buildNonGraphBody(
     props,
@@ -239,7 +239,9 @@ const DeploymentFrequencyGraph: React.FC<ChartProps> = (props: ChartProps) => {
                     {...props}
                     tooltipId="dfTooltip"
                     tooltipRef={tooltipRef}
-                    tooltipContentBuilder={() => renderTooltip(props.payload, repository)}
+                    tooltipContentBuilder={() =>
+                      renderTooltip(props.payload, repository)
+                    }
                   />
                 )}
               />

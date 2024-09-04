@@ -96,12 +96,12 @@ const renderTooltip = (payload: ProcessRepository) => {
   const date = new Date(payload.date).toISOString().split('T')[0];
   const title = <h3>{date}</h3>;
 
-  return (<TooltipContent body={body} title={title} />);
-}
+  return <TooltipContent body={body} title={title} />;
+};
 
 const tickFormatter = (tick: number) => {
   return tick * 100 + '%';
-}
+};
 
 export const composeGraphData = (_: ChartProps, data: DoraRecord[]) => {
   const allData: ProcessRepository[] = [];
@@ -192,9 +192,12 @@ const ChangeFailureRateGraph: React.FC<ChartProps> = (props: ChartProps) => {
       xTicks: generateTicks(startDate, endDate, 5),
       xDomain: [startDate.getTime(), endDate.getTime()],
       xPadding: { left: 9, right: 9 },
-      maxBarWidth: (1 / ((endDate.getTime() - startDate.getTime()) / millisecondsToDays)) * 33 + '%',
-    }
-  }, [startDate, endDate, props.theme])
+      maxBarWidth:
+        (1 / ((endDate.getTime() - startDate.getTime()) / millisecondsToDays)) *
+          33 +
+        '%',
+    };
+  }, [startDate, endDate, props.theme]);
 
   const nonGraphBody = buildNonGraphBody(
     props,

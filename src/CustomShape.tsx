@@ -18,11 +18,11 @@ const CustomShape: React.FC<CustomShapeProps> = ({
   tooltipId,
 }) => {
   const mouseOver = (e: any) => {
-    const tooltipContent = tooltipContentBuilder()
+    const tooltipContent = tooltipContentBuilder();
     tooltipRef.current?.open({
-      content: tooltipContent
-    })
-  }
+      content: tooltipContent,
+    });
+  };
 
   return (
     <circle
