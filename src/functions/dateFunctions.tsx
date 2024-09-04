@@ -2,25 +2,31 @@ import { millisecondsToDays } from '../constants';
 import { DoraRecord } from '../interfaces/apiInterfaces';
 
 export const stripTime = (date: Date, end?: boolean): Date => {
-  let newDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  if(!end) {
+    let newDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
 
-  if (end) {
-    newDate.setMilliseconds(date.getMilliseconds() - 1);
+    return newDate;
+  } else {
+    let newDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 23, 59, 59, 999);
+
+    return newDate;
   }
-
-  return newDate;
 };
 
 export const stripTimeUTC = (date: Date, end?: boolean): Date => {
-  let newDate = new Date(
-    Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()),
-  );
+  if(!end) {
+    let newDate = new Date(
+      Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate()),
+    );
 
-  if (end) {
-    newDate.setMilliseconds(date.getMilliseconds() - 1);
+    return newDate;
+  } else {
+    let newDate = new Date(
+      Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate(), 23, 59, 59, 999),
+    );
+
+    return newDate;
   }
-
-  return newDate;
 };
 
 export const getDateDaysInPast = (
