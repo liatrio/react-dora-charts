@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
   ComposedChart,
   Area,
@@ -231,6 +231,16 @@ const TrendGraph: React.FC<TrendProps> = (props: TrendProps) => {
     setGraphData(filteredData);
   }, [props.graphEnd, props.graphStart, allData]);
 
+  const chartProperties = useMemo(() => {
+    return {
+      tickFill: { fill: props.theme === Theme.Dark ? '#FFF' : '#000' },
+      xTicks: generateTicks(startDate, endDate, 5),
+      xDomain: [startDate.getTime(), endDate.getTime()],
+      xPadding: { left: 9, right: 9 },
+      yDomain: [0, 4],
+    }
+  }, [startDate, endDate, props.theme])
+
   const nonGraphBody = buildNonGraphBody(
     props,
     noData,
@@ -252,10 +262,6 @@ const TrendGraph: React.FC<TrendProps> = (props: TrendProps) => {
       </div>
     );
   }
-
-  const ticks = generateTicks(startDate, endDate, 5);
-
-  const tickColor = props.theme === Theme.Dark ? '#FFF' : '#000';
 
   return (
     <div
@@ -286,21 +292,21 @@ const TrendGraph: React.FC<TrendProps> = (props: TrendProps) => {
             stroke="#FFFFFF44"
           />
           <XAxis
-            padding={{ left: 9, right: 9 }}
+            padding={chartProperties.xPadding}
             dataKey="date"
             tickSize={15}
             interval={0}
             type={'number'}
-            tick={{ fill: tickColor }}
-            ticks={ticks}
-            domain={[startDate.getTime(), endDate.getTime()]}
+            tick={chartProperties.tickFill}
+            ticks={chartProperties.xTicks}
+            domain={chartProperties.xDomain}
             tickFormatter={formatDateTicks}
           />
           <YAxis
             type={'number'}
-            tick={{ fill: tickColor }}
+            tick={chartProperties.tickFill}
             allowDecimals={false}
-            domain={[0, 4]}
+            domain={chartProperties.yDomain}
             tickFormatter={formatRankTicks}
           />
           <Area

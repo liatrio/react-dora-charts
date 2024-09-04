@@ -1,28 +1,33 @@
-import React from 'react';
+import React, { ReactNode, RefObject } from 'react';
+import { TooltipRefProps } from 'react-tooltip';
 import { DotProps } from 'recharts';
+import { v4 as uuidv4 } from 'uuid';
 
 interface CustomShapeProps extends DotProps {
-  payload: any;
   tooltipId: string;
-  mouseOver: (event: any, payload: any) => void;
+  tooltipRef: RefObject<TooltipRefProps>;
+  tooltipContentBuilder: () => ReactNode;
 }
 
 const CustomShape: React.FC<CustomShapeProps> = ({
   cx,
   cy,
   fill,
-  payload,
-  mouseOver,
+  tooltipContentBuilder,
+  tooltipRef,
   tooltipId,
 }) => {
-  const mOver = (e: any) => {
-    if (mouseOver) {
-      mouseOver(e, payload);
-    }
-  };
+  const mouseOver = (e: any) => {
+    const tooltipContent = tooltipContentBuilder()
+    tooltipRef.current?.open({
+      content: tooltipContent
+    })
+  }
 
   return (
     <circle
+      id={uuidv4()}
+      key={uuidv4()}
       className="customRechartShape"
       cx={cx}
       cy={cy}
@@ -31,7 +36,7 @@ const CustomShape: React.FC<CustomShapeProps> = ({
       stroke="none"
       style={{ cursor: 'pointer' }}
       data-tooltip-id={tooltipId}
-      onMouseOver={mOver}
+      onMouseOver={mouseOver}
     />
   );
 };

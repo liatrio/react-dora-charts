@@ -1,36 +1,46 @@
-import React from 'react';
+import React, { ReactNode, RefObject } from 'react';
+import { TooltipRefProps } from 'react-tooltip';
 import { DotProps } from 'recharts';
+import { v4 as uuidv4 } from 'uuid';
 
 interface CustomDotProps extends DotProps {
   payload: any;
-  tooltipId: string;
-  mouseOver: (event: any, payload: any, repository: string) => void;
   repository: string;
+  tooltipId: string;
+  tooltipRef: RefObject<TooltipRefProps>;
+  tooltipContentBuilder: () => ReactNode;
 }
 
 const CustomDot: React.FC<CustomDotProps> = ({
   cx,
   cy,
   fill,
-  repository,
   payload,
-  mouseOver,
+  repository,
+  tooltipContentBuilder,
+  tooltipRef,
   tooltipId,
 }) => {
   const repositoryData = payload.repositories.get(repository);
 
   if (!repositoryData) {
-    return;
+    return null;
   }
 
   const mOver = (e: any) => {
-    if (mouseOver) {
-      mouseOver(e, payload, repository);
+    const tooltipContent = tooltipContentBuilder()
+
+    if(tooltipContent) {
+      tooltipRef.current?.open({
+        content: tooltipContent
+      })
     }
   };
 
   return (
     <circle
+      id={uuidv4()}
+      key={uuidv4()}
       cx={cx}
       cy={cy}
       r={4}

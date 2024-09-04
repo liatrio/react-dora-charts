@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import {
   BarChart,
   Bar,
@@ -8,7 +8,7 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import CustomLayeredBar from './CustomLayeredBar';
-import { Tooltip } from 'react-tooltip';
+import { Tooltip, TooltipRefProps } from 'react-tooltip';
 import TooltipContent from './ToolTip/TooltipContent';
 import { ChartProps, Theme } from './interfaces/propInterfaces';
 import { DoraRecord } from './interfaces/apiInterfaces';
@@ -40,6 +40,67 @@ interface ProcessRepository {
   total: number;
   failureUrls: string[];
   successUrls: string[];
+}
+
+const renderTooltip = (payload: ProcessRepository) => {
+  const successUrls = payload.successUrls.slice(0, 5);
+  const successDots = payload.successUrls.length > 5 ? '...' : '';
+  const failureUrls = payload.failureUrls.slice(0, 5);
+  const failureDots = payload.failureUrls.length > 5 ? '...' : '';
+
+  const body = (
+    <>
+      <p key={uuidv4()}>
+        {payload.repository}: {(payload.total * 100).toFixed(2)}%
+      </p>
+      {payload.successful > 0 && (
+        <span key={uuidv4()} className={styles.toolTipSpan}>
+          Successes:
+          {successUrls.map((url: string, index: number) => {
+            return (
+              <a
+                key={uuidv4()}
+                className={styles.toolTipLink}
+                target="_blank"
+                href={url}
+              >
+                {index + 1}
+              </a>
+            );
+          })}
+          {successDots}
+        </span>
+      )}
+      {payload.failed > 0 && payload.successful > 0 && <br key={uuidv4()} />}
+      {payload.failed > 0 && (
+        <span key={uuidv4()} className={styles.toolTipSpan}>
+          Issues:
+          {failureUrls.map((url: string, index: number) => {
+            return (
+              <a
+                key={uuidv4()}
+                className={styles.toolTipLink}
+                target="_blank"
+                href={url}
+              >
+                {index + 1}
+              </a>
+            );
+          })}
+          {failureDots}
+        </span>
+      )}
+    </>
+  );
+
+  const date = new Date(payload.date).toISOString().split('T')[0];
+  const title = <h3>{date}</h3>;
+
+  return (<TooltipContent body={body} title={title} />);
+}
+
+const tickFormatter = (tick: number) => {
+  return tick * 100 + '%';
 }
 
 export const composeGraphData = (_: ChartProps, data: DoraRecord[]) => {
@@ -116,8 +177,8 @@ export const composeGraphData = (_: ChartProps, data: DoraRecord[]) => {
 };
 
 const ChangeFailureRateGraph: React.FC<ChartProps> = (props: ChartProps) => {
-  const [tooltipContent, setTooltipContent] = useState<any>(null);
-  const [graphData, setGraphData] = useState<any>(null);
+  const tooltipRef = useRef<TooltipRefProps>(null);
+  const [graphData, setGraphData] = useState<ProcessData[]>([]);
 
   const [startDate, endDate, colors, repositories, noData] = useSharedLogic(
     props,
@@ -125,17 +186,15 @@ const ChangeFailureRateGraph: React.FC<ChartProps> = (props: ChartProps) => {
     setGraphData,
   );
 
-  const ticks = useMemo(
-    () => generateTicks(startDate, endDate, 5),
-    [startDate, endDate],
-  );
-  const maxBarWidth = useMemo(
-    () =>
-      (1 / ((endDate.getTime() - startDate.getTime()) / millisecondsToDays)) *
-        33 +
-      '%',
-    [startDate, endDate],
-  );
+  const chartProperties = useMemo(() => {
+    return {
+      tickFill: { fill: props.theme === Theme.Dark ? '#FFF' : '#000' },
+      xTicks: generateTicks(startDate, endDate, 5),
+      xDomain: [startDate.getTime(), endDate.getTime()],
+      xPadding: { left: 9, right: 9 },
+      maxBarWidth: (1 / ((endDate.getTime() - startDate.getTime()) / millisecondsToDays)) * 33 + '%',
+    }
+  }, [startDate, endDate, props.theme])
 
   const nonGraphBody = buildNonGraphBody(
     props,
@@ -148,65 +207,6 @@ const ChangeFailureRateGraph: React.FC<ChartProps> = (props: ChartProps) => {
   if (nonGraphBody) {
     return nonGraphBody;
   }
-
-  const handleMouseOverBar = (event: any, payload: ProcessRepository) => {
-    const successUrls = payload.successUrls.slice(0, 5);
-    const successDots = payload.successUrls.length > 5 ? '...' : '';
-    const failureUrls = payload.failureUrls.slice(0, 5);
-    const failureDots = payload.failureUrls.length > 5 ? '...' : '';
-
-    const body = (
-      <>
-        <p key={uuidv4()}>
-          {payload.repository}: {(payload.total * 100).toFixed(2)}%
-        </p>
-        {payload.successful > 0 && (
-          <span key={uuidv4()} className={styles.toolTipSpan}>
-            Successes:
-            {successUrls.map((url: string, index: number) => {
-              return (
-                <a
-                  key={uuidv4()}
-                  className={styles.toolTipLink}
-                  target="_blank"
-                  href={url}
-                >
-                  {index + 1}
-                </a>
-              );
-            })}
-            {successDots}
-          </span>
-        )}
-        {payload.failed > 0 && payload.successful > 0 && <br key={uuidv4()} />}
-        {payload.failed > 0 && (
-          <span key={uuidv4()} className={styles.toolTipSpan}>
-            Issues:
-            {failureUrls.map((url: string, index: number) => {
-              return (
-                <a
-                  key={uuidv4()}
-                  className={styles.toolTipLink}
-                  target="_blank"
-                  href={url}
-                >
-                  {index + 1}
-                </a>
-              );
-            })}
-            {failureDots}
-          </span>
-        )}
-      </>
-    );
-
-    const date = new Date(payload.date).toISOString().split('T')[0];
-    const title = <h3>{date}</h3>;
-
-    setTooltipContent(<TooltipContent body={body} title={title} />);
-  };
-
-  const tickColor = props.theme === Theme.Dark ? '#FFF' : '#000';
 
   return (
     <div
@@ -227,17 +227,17 @@ const ChangeFailureRateGraph: React.FC<ChartProps> = (props: ChartProps) => {
           <CartesianGrid strokeDasharray="3 3" vertical={false} />
           <YAxis
             type="number"
-            tick={{ fill: tickColor }}
-            tickFormatter={tick => tick * 100 + '%'}
+            tick={chartProperties.tickFill}
+            tickFormatter={tickFormatter}
           />
           <XAxis
-            padding={{ left: 9, right: 9 }}
+            padding={chartProperties.xPadding}
             dataKey="date"
             tickSize={15}
             type="number"
-            tick={{ fill: tickColor }}
-            ticks={ticks}
-            domain={[startDate.getTime(), endDate.getTime()]}
+            tick={chartProperties.tickFill}
+            ticks={chartProperties.xTicks}
+            domain={chartProperties.xDomain}
             tickFormatter={formatDateTicks}
           />
           <Bar
@@ -250,22 +250,23 @@ const ChangeFailureRateGraph: React.FC<ChartProps> = (props: ChartProps) => {
                   colors[repositories.findIndex(r => r === props.repository)]
                 }
                 tooltipId="cfrTooltip"
-                barWidth={maxBarWidth}
-                mouseOver={handleMouseOverBar}
+                barWidth={chartProperties.maxBarWidth}
+                tooltipContentBuilder={renderTooltip}
+                tooltipRef={tooltipRef}
               />
             )}
           />
         </BarChart>
       </ResponsiveContainer>
       <Tooltip
-        className={styles.chartTooltip}
+        ref={tooltipRef}
+        className={styles.tooltip}
         delayHide={tooltipHideDelay}
         clickable={true}
         classNameArrow={styles.tooltipArrow}
         id="cfrTooltip"
         border="1px"
         opacity="1"
-        content={tooltipContent}
       />
     </div>
   );
