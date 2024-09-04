@@ -19,6 +19,7 @@ import {
 } from '../constants';
 import {
   getDateDaysInPast,
+  getDateDaysInPastUtc,
   subtractHolidays,
   subtractWeekends,
 } from './dateFunctions';
@@ -34,6 +35,41 @@ import {
   DoraRank,
   DoraTrend,
 } from '../interfaces/metricInterfaces';
+
+export const calculateCycleTime = (
+  props: ChartProps,
+  record: DoraRecord,
+): number => {
+  const mergedAt = record.merged_at!;
+  const deployedAt = record.failed_at
+    ? record.fixed_at ?? getDateDaysInPastUtc(0)
+    : record.created_at;
+
+  let diff = deployedAt.getTime() - mergedAt.getTime();
+
+  if (!props.includeWeekendsInCalculations) {
+    diff = subtractWeekends(diff, mergedAt, deployedAt);
+  }
+
+  if (props.holidays && props.holidays.length > 0) {
+    diff = subtractHolidays(diff, mergedAt, deployedAt, props.holidays);
+  }
+
+  const cycleTime = diff / millisecondsToHours;
+
+  return cycleTime;
+};
+
+export const calculateRecoverTime = (record: DoraRecord): number => {
+  const fixedAt = (record.fixed_at ?? getDateDaysInPastUtc(0)).getTime();
+  const failedAt = record.failed_at!.getTime();
+
+  const recoverTime = parseFloat(
+    ((fixedAt - failedAt) / millisecondsToHours).toFixed(2),
+  );
+
+  return recoverTime;
+};
 
 const calculateChangeFailureRateAverage = (
   _: ChartProps,
@@ -58,19 +94,21 @@ const calculateChangeFailureRateAverage = (
 };
 
 const calculateChangeLeadTimeAverage = (
-  _: ChartProps,
+  props: ChartProps,
   data: DoraRecord[],
 ): number => {
   let totalSuccessfulRecords = 0;
   let totalLeadTime = 0;
 
   data.forEach(record => {
-    if (record.totalCycle === undefined) {
+    if (!record.merged_at) {
       return;
     }
 
+    const cycleTime = calculateCycleTime(props, record);
+
     totalSuccessfulRecords++;
-    totalLeadTime += record.totalCycle;
+    totalLeadTime += cycleTime;
   });
 
   if (totalSuccessfulRecords === 0) {
@@ -130,15 +168,14 @@ const calculateRecoverTimeAverage = (
   let totalRecoveryTime = 0;
 
   data.forEach(record => {
-    if (
-      (record.status && !record.failed_at) ||
-      record.recoverTime === undefined
-    ) {
+    if (record.status && !record.failed_at) {
       return;
     }
 
+    const recoverTime = calculateRecoverTime(record);
+
     totalFailedRecords++;
-    totalRecoveryTime += record.recoverTime;
+    totalRecoveryTime += recoverTime;
   });
 
   if (totalFailedRecords === 0) {

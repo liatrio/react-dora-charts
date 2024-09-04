@@ -235,13 +235,18 @@ const TrendGraph: React.FC<TrendProps> = (props: TrendProps) => {
     noData,
     trendName,
     styles.messageContainer,
+    props.theme,
   );
 
   if (nonGraphBody) {
     return nonGraphBody;
   } else if (graphData.length <= 1) {
     return (
-      <div className={styles.messageContainer}>
+      <div
+        data-testid={trendName}
+        className={styles.messageContainer}
+        data-theme={props.theme}
+      >
         <span>Not Enough Data to calculate a Trend</span>
       </div>
     );
@@ -255,7 +260,7 @@ const TrendGraph: React.FC<TrendProps> = (props: TrendProps) => {
     <div
       data-testid={trendName}
       className={styles.chartWrapper}
-      data-theme={props.theme === Theme.Dark ? 'dark' : 'light'}
+      data-theme={props.theme}
     >
       <ResponsiveContainer width="100%" height="100%">
         <ComposedChart

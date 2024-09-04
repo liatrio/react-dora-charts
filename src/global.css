@@ -2,7 +2,7 @@
   --react-dora-charts-primary-color: #000000;
   --react-dora-charts-background-color: #ffffff;
   --react-dora-charts-text-color: #333333;
-  --react-dora-charts-link-color: darkgreen;
+  --react-dora-charts-link-color: rgb(255, 0, 255);
 }
 
 [data-theme='dark'] {
@@ -16,5 +16,5 @@
   --react-dora-charts-primary-color: #000000;
   --react-dora-charts-background-color: #ffffff;
   --react-dora-charts-text-color: #333333;
-  --react-dora-charts-link-color: darkgreen;
+  --react-dora-charts-link-color: rgb(255, 0, 255);
 }

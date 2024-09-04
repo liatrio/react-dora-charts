@@ -1,8 +1,8 @@
 import { DoraRecord } from './apiInterfaces';
 
 export enum Theme {
-  Light,
-  Dark,
+  Light = 'light',
+  Dark = 'dark',
 }
 
 export interface ChartProps {

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StoryFn, Meta } from '@storybook/react';
-import Board from '../src/Boards/Board';
+import Board from '../src/Board';
 import { ChartProps, Theme } from '../src/interfaces/propInterfaces';
 import dataSet from './data';
 import {
@@ -41,7 +41,10 @@ const Template: StoryFn<ChartProps> = () => {
   };
 
   return (
-    <div className="graphContainer" data-theme={isDark ? 'dark' : 'light'}>
+    <div
+      className="graphContainer"
+      data-theme={isDark ? Theme.Dark : Theme.Light}
+    >
       <EditPanel args={graphArgs} showStandardFields>
         <MetricEditor
           metricName={deploymentFrequencyName}
