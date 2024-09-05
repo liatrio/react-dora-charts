@@ -1,3 +1,11 @@
+## [1.1.3](https://github.com/liatrio/react-dora-charts/compare/v1.1.2...v1.1.3) (2024-09-05)
+
+
+### Bug Fixes
+
+* institute proper tooltip content updates ([#19](https://github.com/liatrio/react-dora-charts/issues/19)) ([e6f3324](https://github.com/liatrio/react-dora-charts/commit/e6f3324feb2da0eed28911362ed2a5088b5fcb77))
+* publish to npm ([#14](https://github.com/liatrio/react-dora-charts/issues/14)) ([6aaffe2](https://github.com/liatrio/react-dora-charts/commit/6aaffe2ac29e4cd88010022853f9682ee2bb577f))
+
 ## v1.1.2 (2024-09-03)
 
 ### Chore
