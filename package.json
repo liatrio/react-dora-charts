@@ -9,6 +9,16 @@
     "./dist",
     "LICENSE"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/liatrio/react-dora-charts.git",
+    "directory": "."
+  },
+  "publishConfig": {
+    "access": "public",
+    "main": "dist/cjs/index.js",
+    "types": "dist/types.d.ts"
+  },
   "scripts": {
     "build": "npm run clean && tsc",
     "rollup": "rollup -c --bundleConfigAsCjs",
