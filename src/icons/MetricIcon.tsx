@@ -8,7 +8,6 @@ interface Props {
   metric: DoraMetric;
   metricTitle: string;
   children: ReactNode;
-  setTooltipContent: Dispatch<SetStateAction<string>>;
   hideColors?: boolean;
   alwaysShowDetails?: boolean;
 }
@@ -26,11 +25,7 @@ const MetricIcon: React.FC<Props> = (props: Props) => {
       <div
         className={styles.iconContainer}
         data-tooltip-id="metricTooltip"
-        onMouseOver={() =>
-          props.setTooltipContent(
-            `${props.metricTitle}: ${props.metric.display}`,
-          )
-        }
+        data-tooltip-content={`${props.metricTitle}: ${props.metric.display}`}
       >
         <IconRim color={props.hideColors ? purple : props.metric.color}>
           {childrenWithOverriddenProps}

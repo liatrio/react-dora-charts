@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import {
   BarChart,
   Bar,
@@ -8,7 +8,7 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import CustomBar from './CustomBar';
-import { Tooltip } from 'react-tooltip';
+import { Tooltip, TooltipRefProps } from 'react-tooltip';
 import TooltipContent from './ToolTip/TooltipContent';
 import {
   deploymentFrequencyName,
@@ -87,21 +87,62 @@ export const composeGraphData = (_: ChartProps, data: DoraRecord[]): any[] => {
   return result;
 };
 
+const renderTooltip = (payload: ProcessData, repository: string) => {
+  const repositoryData = payload.repositories.get(repository);
+
+  if (!repositoryData) {
+    return;
+  }
+
+  const urls = repositoryData.urls.slice(0, 5);
+  const dots = repositoryData.urls.length > 5 ? '...' : '';
+
+  const body = (
+    <>
+      <p>
+        {repository}:
+        {urls.map((url: string, index: number) => {
+          return (
+            <a
+              key={uuidv4()}
+              className={styles.toolTipLink}
+              href={url}
+              target="_blank"
+            >
+              {index + 1}
+            </a>
+          );
+        })}
+        {dots}
+      </p>
+    </>
+  );
+
+  const date = new Date(payload.date).toISOString().split('T')[0];
+  const title = <h3>{date}</h3>;
+
+  return <TooltipContent body={body} title={title} />;
+};
+
+const dataKeyFunc = (obj: ProcessData, repository: string): any => {
+  const repositoryData = obj.repositories.get(repository);
+
+  if (!repositoryData) {
+    return 0;
+  }
+
+  return repositoryData.count;
+};
+
 const DeploymentFrequencyGraph: React.FC<ChartProps> = (props: ChartProps) => {
   const [graphData, setGraphData] = useState<any[]>([]);
   const [maxDeploys, setMaxDeploys] = useState<number>(0);
-  const [tooltipContent, setTooltipContent] = useState<any>(null);
+  const tooltipRef = useRef<TooltipRefProps>(null);
   const [startDate, endDate, colors, repositories, noData] = useSharedLogic(
     props,
     composeGraphData,
     setGraphData,
   );
-
-  const ticks = generateTicks(startDate, endDate, 5);
-  const maxBarWidth =
-    (1 / ((endDate.getTime() - startDate.getTime()) / millisecondsToDays)) *
-      33 +
-    '%';
 
   useEffect(() => {
     let max = 0;
@@ -123,6 +164,20 @@ const DeploymentFrequencyGraph: React.FC<ChartProps> = (props: ChartProps) => {
     setMaxDeploys(max);
   }, [graphData]);
 
+  const chartProperties = useMemo(() => {
+    return {
+      tickFill: { fill: props.theme === Theme.Dark ? '#FFF' : '#000' },
+      xTicks: generateTicks(startDate, endDate, 5),
+      xDomain: [startDate.getTime(), endDate.getTime()],
+      xPadding: { left: 9, right: 9 },
+      yDomain: [0, maxDeploys],
+      maxBarWidth:
+        (1 / ((endDate.getTime() - startDate.getTime()) / millisecondsToDays)) *
+          33 +
+        '%',
+    };
+  }, [startDate, endDate, props.theme, maxDeploys]);
+
   const nonGraphBody = buildNonGraphBody(
     props,
     noData,
@@ -134,59 +189,6 @@ const DeploymentFrequencyGraph: React.FC<ChartProps> = (props: ChartProps) => {
   if (nonGraphBody) {
     return nonGraphBody;
   }
-
-  const handleMouseOverBar = (
-    event: any,
-    payload: ProcessData,
-    repository: string,
-  ) => {
-    const repositoryData = payload.repositories.get(repository);
-
-    if (!repositoryData) {
-      return;
-    }
-
-    const urls = repositoryData.urls.slice(0, 5);
-    const dots = repositoryData.urls.length > 5 ? '...' : '';
-
-    const body = (
-      <>
-        <p>
-          {repository}:
-          {urls.map((url: string, index: number) => {
-            return (
-              <a
-                key={uuidv4()}
-                className={styles.toolTipLink}
-                href={url}
-                target="_blank"
-              >
-                {index + 1}
-              </a>
-            );
-          })}
-          {dots}
-        </p>
-      </>
-    );
-
-    const date = new Date(payload.date).toISOString().split('T')[0];
-    const title = <h3>{date}</h3>;
-
-    setTooltipContent(<TooltipContent body={body} title={title} />);
-  };
-
-  const dataKeyFunc = (obj: ProcessData, repository: string): any => {
-    const repositoryData = obj.repositories.get(repository);
-
-    if (!repositoryData) {
-      return 0;
-    }
-
-    return repositoryData.count;
-  };
-
-  const tickColor = props.theme === Theme.Dark ? '#FFF' : '#000';
 
   return (
     <div
@@ -207,21 +209,21 @@ const DeploymentFrequencyGraph: React.FC<ChartProps> = (props: ChartProps) => {
         >
           <CartesianGrid strokeDasharray="3 3" vertical={false} />
           <XAxis
-            padding={{ left: 9, right: 9 }}
+            padding={chartProperties.xPadding}
             dataKey="date"
             tickSize={15}
             interval={0}
             type={'number'}
-            tick={{ fill: tickColor }}
-            ticks={ticks}
-            domain={[startDate.getTime(), endDate.getTime()]}
+            tick={chartProperties.tickFill}
+            ticks={chartProperties.xTicks}
+            domain={chartProperties.xDomain}
             tickFormatter={formatDateTicks}
           />
           <YAxis
             type={'number'}
-            tick={{ fill: tickColor }}
+            tick={chartProperties.tickFill}
             allowDecimals={false}
-            domain={[0, maxDeploys]}
+            domain={chartProperties.yDomain}
           />
           {repositories.map((repository, idx) => {
             return (
@@ -231,13 +233,14 @@ const DeploymentFrequencyGraph: React.FC<ChartProps> = (props: ChartProps) => {
                 dataKey={(obj: ProcessData) => dataKeyFunc(obj, repository)}
                 stackId="a"
                 fill={colors[idx]}
-                barSize={maxBarWidth}
+                barSize={chartProperties.maxBarWidth}
                 shape={(props: any) => (
                   <CustomBar
                     {...props}
                     tooltipId="dfTooltip"
-                    mouseOver={(event: any, payload: ProcessData) =>
-                      handleMouseOverBar(event, payload, repository)
+                    tooltipRef={tooltipRef}
+                    tooltipContentBuilder={() =>
+                      renderTooltip(props.payload, repository)
                     }
                   />
                 )}
@@ -247,14 +250,14 @@ const DeploymentFrequencyGraph: React.FC<ChartProps> = (props: ChartProps) => {
         </BarChart>
       </ResponsiveContainer>
       <Tooltip
-        className={styles.chartTooltip}
+        ref={tooltipRef}
+        className={styles.tooltip}
         delayHide={tooltipHideDelay}
         clickable={true}
         classNameArrow={styles.tooltipArrow}
         id="dfTooltip"
         border="1px"
         opacity="1"
-        content={tooltipContent}
       />
     </div>
   );

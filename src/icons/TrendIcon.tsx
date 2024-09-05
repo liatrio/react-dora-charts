@@ -7,7 +7,6 @@ interface Props {
   metric: DoraMetric;
   metricTitle: string;
   children: ReactNode;
-  setTooltipContent: Dispatch<SetStateAction<string>>;
   alwaysShowDetails?: boolean;
 }
 
@@ -23,9 +22,7 @@ const TrendIcon: React.FC<Props> = (props: Props) => {
     <div
       className={styles.metricContainer}
       data-tooltip-id="metricTooltip"
-      onMouseOver={() =>
-        props.setTooltipContent(`${props.metricTitle}: ${props.metric.display}`)
-      }
+      data-tooltip-content={`${props.metricTitle}: ${props.metric.display}`}
     >
       <div
         style={{
