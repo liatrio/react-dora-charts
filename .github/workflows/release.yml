@@ -39,8 +39,9 @@ jobs:
 
       - name: Build the project
         run: npm run rollup
-#      - name: Bump and Release
-#        env:
-#          GITHUB_TOKEN: ${{ secrets.TAGGING_TOKEN }}
-#          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-#        run: npx semantic-release
+
+      - name: Bump and Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.TAGGING_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npx semantic-release
