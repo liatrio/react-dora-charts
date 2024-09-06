@@ -2,7 +2,7 @@ name: 'Release'
 on:
   push:
     branches:
-      - release-testing
+      - main
     paths-ignore:
       - 'LICENSE'
       - 'CHANGELOG.md'
