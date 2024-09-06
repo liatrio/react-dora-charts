@@ -1,3 +1,10 @@
+## [1.1.4](https://github.com/liatrio/react-dora-charts/compare/v1.1.3...v1.1.4) (2024-09-06)
+
+
+### Bug Fixes
+
+* fixed spelling mistake to bump version ([#26](https://github.com/liatrio/react-dora-charts/issues/26)) ([26e9c45](https://github.com/liatrio/react-dora-charts/commit/26e9c45bfe6f457d8e00ab4a97ff65e590484d97))
+
 ## [1.1.3](https://github.com/liatrio/react-dora-charts/compare/v1.1.2...v1.1.3) (2024-09-05)
 
 
