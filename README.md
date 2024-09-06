@@ -73,7 +73,7 @@ This is a component to display a graph of your recover time over the specified t
 
 ### `TrendGraph`
 
-This is a component to display an the overall trend of the data supplied.
+This is a component to display the overall trend of the data supplied.
 
 ![Overall Trend](/screenshots/trend_overall.png?raw=true 'Overall Trend')
 
