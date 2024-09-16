@@ -43,7 +43,7 @@ export const calculateCycleTime = (
 ): number => {
   const mergedAt = record.merged_at!;
   const deployedAt = record.failed_at
-    ? (record.fixed_at ?? getDateDaysInPastUtc(0))
+    ? record.fixed_at ?? getDateDaysInPastUtc(0)
     : record.created_at;
 
   let diff = deployedAt.getTime() - mergedAt.getTime();
@@ -238,17 +238,16 @@ const determineMetricRank = (
     return DoraRank.unknown;
   } else if (
     value <
-    (thresholds?.elite ? thresholds.elite : (defaultThresholds?.elite ?? 0))
+    (thresholds?.elite ? thresholds.elite : defaultThresholds?.elite ?? 0)
   ) {
     return DoraRank.elite;
   } else if (
-    value <
-    (thresholds?.high ? thresholds.high : (defaultThresholds?.high ?? 0))
+    value < (thresholds?.high ? thresholds.high : defaultThresholds?.high ?? 0)
   ) {
     return DoraRank.high;
   } else if (
     value <
-    (thresholds?.medium ? thresholds.medium : (defaultThresholds?.medium ?? 0))
+    (thresholds?.medium ? thresholds.medium : defaultThresholds?.medium ?? 0)
   ) {
     return DoraRank.medium;
   } else {
