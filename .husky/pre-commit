@@ -2,11 +2,6 @@
 
 set -e
 
-if git log -1 --pretty=%B | grep -q '\[skip ci\]'; then
-  echo "Skipping pre-commit hook for version bump commit"
-  exit 0
-fi
-
 npm run prettier:check
 
 if command -v pre-commit &> /dev/null; then
