@@ -10,7 +10,6 @@
 
 # React DORA Charts
 
-
 This component library contains charts for the standard DORA metrics.
 
 ## Installation
