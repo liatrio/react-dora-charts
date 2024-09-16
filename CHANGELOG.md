@@ -1,3 +1,10 @@
+## [1.1.5](https://github.com/liatrio/react-dora-charts/compare/v1.1.4...v1.1.5) (2024-09-16)
+
+
+### Bug Fixes
+
+* added LICENSE, build, and language badge to repo ([#28](https://github.com/liatrio/react-dora-charts/issues/28)) ([82c1d3b](https://github.com/liatrio/react-dora-charts/commit/82c1d3b838db3efb77109da34cf78aa0e8b0ae9d))
+
 ## [1.1.4](https://github.com/liatrio/react-dora-charts/compare/v1.1.3...v1.1.4) (2024-09-06)
 
 
