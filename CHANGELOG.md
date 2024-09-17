@@ -1,3 +1,10 @@
+## [1.1.7](https://github.com/liatrio/react-dora-charts/compare/v1.1.6...v1.1.7) (2024-09-17)
+
+
+### Bug Fixes
+
+* updated readme ([#33](https://github.com/liatrio/react-dora-charts/issues/33)) ([d6844a7](https://github.com/liatrio/react-dora-charts/commit/d6844a715369be2793f57e15bcd5adf150306453))
+
 ## [1.1.6](https://github.com/liatrio/react-dora-charts/compare/v1.1.5...v1.1.6) (2024-09-17)
 
 
