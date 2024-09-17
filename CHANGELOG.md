@@ -1,3 +1,10 @@
+## [1.1.6](https://github.com/liatrio/react-dora-charts/compare/v1.1.5...v1.1.6) (2024-09-17)
+
+
+### Bug Fixes
+
+* add husky pre-commit ([#27](https://github.com/liatrio/react-dora-charts/issues/27)) ([105ed8e](https://github.com/liatrio/react-dora-charts/commit/105ed8e35343908bf328e0dcc633621797f2a1e5))
+
 ## [1.1.5](https://github.com/liatrio/react-dora-charts/compare/v1.1.4...v1.1.5) (2024-09-16)
 
 
