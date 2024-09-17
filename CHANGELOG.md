@@ -1,4 +1,38 @@
-# CHANGELOG
+## [1.1.7](https://github.com/liatrio/react-dora-charts/compare/v1.1.6...v1.1.7) (2024-09-17)
+
+
+### Bug Fixes
+
+* updated readme ([#33](https://github.com/liatrio/react-dora-charts/issues/33)) ([d6844a7](https://github.com/liatrio/react-dora-charts/commit/d6844a715369be2793f57e15bcd5adf150306453))
+
+## [1.1.6](https://github.com/liatrio/react-dora-charts/compare/v1.1.5...v1.1.6) (2024-09-17)
+
+
+### Bug Fixes
+
+* add husky pre-commit ([#27](https://github.com/liatrio/react-dora-charts/issues/27)) ([105ed8e](https://github.com/liatrio/react-dora-charts/commit/105ed8e35343908bf328e0dcc633621797f2a1e5))
+
+## [1.1.5](https://github.com/liatrio/react-dora-charts/compare/v1.1.4...v1.1.5) (2024-09-16)
+
+
+### Bug Fixes
+
+* added LICENSE, build, and language badge to repo ([#28](https://github.com/liatrio/react-dora-charts/issues/28)) ([82c1d3b](https://github.com/liatrio/react-dora-charts/commit/82c1d3b838db3efb77109da34cf78aa0e8b0ae9d))
+
+## [1.1.4](https://github.com/liatrio/react-dora-charts/compare/v1.1.3...v1.1.4) (2024-09-06)
+
+
+### Bug Fixes
+
+* fixed spelling mistake to bump version ([#26](https://github.com/liatrio/react-dora-charts/issues/26)) ([26e9c45](https://github.com/liatrio/react-dora-charts/commit/26e9c45bfe6f457d8e00ab4a97ff65e590484d97))
+
+## [1.1.3](https://github.com/liatrio/react-dora-charts/compare/v1.1.2...v1.1.3) (2024-09-05)
+
+
+### Bug Fixes
+
+* institute proper tooltip content updates ([#19](https://github.com/liatrio/react-dora-charts/issues/19)) ([e6f3324](https://github.com/liatrio/react-dora-charts/commit/e6f3324feb2da0eed28911362ed2a5088b5fcb77))
+* publish to npm ([#14](https://github.com/liatrio/react-dora-charts/issues/14)) ([6aaffe2](https://github.com/liatrio/react-dora-charts/commit/6aaffe2ac29e4cd88010022853f9682ee2bb577f))
 
 ## v1.1.2 (2024-09-03)
 

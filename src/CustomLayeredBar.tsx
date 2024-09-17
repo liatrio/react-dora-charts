@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { ReactNode, RefObject } from 'react';
+import { TooltipRefProps } from 'react-tooltip';
 import { RectangleProps } from 'recharts';
 
 interface CustomBarProps extends RectangleProps {
@@ -6,7 +7,8 @@ interface CustomBarProps extends RectangleProps {
   color: string;
   tooltipId: string;
   barWidth: number;
-  mouseOver: (event: any, payload: any) => void;
+  tooltipRef: RefObject<TooltipRefProps>;
+  tooltipContentBuilder: (payload: any) => ReactNode;
 }
 
 const CustomBar: React.FC<CustomBarProps> = ({
@@ -15,27 +17,31 @@ const CustomBar: React.FC<CustomBarProps> = ({
   barWidth,
   height,
   payload,
-  mouseOver,
   tooltipId,
+  tooltipContentBuilder,
+  tooltipRef,
   color,
 }) => {
-  const mOver = (e: any) => {
-    if (mouseOver) {
-      mouseOver(e, payload);
-    }
+  const mouseOver = (e: any) => {
+    const tooltipContent = tooltipContentBuilder(payload);
+    tooltipRef.current?.open({
+      content: tooltipContent,
+    });
   };
 
   return (
     <rect
+      id={uuidv4()}
+      key={uuidv4()}
       x={x}
       y={y}
       width={barWidth}
       height={height}
       fill={color}
       stroke="none"
-      onMouseOver={mOver}
       style={{ cursor: 'pointer' }}
       data-tooltip-id={tooltipId}
+      onMouseOver={mouseOver}
     />
   );
 };

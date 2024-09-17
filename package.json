@@ -9,6 +9,16 @@
     "./dist",
     "LICENSE"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/liatrio/react-dora-charts.git",
+    "directory": "."
+  },
+  "publishConfig": {
+    "access": "public",
+    "main": "dist/cjs/index.js",
+    "types": "dist/types.d.ts"
+  },
   "scripts": {
     "build": "npm run clean && tsc",
     "rollup": "rollup -c --bundleConfigAsCjs",
@@ -26,10 +36,11 @@
     "build-storybook": "storybook build",
     "prettier:check": "npx --yes prettier --check .",
     "prettier:fix": "npx --yes prettier --write .",
-    "tsc:full": "tsc --skipLibCheck true --incremental false"
+    "tsc:full": "tsc --skipLibCheck true --incremental false",
+    "prepare": "husky"
   },
   "author": "",
-  "license": "ISC",
+  "license": "Apache-2.0",
   "peerDependencies": {
     "react": "^18.0.0",
     "typescript": "^5.0.0"
@@ -69,10 +80,12 @@
     "@types/uuid": "^10.0.0",
     "babel-jest": "^29.7.0",
     "conventional-changelog-conventionalcommits": "^7.0.2",
+    "husky": "^9.1.6",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "jsdom-global": "^3.0.2",
+    "pinst": "^3.0.0",
     "react-datepicker": "^7.3.0",
     "resize-observer-polyfill": "^1.5.1",
     "rimraf": "^5.0.7",
@@ -93,6 +106,9 @@
     "react-tooltip": "^5.28.0",
     "recharts": "^2.12.7",
     "uuid": "^10.0.0"
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "4.18.0"
   },
   "prettier": "@spotify/prettier-config"
 }

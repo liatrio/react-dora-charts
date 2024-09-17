@@ -20,6 +20,7 @@ import {
 import {
   getDateDaysInPast,
   getDateDaysInPastUtc,
+  stripTime,
   subtractHolidays,
   subtractWeekends,
 } from './dateFunctions';
@@ -312,8 +313,11 @@ export const buildDoraState = (
   props: ChartProps,
   data: DoraRecord[],
 ): DoraState => {
-  const start = props.graphStart || getDateDaysInPast(defaultGraphStart);
-  const end = props.graphEnd || getDateDaysInPast(defaultGraphEnd);
+  let start = props.graphStart ?? getDateDaysInPast(defaultGraphStart);
+  let end = props.graphEnd ?? getDateDaysInPast(defaultGraphEnd);
+
+  start = stripTime(start);
+  end = stripTime(end, true);
 
   const period = (end.getTime() - start.getTime()) * millisecondsToDays;
 

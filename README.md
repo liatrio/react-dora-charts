@@ -1,6 +1,6 @@
 # React DORA Charts
 
-[![CodeQL](https://github.com/liatrio/react-dora-charts/actions/workflows/codeql.yml/badge.svg)](https://github.com/liatrio/react-dora-charts/actions/workflows/codeql.yml)
+[![CodeQL](https://github.com/liatrio/react-dora-charts/actions/workflows/codeql.yml/badge.svg)](https://github.com/liatrio/react-dora-charts/actions/workflows/codeql.yml) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0) [![Release](https://github.com/liatrio/react-dora-charts/actions/workflows/release.yml/badge.svg?branch=main)](https://github.com/liatrio/react-dora-charts/actions/workflows/release.yml) ![GitHub top language](https://img.shields.io/github/languages/top/liatrio/react-dora-charts)
 
 This component library contains charts for the standard DORA metrics.
 
@@ -23,7 +23,7 @@ yarn add @liatrio/react-dora-charts
 To use these charts, you can do as follows:
 
 ```js
-import { DeploymentFrequency, fetchData } from `react-dora-charts`
+import { DeploymentFrequency, fetchData } from `@liatrio/react-dora-charts`
 ...
 const fetchedData = fetchData(fetchProps, onSuccess, onFailure)
 ...
@@ -73,7 +73,7 @@ This is a component to display a graph of your recover time over the specified t
 
 ### `TrendGraph`
 
-This is a component to display an the overall trend of the data supplied.
+This is a component to display the overall trend of the data supplied.
 
 ![Overall Trend](/screenshots/trend_overall.png?raw=true 'Overall Trend')
 

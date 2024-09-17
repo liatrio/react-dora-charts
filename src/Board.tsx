@@ -16,7 +16,6 @@ import TrendIcon from './icons/TrendIcon';
 const Board: React.FC<BoardProps> = props => {
   const [state, setState] = useState<DoraState>({ ...defaultDoraState });
   const [noData, setNoData] = useState<boolean>(false);
-  const [tooltipContent, setTooltipContent] = useState<any>(true);
 
   useEffect(() => {
     if (!props.data || props.data.length === 0) {
@@ -61,7 +60,6 @@ const Board: React.FC<BoardProps> = props => {
           metric={state.deploymentFrequency}
           metricTitle={'Deployment Frequency'}
           alwaysShowDetails={props.alwaysShowDetails}
-          setTooltipContent={setTooltipContent}
         >
           <DeployFrequencyIcon />
         </TrendIcon>
@@ -69,7 +67,6 @@ const Board: React.FC<BoardProps> = props => {
           metric={state.changeLeadTime}
           metricTitle={'Change Lead Time'}
           alwaysShowDetails={props.alwaysShowDetails}
-          setTooltipContent={setTooltipContent}
         >
           <ChangeLeadTimeIcon />
         </TrendIcon>
@@ -77,7 +74,6 @@ const Board: React.FC<BoardProps> = props => {
           metric={state.changeFailureRate}
           metricTitle={'Change Failure Rate'}
           alwaysShowDetails={props.alwaysShowDetails}
-          setTooltipContent={setTooltipContent}
         >
           <ChangeFailureRateIcon />
         </TrendIcon>
@@ -85,7 +81,6 @@ const Board: React.FC<BoardProps> = props => {
           metric={state.recoverTime}
           metricTitle={'Recover Time'}
           alwaysShowDetails={props.alwaysShowDetails}
-          setTooltipContent={setTooltipContent}
         >
           <RecoverTimeIcon />
         </TrendIcon>
@@ -95,7 +90,6 @@ const Board: React.FC<BoardProps> = props => {
             id="metricTooltip"
             classNameArrow={styles.tooltipArrow}
             border="1px"
-            content={tooltipContent}
           />
         )}
       </div>
@@ -112,7 +106,6 @@ const Board: React.FC<BoardProps> = props => {
           metricTitle={'Deployment Frequency'}
           alwaysShowDetails={props.alwaysShowDetails}
           hideColors={props.hideColors}
-          setTooltipContent={setTooltipContent}
         >
           <DeployFrequencyIcon />
         </MetricIcon>
@@ -121,7 +114,6 @@ const Board: React.FC<BoardProps> = props => {
           metricTitle={'Change Lead Time'}
           alwaysShowDetails={props.alwaysShowDetails}
           hideColors={props.hideColors}
-          setTooltipContent={setTooltipContent}
         >
           <ChangeLeadTimeIcon />
         </MetricIcon>
@@ -130,7 +122,6 @@ const Board: React.FC<BoardProps> = props => {
           metricTitle={'Change Failure Rate'}
           alwaysShowDetails={props.alwaysShowDetails}
           hideColors={props.hideColors}
-          setTooltipContent={setTooltipContent}
         >
           <ChangeFailureRateIcon />
         </MetricIcon>
@@ -139,7 +130,6 @@ const Board: React.FC<BoardProps> = props => {
           metricTitle={'Recover Time'}
           alwaysShowDetails={props.alwaysShowDetails}
           hideColors={props.hideColors}
-          setTooltipContent={setTooltipContent}
         >
           <RecoverTimeIcon />
         </MetricIcon>
@@ -150,7 +140,6 @@ const Board: React.FC<BoardProps> = props => {
             classNameArrow={styles.tooltipArrow}
             border="1px"
             opacity="1"
-            content={tooltipContent}
           />
         )}
       </div>

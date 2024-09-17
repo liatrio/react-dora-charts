@@ -1,0 +1,9 @@
+#!/bin/env bash
+
+set -e
+
+npm run prettier:check
+
+if command -v pre-commit &> /dev/null; then
+  pre-commit run
+fi
