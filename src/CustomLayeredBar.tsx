@@ -1,6 +1,7 @@
 import React, { ReactNode, RefObject } from 'react';
 import { TooltipRefProps } from 'react-tooltip';
 import { RectangleProps } from 'recharts';
+import { v4 as uuidv4 } from 'uuid';
 
 interface CustomBarProps extends RectangleProps {
   payload: any;
