@@ -36,7 +36,7 @@ interface ProcessRepository {
 }
 
 export const composeGraphData = (props: ChartProps, data: DoraRecord[]) => {
-  let reduced = data.reduce(
+  let resp = data.reduce(
     (acc: Map<string, ProcessRepository[]>, record: DoraRecord) => {
       if (!record.merged_at) {
         return acc;
@@ -71,7 +71,7 @@ export const composeGraphData = (props: ChartProps, data: DoraRecord[]) => {
     new Map<string, ProcessRepository[]>(),
   );
 
-  return reduced;
+  return resp;
 };
 
 const renderTooltip = (payload: ProcessRepository, repository: string) => {

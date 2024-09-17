@@ -135,7 +135,7 @@ export const composeGraphData = (_: ChartProps, data: DoraRecord[]) => {
         successUrls: [],
       };
 
-      if (record.status === true && !record.failed_at) {
+      if (record.status && !record.failed_at) {
         count.successful = 1;
         count.successUrls.push(record.deploy_url);
       } else {
@@ -145,7 +145,7 @@ export const composeGraphData = (_: ChartProps, data: DoraRecord[]) => {
 
       entry.repositories.set(key, count);
     } else {
-      if (record.status === true && !record.failed_at) {
+      if (record.status && !record.failed_at) {
         count.successful++;
         count.successUrls.push(record.deploy_url);
       } else {

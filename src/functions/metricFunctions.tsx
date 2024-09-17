@@ -77,10 +77,10 @@ const calculateChangeFailureRateAverage = (
   data: DoraRecord[],
 ): number => {
   const totalSuccessfulRecords = data.filter(
-    f => f.status === true && !f.failed_at,
+    f => f.status && !f.failed_at,
   ).length;
   const totalFailedRecords = data.filter(
-    f => f.status === false || (f.status === true && f.failed_at),
+    f => !f.status || (f.status && f.failed_at),
   ).length;
 
   if (totalFailedRecords === 0 && totalSuccessfulRecords === 0) {
@@ -157,9 +157,8 @@ const calculateDeploymentFrequencyAverage = (
     totalDeployTime += diff;
   }
 
-  let avgDeployTime = totalDeployTime / sorted.length / millisecondsToHours;
-
-  return avgDeployTime;
+  const resp = totalDeployTime / sorted.length / millisecondsToHours;
+  return resp;
 };
 
 const calculateRecoverTimeAverage = (
@@ -170,7 +169,7 @@ const calculateRecoverTimeAverage = (
   let totalRecoveryTime = 0;
 
   data.forEach(record => {
-    if (record.status === true && !record.failed_at) {
+    if (record.status && !record.failed_at) {
       return;
     }
 

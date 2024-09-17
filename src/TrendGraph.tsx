@@ -152,11 +152,10 @@ const filterGraphData = (
   start: number,
   end: number,
 ): GraphData[] => {
-  const filtered = data.filter((entry: GraphData) => {
+  const resp = data.filter((entry: GraphData) => {
     return entry.date >= start && entry.date <= end;
   });
-
-  return filtered;
+  return resp;
 };
 
 const TrendGraph: React.FC<TrendProps> = (props: TrendProps) => {
