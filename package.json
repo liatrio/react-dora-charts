@@ -1,5 +1,5 @@
 {
-  "name": "liatrio-react-dora",
+  "name": "@liatrio/react-dora-charts",
   "version": "0.0.0",
   "description": "DORA Metric Charts for React",
   "main": "dist/cjs/index.js",
@@ -9,17 +9,38 @@
     "./dist",
     "LICENSE"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/liatrio/react-dora-charts.git",
+    "directory": "."
+  },
+  "publishConfig": {
+    "access": "public",
+    "main": "dist/cjs/index.js",
+    "types": "dist/types.d.ts"
+  },
   "scripts": {
     "build": "npm run clean && tsc",
     "rollup": "rollup -c --bundleConfigAsCjs",
     "clean": "rimraf dist",
     "test": "jest",
+    "playwright": "playwright test",
+    "playwright:smoke-test": "playwright test --grep @component-board --grep @dataset-low --grep @checkbox-always-show-details",
+    "playwright:show-report": "playwright show-report",
+    "playwright:update-snapshots": "playwright test --update-snapshots",
+    "playwright:docker:build": "docker build -t playwright-image -f playwright/playwright.dockerfile .",
+    "playwright:docker": "docker run -it --rm --name playwright -v $(pwd):/app playwright-image",
+    "playwright:docker:update-snapshots": "docker run -it --rm --name playwright -v $(pwd):/app playwright-image npm run playwright:update-snapshots",
     "storybook": "storybook dev -p 6006",
     "storybook-ci": "storybook dev -p 6006 --no-open",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "prettier:check": "npx --yes prettier --check .",
+    "prettier:fix": "npx --yes prettier --write .",
+    "tsc:full": "tsc --skipLibCheck true --incremental false",
+    "prepare": "husky"
   },
   "author": "",
-  "license": "ISC",
+  "license": "Apache-2.0",
   "peerDependencies": {
     "react": "^18.0.0",
     "typescript": "^5.0.0"
@@ -29,28 +50,42 @@
     "@babel/preset-env": "^7.24.5",
     "@babel/preset-react": "^7.24.1",
     "@babel/preset-typescript": "^7.24.1",
+    "@playwright/test": "^1.46.1",
     "@rollup/plugin-commonjs": "^25.0.8",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
     "@rollup/plugin-typescript": "^11.1.6",
     "@rollup/plugin-url": "^8.0.2",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/commit-analyzer": "^10.0.4",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^9.2.6",
+    "@semantic-release/npm": "^11.0.3",
+    "@semantic-release/release-notes-generator": "^12.1.0",
+    "@spotify/prettier-config": "^15.0.0",
     "@storybook/addon-webpack5-compiler-swc": "^1.0.2",
     "@storybook/blocks": "^8.1.3",
     "@storybook/cli": "^8.1.3",
+    "@storybook/manager-api": "^8.2.9",
     "@storybook/react": "^8.1.3",
     "@storybook/react-webpack5": "^8.1.3",
     "@storybook/test": "^8.1.3",
+    "@storybook/theming": "^8.2.9",
     "@svgr/rollup": "^8.1.0",
     "@testing-library/jest-dom": "^6.4.5",
     "@testing-library/react": "^15.0.7",
     "@types/jest": "^29.5.12",
+    "@types/node": "^22.5.1",
     "@types/react": "^18.3.2",
     "@types/uuid": "^10.0.0",
     "babel-jest": "^29.7.0",
+    "conventional-changelog-conventionalcommits": "^7.0.2",
+    "husky": "^9.1.6",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "jsdom-global": "^3.0.2",
+    "pinst": "^3.0.0",
     "react-datepicker": "^7.3.0",
     "resize-observer-polyfill": "^1.5.1",
     "rimraf": "^5.0.7",
@@ -59,6 +94,7 @@
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-rebase": "^4.1.1",
+    "semantic-release": "^22.0.12",
     "storybook": "^8.1.3",
     "storybook-dark-mode": "^4.0.1",
     "ts-jest": "^29.1.3",
@@ -66,8 +102,13 @@
     "typescript": "^5.4.5"
   },
   "dependencies": {
+    "js-yaml": "^4.1.0",
     "react-tooltip": "^5.28.0",
     "recharts": "^2.12.7",
     "uuid": "^10.0.0"
-  }
+  },
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "4.18.0"
+  },
+  "prettier": "@spotify/prettier-config"
 }

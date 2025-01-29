@@ -664,4 +664,4 @@ export default `{
       "total_cycle_time": null
     }
   ]
-}`
+}`;

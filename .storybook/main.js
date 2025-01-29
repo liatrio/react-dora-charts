@@ -4,8 +4,8 @@ module.exports = {
 
   framework: {
     name: '@storybook/react-webpack5',
-    options: {}
+    options: {},
   },
 
-  staticDirs: [{from:'../src/assets',to:'/src/assets'}]
-}
+  staticDirs: [{ from: '../src/assets', to: '/src/assets' }],
+};

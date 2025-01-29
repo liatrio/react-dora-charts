@@ -1,9 +1,9 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: liatrio-react-dora
+  name: react-dora-charts
   annotations:
-    github.com/project-slug: liatrio/liatrio-react-dora
+    github.com/project-slug: liatrio/react-dora-charts
 spec:
   type: other
   lifecycle: unknown

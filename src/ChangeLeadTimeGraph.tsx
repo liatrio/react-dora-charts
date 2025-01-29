@@ -1,209 +1,259 @@
-import React, { useState, useRef } from 'react'
-import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, ResponsiveContainer } from 'recharts'
-import TooltipContent from './ToolTip/TooltipContent'
-import { Tooltip,  } from 'react-tooltip'
-import CustomShape from './CustomShape'
-import { DoraRecord } from './interfaces/apiInterfaces'
-import { ChartProps } from './interfaces/propInterfaces'
-import { buildNonGraphBody, formatDateTicks, generateTicks, useSharedLogic } from './functions/chartFunctions'
-import { buildDoraState } from './functions/metricFunctions'
-import { changeLeadTimeName } from './constants'
-import {v4 as uuidv4} from 'uuid'
+import React, { useState, useRef, useMemo } from 'react';
+import {
+  ScatterChart,
+  Scatter,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  ResponsiveContainer,
+} from 'recharts';
+import TooltipContent from './ToolTip/TooltipContent';
+import { Tooltip, TooltipRefProps } from 'react-tooltip';
+import CustomShape from './CustomShape';
+import { DoraRecord } from './interfaces/apiInterfaces';
+import { ChartProps, Theme } from './interfaces/propInterfaces';
+import {
+  buildNonGraphBody,
+  formatDateTicks,
+  generateTicks,
+  useSharedLogic,
+} from './functions/chartFunctions';
+import {
+  buildDoraState,
+  calculateCycleTime,
+} from './functions/metricFunctions';
+import { changeLeadTimeName, tooltipHideDelay } from './constants';
+import styles from './chart.module.css';
 
 interface ProcessRepository {
-  mergeTime: number
-  graphCycleTime: number
-  originalCycleTime: number
-  cycleLabel: string
-  changeUrl: string
-  title: string
-  user: string
-  id: string
+  mergeTime: number;
+  graphCycleTime: number;
+  originalCycleTime: number;
+  cycleLabel: string;
+  changeUrl: string;
+  title: string;
+  user: string;
 }
 
-export const composeGraphData = (_: ChartProps, data: DoraRecord[]) => {
-  let reduced = data.reduce((acc: Map<string, ProcessRepository[]>, record: DoraRecord) => {
-    if(!record.merged_at) {
-      return acc
+export const composeGraphData = (props: ChartProps, data: DoraRecord[]) => {
+  let resp = data.reduce(
+    (acc: Map<string, ProcessRepository[]>, record: DoraRecord) => {
+      if (!record.merged_at) {
+        return acc;
+      }
+
+      const repository = record.repository;
+
+      const cycleTime = calculateCycleTime(props, record);
+
+      let entry: ProcessRepository = {
+        mergeTime: record.merged_at.getTime(),
+        originalCycleTime: cycleTime,
+        graphCycleTime: cycleTime,
+        cycleLabel: ' hrs',
+        changeUrl: record.change_url,
+        title: record.title ?? '',
+        user: record.user ?? '',
+      };
+
+      let repositoryEntry = acc.get(repository);
+
+      if (!repositoryEntry) {
+        repositoryEntry = [];
+
+        acc.set(repository, repositoryEntry);
+      }
+
+      repositoryEntry.push(entry);
+
+      return acc;
+    },
+    new Map<string, ProcessRepository[]>(),
+  );
+
+  return resp;
+};
+
+const renderTooltip = (payload: ProcessRepository, repository: string) => {
+  const title = (
+    <h3>
+      <a
+        className={styles.toolTipLink}
+        href={payload.changeUrl}
+        target="_blank"
+      >
+        {payload.title}
+      </a>
+    </h3>
+  );
+
+  const body = (
+    <>
+      <p>Repository: {repository}</p>
+      <p>
+        Total Cycle Time: {payload.originalCycleTime.toFixed(2)}{' '}
+        {payload.cycleLabel}
+      </p>
+    </>
+  );
+
+  const footer = <span>Commit By: {payload.user}</span>;
+
+  return <TooltipContent title={title} body={body} footer={footer} />;
+};
+
+const ChangeLeadTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
+  const [graphData, setGraphData] = useState<Map<string, ProcessRepository[]>>(
+    new Map<string, ProcessRepository[]>(),
+  );
+  const tooltipRef = useRef<TooltipRefProps>(null);
+  const [yLabel, setYLabel] = useState<any>(' hrs');
+
+  const postCompose = (
+    componentProps: ChartProps,
+    data: DoraRecord[],
+    composedData: any,
+  ) => {
+    const state = buildDoraState(componentProps, data);
+
+    let graphMultiplier = 1;
+
+    if (state.changeLeadTime.average > 48) {
+      graphMultiplier = 1 / 24;
+      setYLabel(' days');
+    } else if (state.changeLeadTime.average < 1) {
+      graphMultiplier = 60;
+      setYLabel(' mins');
+    } else {
+      setYLabel(' hrs');
     }
 
-    const repository = record.repository
-
-    let entry: ProcessRepository = {
-      mergeTime: record.merged_at.getTime(),
-      originalCycleTime: record.totalCycle,
-      graphCycleTime: record.totalCycle,
-      cycleLabel: " hrs",
-      changeUrl: record.change_url,
-      title: record.title ?? "",
-      user: record.user ?? "",
-      id: uuidv4()
-    }
-
-    let repositoryEntry = acc.get(repository)
-
-    if(!repositoryEntry) {
-      repositoryEntry = []
-
-      acc.set(repository, repositoryEntry)
-    }
-
-    repositoryEntry.push(entry)
-
-    return acc
-  }, new Map<string, ProcessRepository[]>())
-
-  return reduced
-}
-
-const ChangeLeadTimeGraph : React.FC<ChartProps> = (props: ChartProps) => {
-  const [graphData, setGraphData] = useState<Map<string, ProcessRepository[]>>(new Map<string, ProcessRepository[]>())
-  const [tooltipContent, setTooltipContent] = useState<any>(null)
-  const [tooltipOpen, setTooltipOpen] = useState<boolean>(false)
-  const [node, setNode] = useState<any>(null)
-  const [position, setPosition] = useState<any>(null)
-  const [yLabel, setYLabel] = useState<any>(' hrs')
-
-  const postCompose = (componentProps: ChartProps, data: DoraRecord[], composedData: any) => {
-    const state = buildDoraState(componentProps, data)
-
-    let label = " hrs"
-    let multiplier = 1
-
-    if(state.changeLeadTime.average > 48) {
-      multiplier = 1/24
-      label = " days"
-    } else if(state.changeLeadTime.average < 1) {
-      multiplier = 60
-      label = " mins"
-    }
-      
     composedData.forEach((repositories: ProcessRepository[], key: string) => {
       repositories.forEach((repository: ProcessRepository) => {
-        repository.graphCycleTime *= multiplier
-      })
-    })
+        repository.graphCycleTime *= graphMultiplier;
 
-    setYLabel(label)
-  }
+        let multiplier = 1;
+        let label = ' hrs';
 
-  const [startDate, endDate, colors, _, noData] = useSharedLogic(props, composeGraphData, setGraphData, postCompose)
+        if (repository.originalCycleTime > 48) {
+          multiplier = 1 / 24;
+          label = ' days';
+        } else if (repository.originalCycleTime < 1) {
+          multiplier = 60;
+          label = ' mins';
+        }
 
-  const timeoutRef = useRef<any>(null)
+        repository.originalCycleTime *= multiplier;
+        repository.cycleLabel = label;
+      });
+    });
+  };
 
-  const ticks = generateTicks(startDate, endDate, 5)
+  const [startDate, endDate, colors, _, noData] = useSharedLogic(
+    props,
+    composeGraphData,
+    setGraphData,
+    postCompose,
+  );
 
-  const nonGraphBody = buildNonGraphBody(props, noData, changeLeadTimeName)
+  const tickProperties = useMemo(() => {
+    return {
+      fill: { fill: props.theme === Theme.Dark ? '#FFF' : '#000' },
+      ticks: generateTicks(startDate, endDate, 5),
+      domain: [startDate.getTime(), endDate.getTime()],
+      padding: { left: 9, right: 9 },
+    };
+  }, [startDate, endDate, props.theme]);
 
-  if(nonGraphBody) {
-    return nonGraphBody
-  }
+  const nonGraphBody = buildNonGraphBody(
+    props,
+    noData,
+    changeLeadTimeName,
+    styles.messageContainer,
+    props.theme,
+  );
 
-  function getElementCenter(element: any) {
-    const rect = element.getBoundingClientRect()
-    const centerX = rect.left + rect.width / 2
-    const centerY = rect.top + rect.height / 2
-    return { x: centerX, y: centerY }
-  }
-
-  const handleMouseOverDot = (event: any, payload: ProcessRepository, repository: string) => {
-    if(payload.id === node) {
-      return
-    } else {
-      setNode(payload.id)
-      setTooltipOpen(true)
-    }
-
-    const center = getElementCenter(event.target)
-
-    setPosition(center)
-
-    const title = (
-      <h3>
-        <a className="toolTipLink" href={payload.changeUrl} target="_blank">{payload.title}</a>
-      </h3>
-    )
-
-    const body = (<>
-      <p>Repository: {repository}</p>
-      <p>Total Cycle Time: {payload.originalCycleTime.toFixed(2)} {payload.cycleLabel}</p>
-    </>)
-
-    const footer = (<span>Commit By: {payload.user}</span>)
-
-    setTooltipContent(<TooltipContent title={title} body={body} footer={footer}/>)
-  }
-
-  const handleMouseMoveContainer = (event: any) => {
-    if(!tooltipOpen) {
-      return
-    }
-
-    if(event.target.tagName === "svg" || event.target.tagName === "line") {
-      if(!timeoutRef.current) {
-        setNode(null)
-        timeoutRef.current = setTimeout(() => {setTooltipOpen(false)}, 1000)
-      }
-    } else if(timeoutRef.current) {
-      clearTimeout(timeoutRef.current)
-      timeoutRef.current = null
-    }
-  }
-
-  const handleMouseMoveChart = (coords: any, event: any) => {
-    handleMouseMoveContainer(event)
-  }
-
-  const handleMouseOut = (event: any) => {
-    if(!timeoutRef.current) {
-      setNode("")
-      timeoutRef.current = setTimeout(() => {setTooltipOpen(false)}, 1000)
-    }
+  if (nonGraphBody) {
+    return nonGraphBody;
   }
 
   return (
-    <div data-testid={changeLeadTimeName} className="chart-wrapper" onMouseMove={handleMouseMoveContainer} onMouseOut={handleMouseOut}>
+    <div
+      data-testid={changeLeadTimeName}
+      className={styles.chartWrapper}
+      data-theme={props.theme}
+    >
       <ResponsiveContainer width="100%" height="100%">
         <ScatterChart
           width={500}
           height={300}
           margin={{
             right: 40,
-            top: 10
+            top: 10,
           }}
-          onMouseMove={handleMouseMoveChart}
-          onMouseLeave={handleMouseOut}
         >
           <CartesianGrid strokeDasharray="3 3" vertical={false} />
-          <XAxis padding={{left: 9, right: 9}} dataKey="mergeTime" tickSize={15} type={"number"} tick={{fill: "#FFFFFF"}} ticks={ticks} domain={[startDate.getTime(), endDate.getTime()]} tickFormatter={formatDateTicks} />
-          <YAxis type="number" dataKey="graphCycleTime" name="Time" unit={yLabel} tick={{fill: "#FFFFFF"}} />
-          {Array.from(graphData.keys()).map((repository: string, idx: number) => (
-            <Scatter
-              animationDuration={0}
-              key={repository}
-              data={graphData.get(repository)}
-              fill={colors[idx]}
-              shape={(props: any) =>
-                <CustomShape
-                  {...props}
-                  tooltipId="cltTooltip"  
-                  mouseOver={(event: any, payload: ProcessRepository) => handleMouseOverDot(event, payload, repository)}
-                />
-              }
-              activeShape={(props: any) =>
-                <CustomShape
-                  {...props}
-                  tooltipId="cltTooltip"  
-                  mouseOver={(event: any, payload: ProcessRepository) => handleMouseOverDot(event, payload, repository)}
-                />
-              }
-            />
-          ))}
+          <XAxis
+            padding={tickProperties.padding}
+            dataKey="mergeTime"
+            tickSize={15}
+            type={'number'}
+            ticks={tickProperties.ticks}
+            tick={tickProperties.fill}
+            domain={tickProperties.domain}
+            tickFormatter={formatDateTicks}
+          />
+          <YAxis
+            type="number"
+            dataKey="graphCycleTime"
+            name="Time"
+            unit={yLabel}
+            tick={tickProperties.fill}
+          />
+          {Array.from(graphData.keys()).map(
+            (repository: string, idx: number) => (
+              <Scatter
+                animationDuration={0}
+                key={repository}
+                data={graphData.get(repository)}
+                fill={colors[idx]}
+                shape={(props: any) => (
+                  <CustomShape
+                    {...props}
+                    tooltipId="cltTooltip"
+                    tooltipRef={tooltipRef}
+                    tooltipContentBuilder={() =>
+                      renderTooltip(props.payload, repository)
+                    }
+                  />
+                )}
+                activeShape={(props: any) => (
+                  <CustomShape
+                    {...props}
+                    tooltipId="cltTooltip"
+                    tooltipRef={tooltipRef}
+                    tooltipContentBuilder={() =>
+                      renderTooltip(props.payload, repository)
+                    }
+                  />
+                )}
+              />
+            ),
+          )}
         </ScatterChart>
       </ResponsiveContainer>
-      <Tooltip className='chartTooltip' offset={20}  isOpen={tooltipOpen} position={position} clickable={true} classNameArrow='chartTooltipArrow' id="cltTooltip" border="1px solid white" opacity="1" content={tooltipContent}/>
+      <Tooltip
+        ref={tooltipRef}
+        className={styles.tooltip}
+        delayHide={tooltipHideDelay}
+        clickable={true}
+        classNameArrow={styles.tooltipArrow}
+        id="cltTooltip"
+        border="1px"
+        opacity="1"
+      />
     </div>
-  )
-}
+  );
+};
 
-export default ChangeLeadTimeGraph
+export default ChangeLeadTimeGraph;

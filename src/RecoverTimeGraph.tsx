@@ -1,145 +1,222 @@
-import React, { useState } from "react"
-import { XAxis, YAxis, CartesianGrid, ResponsiveContainer, LineChart, Line } from "recharts"
-import CustomDot from "./CustomDot"
-import "./general.css"
-import TooltipContent from "./ToolTip/TooltipContent"
-import { Tooltip } from "react-tooltip"
-import { ChartProps } from "./interfaces/propInterfaces"
-import { DoraRecord } from "./interfaces/apiInterfaces"
-import { buildNonGraphBody, formatDateTicks, generateTicks, useSharedLogic } from "./functions/chartFunctions"
-import { buildDoraState } from "./functions/metricFunctions"
-import { recoverTimeName } from "./constants"
-import {v4 as uuidv4} from 'uuid'
+import React, { useMemo, useRef, useState } from 'react';
+import {
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  ResponsiveContainer,
+  LineChart,
+  Line,
+} from 'recharts';
+import CustomDot from './CustomDot';
+import TooltipContent from './ToolTip/TooltipContent';
+import { Tooltip, TooltipRefProps } from 'react-tooltip';
+import { ChartProps, Theme } from './interfaces/propInterfaces';
+import { DoraRecord } from './interfaces/apiInterfaces';
+import {
+  buildNonGraphBody,
+  formatDateTicks,
+  generateTicks,
+  useSharedLogic,
+} from './functions/chartFunctions';
+import {
+  buildDoraState,
+  calculateRecoverTime,
+} from './functions/metricFunctions';
+import {
+  millisecondsToMinutes,
+  recoverTimeName,
+  tooltipHideDelay,
+} from './constants';
+import { v4 as uuidv4 } from 'uuid';
+import styles from './chart.module.css';
+import { stripTimeUTC } from './functions/dateFunctions';
 
 interface ProcessRepository {
-  count: number
-  totalTime: number
-  avgTime: number
-  avgLabel: string
+  count: number;
+  totalTime: number;
+  avgTime: number;
+  avgLabel: string;
+  graphAvgTime: number;
 }
 
 interface ProcessData {
-  date: number
-  repositories: Map<string, ProcessRepository>
+  date: number;
+  repositories: Map<string, ProcessRepository>;
 }
 
 export const composeGraphData = (props: ChartProps, data: DoraRecord[]) => {
-  let reduced = data.reduce((acc: Map<number, ProcessData>, record: DoraRecord) => {
-    if (record.recoverTime === undefined) {
-      return acc
-    }
-
-    const date = (new Date(Date.UTC(record.created_at.getUTCFullYear(), record.created_at.getUTCMonth(), record.created_at.getUTCDate()))).getTime()
-    let entry = acc.get(date)
-
-    if (!entry) {
-      entry = {
-        date: date,
-        repositories: new Map<string, ProcessRepository>()
+  let reduced = data.reduce(
+    (acc: Map<number, ProcessData>, record: DoraRecord) => {
+      if (!record.failed_at) {
+        return acc;
       }
 
-      acc.set(date, entry)
-    }
+      const date =
+        stripTimeUTC(record.created_at).getTime() +
+        new Date().getTimezoneOffset() * millisecondsToMinutes;
+      let entry = acc.get(date);
 
-    let payload = entry.repositories.get(record.repository)
+      if (!entry) {
+        entry = {
+          date: date,
+          repositories: new Map<string, ProcessRepository>(),
+        };
 
-    if (!payload) {
-      entry.repositories.set(record.repository, {
-        count: 1,
-        totalTime: record.recoverTime,
-        avgTime: record.recoverTime,
-        avgLabel: " hrs",
-      })
-    } else {
-      payload.count++
-      payload.totalTime += record.recoverTime
-      payload.avgTime += payload.totalTime / payload.count
-    }
+        acc.set(date, entry);
+      }
 
-    return acc
-  }, new Map<number, ProcessData>())
+      let payload = entry.repositories.get(record.repository);
 
-  let result = Array.from(reduced.values())
+      const recoverTime = calculateRecoverTime(record);
 
-  result.sort((l, r) => new Date(l.date).getTime() - new Date(r.date).getTime())
+      if (!payload) {
+        entry.repositories.set(record.repository, {
+          count: 1,
+          totalTime: recoverTime,
+          avgTime: recoverTime,
+          avgLabel: ' hrs',
+          graphAvgTime: 0,
+        });
+      } else {
+        payload.count++;
+        payload.totalTime += recoverTime;
+        payload.avgTime += payload.totalTime / payload.count;
+      }
 
-  return result
-}
+      return acc;
+    },
+    new Map<number, ProcessData>(),
+  );
+
+  let result = Array.from(reduced.values());
+
+  result.sort(
+    (l, r) => new Date(l.date).getTime() - new Date(r.date).getTime(),
+  );
+
+  return result;
+};
+
+const renderTooltip = (payload: ProcessData, repository: string) => {
+  const repositoryData = payload.repositories.get(repository);
+
+  if (!repositoryData) {
+    return null;
+  }
+
+  const body = (
+    <>
+      <p key={uuidv4()}>
+        {repository}: {repositoryData.avgTime.toFixed(2)}{' '}
+        {repositoryData.avgLabel}
+      </p>
+    </>
+  );
+
+  const date = new Date(payload.date).toISOString().split('T')[0];
+  const title = <h3>{date}</h3>;
+
+  return <TooltipContent body={body} title={title} />;
+};
+
+const dataKeyFunc = (obj: ProcessData, repository: string): any => {
+  const repositoryData = obj.repositories.get(repository);
+
+  if (!repositoryData) {
+    return NaN;
+  }
+
+  return repositoryData.graphAvgTime;
+};
 
 const RecoverTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
-  const [graphData, setGraphData] = useState<ProcessData[]>([])
-  const [tooltipContent, setTooltipContent] = useState<any>(null)
-  const [usedRepositories, setUsedRepositories] = useState<string[]>([])
-  const [yLabel, setYLabel] = useState<any>(" hrs")
+  const [graphData, setGraphData] = useState<ProcessData[]>([]);
+  const tooltipRef = useRef<TooltipRefProps>(null);
+  const [usedRepositories, setUsedRepositories] = useState<string[]>([]);
+  const [yLabel, setYLabel] = useState<any>(' hrs');
 
-  const postCompose = (componentProps: ChartProps, data: DoraRecord[], composedData: ProcessData[]) => {
-    const state = buildDoraState(componentProps, data)
+  const postCompose = (
+    componentProps: ChartProps,
+    data: DoraRecord[],
+    composedData: ProcessData[],
+  ) => {
+    const state = buildDoraState(componentProps, data);
 
-    const repositories: string[] = []
-    let multiplier = 1
-    let label = " hrs"
+    const repositories: string[] = [];
+
+    let graphMultiplier = 1;
 
     if (state.recoverTime.average > 48) {
-      multiplier = 1/24
-      label = " days"
+      graphMultiplier = 1 / 24;
+      setYLabel(' days');
     } else if (state.recoverTime.average < 1) {
-      multiplier = 60
-      label = " mins"
+      graphMultiplier = 60;
+      setYLabel(' mins');
+    } else {
+      setYLabel(' hrs');
     }
 
     composedData.forEach((entry: ProcessData) => {
-      entry.repositories.forEach((repositoryData: ProcessRepository, key: string) => {
-        repositories.push(key)
-        
-        repositoryData.avgTime *= multiplier
-        repositoryData.avgLabel = " days"
-      })
-    })
+      entry.repositories.forEach(
+        (repositoryData: ProcessRepository, key: string) => {
+          repositories.push(key);
 
-    setYLabel(label)
+          let multiplier = 1;
+          let label = ' hrs';
 
-    setUsedRepositories(Array.from(new Set(repositories)))
-  }
+          if (repositoryData.avgTime > 48) {
+            multiplier = 1 / 24;
+            label = ' days';
+          } else if (repositoryData.avgTime < 1) {
+            multiplier = 60;
+            label = ' mins';
+          }
 
-  const [startDate, endDate, colors, _, noData] = useSharedLogic(props, composeGraphData, setGraphData, postCompose)
+          repositoryData.graphAvgTime =
+            repositoryData.avgTime * graphMultiplier;
+          repositoryData.avgTime *= multiplier;
+          repositoryData.avgLabel = label;
+        },
+      );
+    });
 
-  const ticks = generateTicks(startDate, endDate, 5)
+    setUsedRepositories(Array.from(new Set(repositories)));
+  };
 
-  const nonGraphBody = buildNonGraphBody(props, noData, recoverTimeName)
+  const [startDate, endDate, colors, _, noData] = useSharedLogic(
+    props,
+    composeGraphData,
+    setGraphData,
+    postCompose,
+  );
 
-  if(nonGraphBody) {
-      return nonGraphBody
-  }
+  const chartProperties = useMemo(() => {
+    return {
+      tickFill: { fill: props.theme === Theme.Dark ? '#FFF' : '#000' },
+      xTicks: generateTicks(startDate, endDate, 5),
+      xDomain: [startDate.getTime(), endDate.getTime()],
+      xPadding: { left: 9, right: 9 },
+    };
+  }, [startDate, endDate, props.theme]);
 
-  const handleMouseOverDot = (event: any, payload: ProcessData, repository: string) => {
-    const repositoryData = payload.repositories.get(repository)
+  const nonGraphBody = buildNonGraphBody(
+    props,
+    noData,
+    recoverTimeName,
+    styles.messageContainer,
+    props.theme,
+  );
 
-    if(!repositoryData) {
-      return
-    }
-
-    const body = (<>
-      <p key={uuidv4()}>{repository}: {repositoryData.avgTime.toFixed(2)} {repositoryData.avgLabel}</p>
-    </>)
-
-    const date = new Date(payload.date).toISOString().split("T")[0]
-    const title = (<h3>{date}</h3>)
-    
-    setTooltipContent(<TooltipContent body={body} title={title}/>)
-  }
-
-  const dataKeyFunc = (obj: ProcessData, repository: string) : any => {
-    const repositoryData = obj.repositories.get(repository)
-    
-    if(!repositoryData) {
-      return NaN
-    }
-
-    return repositoryData.avgTime
+  if (nonGraphBody) {
+    return nonGraphBody;
   }
 
   return (
-    <div data-testid={recoverTimeName} className="chart-wrapper">
+    <div
+      data-testid={recoverTimeName}
+      className={styles.chartWrapper}
+      data-theme={props.theme}
+    >
       <ResponsiveContainer width="100%" height="100%">
         <LineChart
           width={500}
@@ -152,16 +229,16 @@ const RecoverTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
         >
           <CartesianGrid strokeDasharray="3 3" vertical={false} />
           <XAxis
-            padding={{ left: 9, right: 9 }}
+            padding={chartProperties.xPadding}
             dataKey="date"
             tickSize={15}
-            type={"number"}
-            tick={{ fill: "#FFFFFF" }}
-            ticks={ticks}
-            domain={[startDate.getTime(), endDate.getTime()]}
+            type={'number'}
+            tick={chartProperties.tickFill}
+            ticks={chartProperties.xTicks}
+            domain={chartProperties.xDomain}
             tickFormatter={formatDateTicks}
           />
-          <YAxis name="Time" unit={yLabel} tick={{ fill: "#FFFFFF" }} />
+          <YAxis name="Time" unit={yLabel} tick={chartProperties.tickFill} />
           {usedRepositories.map((repository, idx) => (
             <Line
               connectNulls={true}
@@ -171,24 +248,44 @@ const RecoverTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
               dataKey={(obj: ProcessData) => dataKeyFunc(obj, repository)}
               fill={colors[idx]}
               stroke={colors[idx]}
-              dot={(props: any) => <CustomDot {...props} repository={repository} tooltipId="rtTooltip" mouseOver={handleMouseOverDot} />}
-              activeDot={(props: any) => <CustomDot {...props} repository={repository} tooltipId="rtTooltip" mouseOver={handleMouseOverDot} />}
+              dot={(props: any) => (
+                <CustomDot
+                  {...props}
+                  repository={repository}
+                  tooltipId="rtTooltip"
+                  tooltipRef={tooltipRef}
+                  tooltipContentBuilder={() =>
+                    renderTooltip(props.payload, repository)
+                  }
+                />
+              )}
+              activeDot={(props: any) => (
+                <CustomDot
+                  {...props}
+                  repository={repository}
+                  tooltipId="rtTooltip"
+                  tooltipRef={tooltipRef}
+                  tooltipContentBuilder={() =>
+                    renderTooltip(props.payload, repository)
+                  }
+                />
+              )}
             />
           ))}
         </LineChart>
       </ResponsiveContainer>
       <Tooltip
-        className="chartTooltip"
-        delayHide={2000}
+        ref={tooltipRef}
+        className={styles.tooltip}
+        delayHide={tooltipHideDelay}
         clickable={true}
-        classNameArrow="chartTooltipArrow"
+        classNameArrow={styles.tooltipArrow}
         id="rtTooltip"
-        border="1px solid white"
+        border="1px"
         opacity="1"
-        content={tooltipContent}
       />
     </div>
-  )
-}
+  );
+};
 
-export default RecoverTimeGraph
+export default RecoverTimeGraph;

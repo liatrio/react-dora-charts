@@ -1,0 +1,35 @@
+.tooltip {
+  background-color: black;
+  border: 2px solid grey;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 300px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  color: var(--react-dora-charts-text-color);
+  height: fit-content;
+}
+
+.tooltipHeader h3 {
+  font-size: 16px;
+  margin: 0;
+  color: var(--react-dora-charts-text-color);
+}
+
+.tooltipBody p {
+  font-size: 14px;
+  color: var(--react-dora-charts-text-color);
+  margin: 8px 0 0;
+}
+
+.tooltipFooter {
+  display: flex;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.tooltipFooter span {
+  font-size: 14px;
+  color: var(--react-dora-charts-text-color);
+}

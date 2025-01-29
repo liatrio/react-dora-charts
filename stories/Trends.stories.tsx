@@ -1,70 +1,73 @@
-import React, { useState } from 'react'
-import { StoryFn, Meta } from '@storybook/react'
-import TrendGraph from '../src/TrendGraph'
-import { ChartProps } from '../src/interfaces/propInterfaces'
-import dataSet from './data'
-import { getDateRange, isWeekend } from '../src/functions/dateFunctions'
-import DatePicker from 'react-datepicker'
-import "react-datepicker/dist/react-datepicker.css"
-import { millisecondsToDays } from '../src/constants'
+import React, { useState } from 'react';
+import { StoryFn, Meta } from '@storybook/react';
+import TrendGraph from '../src/TrendGraph';
+import { ChartProps, Theme } from '../src/interfaces/propInterfaces';
+import dataSet from './data';
+import { getDateRange, isWeekend } from '../src/functions/dateFunctions';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { millisecondsToDays } from '../src/constants';
+import { useDarkMode } from 'storybook-dark-mode';
 
 export default {
   title: 'TrendGraph',
   component: TrendGraph,
-} as Meta
+} as Meta;
 
 const Template: StoryFn<ChartProps> = () => {
-  let {start, end} = getDateRange(dataSet[0])
+  let { start, end } = getDateRange(dataSet[0]);
+  const isDark = useDarkMode();
 
-  if(end.getTime() - start.getTime() < millisecondsToDays) {
-    start = new Date(start.getTime() - millisecondsToDays)
-    end = new Date(end.getTime() + millisecondsToDays)
+  if (end.getTime() - start.getTime() < millisecondsToDays) {
+    start = new Date(start.getTime() - millisecondsToDays);
+    end = new Date(end.getTime() + millisecondsToDays);
   }
 
-  const [dataSetIndex, setDataSetIndex] = useState<number>(0)
-  const [data, setData] = useState<any>(dataSet[0])
-  const [showIndividualTrends, setShowIndividualTrends] = useState<boolean>(false)
-  const [calendarStartDate, setCalendarStartDate] = useState<Date>(start)
-  const [calendarEndDate, setCalendarEndDate] = useState<Date>(end)
-  const [graphStart, setGraphStartDate] = useState<Date>(start)
-  const [graphEnd, setGraphEndDate] = useState<Date>(end)
+  const [dataSetIndex, setDataSetIndex] = useState<number>(0);
+  const [data, setData] = useState<any>(dataSet[0]);
+  const [showIndividualTrends, setShowIndividualTrends] =
+    useState<boolean>(false);
+  const [calendarStartDate, setCalendarStartDate] = useState<Date>(start);
+  const [calendarEndDate, setCalendarEndDate] = useState<Date>(end);
+  const [graphStart, setGraphStartDate] = useState<Date>(start);
+  const [graphEnd, setGraphEndDate] = useState<Date>(end);
 
   const changeDataSet = (event: any) => {
-    const data = dataSet[event.target.value]
+    const data = dataSet[event.target.value];
 
-    setData(data)
+    setData(data);
 
-    const {start, end} = getDateRange(data)
-    
-    setCalendarStartDate(start)
-    setCalendarEndDate(end)
+    const { start, end } = getDateRange(data);
 
-    setGraphStartDate(start)
-    setGraphEndDate(end)
+    setCalendarStartDate(start);
+    setCalendarEndDate(end);
 
-    setDataSetIndex(event.target.value)
-  }
+    setGraphStartDate(start);
+    setGraphEndDate(end);
+
+    setDataSetIndex(event.target.value);
+  };
 
   const changeShowMetricTrends = (event: any) => {
-    setShowIndividualTrends(event.target.checked)
-  }
+    setShowIndividualTrends(event.target.checked);
+  };
 
   const changeDateRange = (dates: any) => {
-    const [start, end] = dates
+    const [start, end] = dates;
 
-    setCalendarStartDate(start)
-    setCalendarEndDate(end)
+    setCalendarStartDate(start);
+    setCalendarEndDate(end);
 
-    if(!start || !end) {
-      return
+    if (!start || !end) {
+      return;
     }
 
-    setGraphStartDate(start)
-    setGraphEndDate(end)
-  }
+    setGraphStartDate(start);
+    setGraphEndDate(end);
+  };
 
   return (
-    <div className="graphContainer">
+    <div className="graphContainer" data-theme={isDark ? 'dark' : 'light'}>
       <div className="editor">
         <div className="editorFieldContainer">
           <label>Data Set:</label>
@@ -78,26 +81,36 @@ const Template: StoryFn<ChartProps> = () => {
         </div>
         <div className="editorFieldContainer">
           <label>Show Metric Trends:</label>
-          <input type='checkbox' checked={showIndividualTrends} onChange={changeShowMetricTrends} />
+          <input
+            type="checkbox"
+            checked={showIndividualTrends}
+            onChange={changeShowMetricTrends}
+          />
         </div>
         <div className="editorFieldContainer">
           <label>Graph Date Range:</label>
           <DatePicker
-              selected={calendarStartDate}
-              onChange={changeDateRange}
-              startDate={calendarStartDate}
-              endDate={calendarEndDate}
-              selectsRange
-              popperPlacement="bottom"
-              filterDate={isWeekend}
-            />
+            selected={calendarStartDate}
+            onChange={changeDateRange}
+            startDate={calendarStartDate}
+            endDate={calendarEndDate}
+            selectsRange
+            popperPlacement="bottom"
+            filterDate={isWeekend}
+          />
         </div>
       </div>
-      <br/>
-      <br/>
-      <TrendGraph showIndividualTrends={showIndividualTrends} data={data} graphStart={graphStart} graphEnd={graphEnd} />
+      <br />
+      <br />
+      <TrendGraph
+        showIndividualTrends={showIndividualTrends}
+        data={data}
+        graphStart={graphStart}
+        graphEnd={graphEnd}
+        theme={isDark ? Theme.Dark : Theme.Light}
+      />
     </div>
-  )
-}
+  );
+};
 
-export const Example = Template.bind({})
+export const Example = Template.bind({});
