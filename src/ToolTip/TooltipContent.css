@@ -7,19 +7,19 @@
   padding: 16px;
   display: flex;
   flex-direction: column;
-  color: #AAA;
+  color: #aaa;
   height: fit-content;
 }
 
 .dora-tooltip-header h3 {
   font-size: 16px;
   margin: 0;
-  color: #AAA;
+  color: #aaa;
 }
 
 .dora-tooltip-body p {
   font-size: 14px;
-  color: #AAA;
+  color: #aaa;
   margin: 8px 0 0;
 }
 
@@ -38,7 +38,7 @@
 
 .dora-tooltip-footer span {
   font-size: 14px;
-  color: #AAA;
+  color: #aaa;
 }
 
 .dora-tooltip-wrapper {
@@ -50,7 +50,7 @@
   position: absolute;
   top: -5px;
   left: -5px;
-  background-color: #AAAAAA33;
+  background-color: #aaaaaa33;
   border-radius: 10px;
   padding: 10px;
 }
