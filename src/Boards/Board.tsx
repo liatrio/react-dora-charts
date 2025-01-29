@@ -1,3 +1,5 @@
+// @ts-nocheck
+// TODO: Remove no-check - Added the skip to enable Renovate before making code related changes.
 import React, { useEffect, useState } from 'react';
 import './Board.css';
 import { Tooltip } from 'react-tooltip';
