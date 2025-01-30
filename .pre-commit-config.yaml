@@ -5,7 +5,6 @@ repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.6.0
     hooks:
-      - id: check-added-large-files
       - id: check-merge-conflict
       - id: check-symlinks
       - id: check-yaml
@@ -13,7 +12,6 @@ repos:
           - '--allow-multiple-documents'
       - id: end-of-file-fixer
       - id: mixed-line-ending
-      - id: trailing-whitespace
   - repo: https://github.com/igorshubovych/markdownlint-cli
     rev: v0.41.0
     hooks:
