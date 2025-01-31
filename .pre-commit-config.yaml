@@ -44,6 +44,6 @@ repos:
     hooks:
       - id: prettier
         name: Prettier via npm
-        entry: npm run prettier:fix
+        entry: yarn run prettier:fix
         language: node
         types_or: [css, javascript, ts, tsx]
