@@ -80,6 +80,9 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
+      - name: Update snapshots
+        run: yarn playwright:update-snapshots
+
       - name: Run Playwright tests
         run: yarn playwright
 
