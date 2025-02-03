@@ -9,6 +9,12 @@ This component library contains charts for the standard DORA metrics.
 You can install these components using the following command:
 
 ```sh
+npm install @liatrio/react-dora-charts
+```
+
+Or
+
+```sh
 yarn add @liatrio/react-dora-charts
 ```
 
