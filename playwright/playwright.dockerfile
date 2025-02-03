@@ -12,7 +12,7 @@ FROM base
 WORKDIR /app
 USER node
 COPY --chown=node package*.json ./
-RUN npm install
+RUN yarn install
 COPY --chown=node . .
 ENV PLAYWRIGHT_HTML_OPEN=never
-CMD ["npm", "run", "playwright", "--config=playwright.config.js"]
+CMD ["yarn", "playwright", "--config=playwright.config.js"]

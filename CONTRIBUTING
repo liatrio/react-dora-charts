@@ -11,7 +11,7 @@ We follow the standard open-source code of conduct. Please be respectful and con
 Before you start contributing, please make sure you have the following:
 
 * Node.js
-* npm or yarn
+* yarn
 * A code editor or IDE of your choice
 
 ## Coding Style and Practices
@@ -37,7 +37,7 @@ We use Jest for testing. Please make sure to write tests for any new features or
 To contribute to the codebase, please follow these steps:
 
 1. Fork the repository and create a new branch for your feature or bug fix.
-2. Run `npm install` or `yarn install` to install the dependencies.
+2. Run `yarn install` to install the dependencies.
 3. Run `pre-commit install` to install the pre-commit hooks.
 4. Use [Conventional Commits](https://www.conventionalcommits.org) to format your commit messages.
 5. Open a pull request to the main repository, targeting the `main` branch.

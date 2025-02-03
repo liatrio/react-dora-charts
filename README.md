@@ -205,7 +205,7 @@ The data schema for each chart is as follows:
 
 ### Unit Tests
 
-Basic unit tests can be found in the [tests](./tests/) directory. They can be run with `npm test`
+Basic unit tests can be found in the [tests](./tests/) directory. They can be run with `yarn test`
 
 ### Visual Diffs via Playwright
 
@@ -222,15 +222,15 @@ This project includes visual diff tests that are run via Playwright. They are us
 
 To run the Playwright tests, use the following commands:
 
-| Command                                      | Description                                                                                |
-| -------------------------------------------- | ------------------------------------------------------------------------------------------ |
-| `npm run playwright`                         | Runs all the tests. See [note about docker usage](#note-about-docker-usage).               |
-| `npm run playwright:smoke-test`              | Runs a subset of the tests.<br>Useful for debugging.                                       |
-| `npm run playwright:show-report`             | Shows the most recent test report.<br>Can be used to view reports for test run via Docker. |
-| `npm run playwright:update-snapshots`        | Updates the snapshots. See [note about docker usage](#note-about-docker-usage).            |
-| `npm run playwright:docker:build`            | Builds the Docker image.                                                                   |
-| `npm run playwright:docker`                  | Runs the tests in a Docker container.                                                      |
-| `npm run playwright:docker:update-snapshots` | Updates the snapshots in a Docker container.                                               |
+| Command                                   | Description                                                                                |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------ |
+| `yarn playwright`                         | Runs all the tests. See [note about docker usage](#note-about-docker-usage).               |
+| `yarn playwright:smoke-test`              | Runs a subset of the tests.<br>Useful for debugging.                                       |
+| `yarn playwright:show-report`             | Shows the most recent test report.<br>Can be used to view reports for test run via Docker. |
+| `yarn playwright:update-snapshots`        | Updates the snapshots. See [note about docker usage](#note-about-docker-usage).            |
+| `yarn playwright:docker:build`            | Builds the Docker image.                                                                   |
+| `yarn playwright:docker`                  | Runs the tests in a Docker container.                                                      |
+| `yarn playwright:docker:update-snapshots` | Updates the snapshots in a Docker container.                                               |
 
 You can also run a subset of the tests using tags, for example:
 
