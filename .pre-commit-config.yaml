@@ -43,7 +43,7 @@ repos:
   - repo: local
     hooks:
       - id: prettier
-        name: Prettier via npm
+        name: Prettier via yarn
         entry: yarn run prettier:fix
         language: node
         types_or: [css, javascript, ts, tsx]
