@@ -38,10 +38,10 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm install
+        run: yarn install
 
       - name: Build the project
-        run: npm run rollup
+        run: yarn rollup
 
       - name: Bump and Release
         env:

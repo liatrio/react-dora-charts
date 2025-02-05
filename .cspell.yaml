@@ -24,6 +24,7 @@ ignorePaths:
   - package.json
   - stories/
   - node_modules/
+  - .yarn/
 #   - test_issue_data.json
 #   - test_merge_data.json
 features:
