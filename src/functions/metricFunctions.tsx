@@ -1,6 +1,5 @@
 import { DoraRecord } from '../interfaces/apiInterfaces';
 import {
-  blue,
   changeFailureRateName,
   changeLeadTimeName,
   defaultDoraMetric,
@@ -9,13 +8,15 @@ import {
   defaultGraphStart,
   defaultMetricThresholdSet,
   deploymentFrequencyName,
-  green,
   grey,
   millisecondsToDays,
   millisecondsToHours,
-  orange,
   recoverTimeName,
-  yellow,
+  burntOrange,
+  pastelBlue,
+  tangerine,
+  sapphire,
+  brightAzure,
 } from '../constants';
 import {
   getDateDaysInPast,
@@ -43,7 +44,7 @@ export const calculateCycleTime = (
 ): number => {
   const mergedAt = record.merged_at!;
   const deployedAt = record.failed_at
-    ? record.fixed_at ?? getDateDaysInPastUtc(0)
+    ? (record.fixed_at ?? getDateDaysInPastUtc(0))
     : record.created_at;
 
   let diff = deployedAt.getTime() - mergedAt.getTime();
@@ -237,16 +238,17 @@ const determineMetricRank = (
     return DoraRank.unknown;
   } else if (
     value <
-    (thresholds?.elite ? thresholds.elite : defaultThresholds?.elite ?? 0)
+    (thresholds?.elite ? thresholds.elite : (defaultThresholds?.elite ?? 0))
   ) {
     return DoraRank.elite;
   } else if (
-    value < (thresholds?.high ? thresholds.high : defaultThresholds?.high ?? 0)
+    value <
+    (thresholds?.high ? thresholds.high : (defaultThresholds?.high ?? 0))
   ) {
     return DoraRank.high;
   } else if (
     value <
-    (thresholds?.medium ? thresholds.medium : defaultThresholds?.medium ?? 0)
+    (thresholds?.medium ? thresholds.medium : (defaultThresholds?.medium ?? 0))
   ) {
     return DoraRank.medium;
   } else {
@@ -261,13 +263,13 @@ const determineMetricColor = (
   if (rank === DoraRank.unknown) {
     return grey;
   } else if (rank === DoraRank.elite) {
-    return thresholdColors?.elite ? thresholdColors.elite : green;
+    return thresholdColors?.elite ? thresholdColors.elite : tangerine;
   } else if (rank === DoraRank.high) {
-    return thresholdColors?.high ? thresholdColors.high : blue;
+    return thresholdColors?.high ? thresholdColors.high : sapphire;
   } else if (rank === DoraRank.medium) {
-    return thresholdColors?.medium ? thresholdColors.medium : yellow;
+    return thresholdColors?.medium ? thresholdColors.medium : pastelBlue;
   } else {
-    return thresholdColors?.low ? thresholdColors.low : orange;
+    return thresholdColors?.low ? thresholdColors.low : burntOrange;
   }
 };
 

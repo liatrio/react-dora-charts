@@ -30,16 +30,16 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm install
+        run: yarn install
 
       - name: Version Package
         run: npm version ${{ steps.clean_tag.outputs.tag_name_clean }} --no-git-tag-version
 
       - name: Build the project
-        run: npm run rollup
+        run: yarn rollup
 
       - name: Package the build artifacts
-        run: npm pack
+        run: yarn pack
 
       - name: Install GitHub CLI
         run: sudo apt-get install -y gh

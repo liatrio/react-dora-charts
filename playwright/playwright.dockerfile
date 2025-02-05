@@ -1,18 +1,15 @@
-# Stage 1: Install Playwright browsers
-FROM node:18.20.4-slim AS base
-WORKDIR /app
-RUN npx playwright install --with-deps && \
-  chown -R node /app
-USER node
-RUN npx playwright install
+FROM node:20.18.2-slim
 
-
-# Stage 2: Build the project
-FROM base
 WORKDIR /app
-USER node
-COPY --chown=node package*.json ./
-RUN npm install
-COPY --chown=node . .
+
+COPY package.json yarn.lock .yarnrc.yml ./
+COPY .yarn .yarn
+RUN yarn install
+
+RUN npx playwright install --with-deps
+
+# Copy code & config
+COPY . .
+
 ENV PLAYWRIGHT_HTML_OPEN=never
-CMD ["npm", "run", "playwright", "--config=playwright.config.js"]
+CMD ["yarn", "playwright", "--config=playwright.config.js"]

@@ -12,6 +12,11 @@ export const orange = '#FF8300';
 export const blue = '#00FFFF';
 export const grey = '#C0C0C0';
 export const purple = '#7F00FF';
+export const burntOrange = '#c44601';
+export const tangerine = '#f57600';
+export const pastelBlue = '#8babf1';
+export const brightAzure = '#0073e6';
+export const sapphire = '#054fb9';
 
 export const recordDateKeys = [
   'merged_at',

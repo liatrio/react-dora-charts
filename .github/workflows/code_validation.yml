@@ -18,10 +18,10 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm install
+        run: yarn install
 
-      - name: npm format
-        run: npm run prettier:check
+      - name: yarn format
+        run: yarn prettier:check
 
   check-types:
     name: Check Typescript Types
@@ -37,10 +37,10 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm install
+        run: yarn install
 
-      - name: npm tsc
-        run: npm run tsc:full
+      - name: yarn tsc
+        run: yarn tsc:full
 
   test:
     name: Unit Tests
@@ -56,10 +56,10 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm install
+        run: yarn install
 
-      - name: npm test
-        run: npm run test
+      - name: yarn test
+        run: yarn test
 
   test-playwright:
     name: Playwright Tests
@@ -78,10 +78,10 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm install
+        run: yarn install
 
       - name: Run Playwright tests
-        run: npm run playwright
+        run: yarn playwright
 
       - uses: actions/upload-artifact@v4
         if: always()
