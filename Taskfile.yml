@@ -1,0 +1,92 @@
+version: '3'
+
+tasks:
+  install:
+    desc: Install dependencies
+    cmds:
+      - yarn install
+
+  test:
+    desc: Run Jest tests
+    cmds:
+      - yarn test
+
+  playwright:
+    desc: Run Playwright tests
+    deps: [install]
+    cmds:
+      - yarn playwright
+
+  playwright:smoke-test:
+    desc: Run Playwright smoke tests
+    deps: [install]
+    cmds:
+      - yarn playwright:smoke-test
+
+  playwright:show-report:
+    desc: Show Playwright test report
+    cmds:
+      - yarn playwright:show-report
+
+  playwright:update-snapshots:
+    desc: Update Playwright snapshots
+    deps: [install]
+    cmds:
+      - yarn playwright:update-snapshots
+
+  playwright:docker:
+    desc: Run Playwright tests in Docker
+    deps: [playwright:docker:install]
+    cmds:
+      - yarn playwright:docker
+
+  playwright:docker:build:
+    desc: Build Playwright Docker image
+    cmds:
+      - yarn playwright:docker:build
+
+  playwright:docker:install:
+    desc: Install dependencies in Playwright Docker image
+    cmds:
+      - yarn playwright:docker:install
+
+  playwright:docker:update-snapshots:
+    desc: Update Playwright snapshots in Docker
+    deps: [playwright:docker:install]
+    cmds:
+      - yarn playwright:docker:update-snapshots
+
+  storybook:
+    desc: Start Storybook development server
+    cmds:
+      - yarn storybook
+
+  storybook:ci:
+    desc: Start Storybook in CI mode
+    cmds:
+      - yarn storybook-ci
+
+  build:
+    desc: Build the project
+    cmds:
+      - yarn build
+
+  build:storybook:
+    desc: Build Storybook
+    cmds:
+      - yarn build-storybook
+
+  prettier:check:
+    desc: Check code formatting
+    cmds:
+      - yarn prettier:check
+
+  prettier:fix:
+    desc: Fix code formatting
+    cmds:
+      - yarn prettier:fix
+
+  tsc:full:
+    desc: Run full TypeScript compilation
+    cmds:
+      - yarn tsc:full
