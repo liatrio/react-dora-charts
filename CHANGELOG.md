@@ -1,3 +1,10 @@
+## [1.1.9](https://github.com/liatrio/react-dora-charts/compare/v1.1.8...v1.1.9) (2025-02-05)
+
+
+### Bug Fixes
+
+* metric indicators have accessible colors ([#58](https://github.com/liatrio/react-dora-charts/issues/58)) ([c8f0758](https://github.com/liatrio/react-dora-charts/commit/c8f07586351312d5359576f03bd7193cfa47fa68))
+
 ## [1.1.8](https://github.com/liatrio/react-dora-charts/compare/v1.1.7...v1.1.8) (2024-09-17)
 
 
