@@ -30,6 +30,7 @@
     "playwright:update-snapshots": "playwright test --update-snapshots",
     "playwright:docker:build": "docker build -t playwright-image -f playwright/playwright.dockerfile .",
     "playwright:docker": "docker run -it --rm --name playwright -v $(pwd):/app playwright-image",
+    "playwright:docker:install": "docker run -it --rm --name playwright -v $(pwd):/app playwright-image yarn install",
     "playwright:docker:update-snapshots": "docker run -it --rm --name playwright -v $(pwd):/app playwright-image yarn playwright:update-snapshots",
     "storybook": "storybook dev -p 6006",
     "storybook-ci": "storybook dev -p 6006 --no-open",
@@ -50,7 +51,7 @@
     "@babel/preset-env": "^7.24.5",
     "@babel/preset-react": "^7.24.1",
     "@babel/preset-typescript": "^7.24.1",
-    "@playwright/test": "1.46.1",
+    "@playwright/test": "1.50.1",
     "@rollup/plugin-commonjs": "^25.0.8",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
@@ -75,7 +76,7 @@
     "@testing-library/jest-dom": "^6.4.5",
     "@testing-library/react": "^15.0.7",
     "@types/jest": "^29.5.12",
-    "@types/node": "^22.5.1",
+    "@types/node": "22.13.1",
     "@types/react": "^18.3.2",
     "@types/react-dom": "^18.3.2",
     "@types/uuid": "^10.0.0",
@@ -92,7 +93,7 @@
     "react-dom": "^18.0.0",
     "resize-observer-polyfill": "^1.5.1",
     "rimraf": "^5.0.7",
-    "rollup": "^4.18.0",
+    "rollup": "4.34.3",
     "rollup-plugin-dts": "^6.1.1",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
@@ -111,7 +112,7 @@
     "uuid": "^10.0.0"
   },
   "optionalDependencies": {
-    "@rollup/rollup-linux-x64-gnu": "4.18.0"
+    "@rollup/rollup-linux-x64-gnu": "4.34.3"
   },
   "prettier": "@spotify/prettier-config"
 }

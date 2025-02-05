@@ -1,6 +1,6 @@
 import React from 'react';
 import { DoraTrend } from '../interfaces/metricInterfaces';
-import { green, grey, purple, yellow } from '../constants';
+import { brightAzure, grey, purple, pastelBlue } from '../constants';
 import styles from './icon.module.css';
 
 interface Props {
@@ -40,7 +40,8 @@ const TrendIndicator: React.FC<Props> = (props: Props) => {
     );
   } else {
     const rotation = props.trend === DoraTrend.Declining ? 90 : 270;
-    const color = props.trend === DoraTrend.Declining ? yellow : green;
+    const color =
+      props.trend === DoraTrend.Declining ? brightAzure : pastelBlue;
 
     indicator = (
       <svg

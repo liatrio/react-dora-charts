@@ -1,6 +1,5 @@
 import { DoraRecord } from '../interfaces/apiInterfaces';
 import {
-  blue,
   changeFailureRateName,
   changeLeadTimeName,
   defaultDoraMetric,
@@ -9,13 +8,15 @@ import {
   defaultGraphStart,
   defaultMetricThresholdSet,
   deploymentFrequencyName,
-  green,
   grey,
   millisecondsToDays,
   millisecondsToHours,
-  orange,
   recoverTimeName,
-  yellow,
+  burntOrange,
+  pastelBlue,
+  tangerine,
+  sapphire,
+  brightAzure,
 } from '../constants';
 import {
   getDateDaysInPast,
@@ -262,13 +263,13 @@ const determineMetricColor = (
   if (rank === DoraRank.unknown) {
     return grey;
   } else if (rank === DoraRank.elite) {
-    return thresholdColors?.elite ? thresholdColors.elite : green;
+    return thresholdColors?.elite ? thresholdColors.elite : tangerine;
   } else if (rank === DoraRank.high) {
-    return thresholdColors?.high ? thresholdColors.high : blue;
+    return thresholdColors?.high ? thresholdColors.high : sapphire;
   } else if (rank === DoraRank.medium) {
-    return thresholdColors?.medium ? thresholdColors.medium : yellow;
+    return thresholdColors?.medium ? thresholdColors.medium : pastelBlue;
   } else {
-    return thresholdColors?.low ? thresholdColors.low : orange;
+    return thresholdColors?.low ? thresholdColors.low : burntOrange;
   }
 };
 
