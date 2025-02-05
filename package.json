@@ -30,6 +30,7 @@
     "playwright:update-snapshots": "playwright test --update-snapshots",
     "playwright:docker:build": "docker build -t playwright-image -f playwright/playwright.dockerfile .",
     "playwright:docker": "docker run -it --rm --name playwright -v $(pwd):/app playwright-image",
+    "playwright:docker:install": "docker run -it --rm --name playwright -v $(pwd):/app playwright-image yarn install",
     "playwright:docker:update-snapshots": "docker run -it --rm --name playwright -v $(pwd):/app playwright-image yarn playwright:update-snapshots",
     "storybook": "storybook dev -p 6006",
     "storybook-ci": "storybook dev -p 6006 --no-open",
