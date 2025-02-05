@@ -201,11 +201,33 @@ The data schema for each chart is as follows:
 }
 ```
 
+## Development
+
+The following commands are available for development:
+
+| Command                                   | Description                                                                                |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------ |
+| `task test`                               | Runs the test suite.                                                                       |
+| `task playwright`                         | Runs the full Playwright test suite.                                                       |
+| `task playwright:smoke-test`              | Runs a subset of the tests.<br>Useful for debugging.                                       |
+| `task playwright:show-report`             | Shows the most recent test report.<br>Can be used to view reports for test run via Docker. |
+| `task playwright:update-snapshots`        | Updates the snapshots. See [note about docker usage](#note-about-docker-usage).            |
+| `task playwright:docker:build`            | Builds the Docker image.                                                                   |
+| `task playwright:docker`                  | Runs the tests in a Docker container.                                                      |
+| `task playwright:docker:install`          | Install dependencies in the Docker container.                                              |
+| `task playwright:docker:update-snapshots` | Updates the snapshots using Docker.                                                        |
+| `task storybook`                          | Starts Storybook development server.                                                       |
+| `task build-storybook`                    | Builds the static Storybook site.                                                          |
+| `task prettier:check`                     | Checks code formatting.                                                                    |
+| `task prettier:fix`                       | Fixes code formatting issues.                                                              |
+| `task build`                              | Builds the project.                                                                        |
+| `task tsc:full`                           | Runs full TypeScript compilation.                                                          |
+
 ## Testing
 
 ### Unit Tests
 
-Basic unit tests can be found in the [tests](./tests/) directory. They can be run with `yarn test`
+Basic unit tests can be found in the [tests](./tests/) directory. They can be run with `task test`
 
 ### Visual Diffs via Playwright
 
@@ -224,13 +246,13 @@ To run the Playwright tests, use the following commands:
 
 | Command                                   | Description                                                                                |
 | ----------------------------------------- | ------------------------------------------------------------------------------------------ |
-| `yarn playwright`                         | Runs all the tests. See [note about docker usage](#note-about-docker-usage).               |
-| `yarn playwright:smoke-test`              | Runs a subset of the tests.<br>Useful for debugging.                                       |
-| `yarn playwright:show-report`             | Shows the most recent test report.<br>Can be used to view reports for test run via Docker. |
-| `yarn playwright:update-snapshots`        | Updates the snapshots. See [note about docker usage](#note-about-docker-usage).            |
-| `yarn playwright:docker:build`            | Builds the Docker image.                                                                   |
-| `yarn playwright:docker`                  | Runs the tests in a Docker container.                                                      |
-| `yarn playwright:docker:update-snapshots` | Updates the snapshots in a Docker container.                                               |
+| `task playwright`                         | Runs all the tests. See [note about docker usage](#note-about-docker-usage).               |
+| `task playwright:smoke-test`              | Runs a subset of the tests.<br>Useful for debugging.                                       |
+| `task playwright:show-report`             | Shows the most recent test report.<br>Can be used to view reports for test run via Docker. |
+| `task playwright:update-snapshots`        | Updates the snapshots. See [note about docker usage](#note-about-docker-usage).            |
+| `task playwright:docker:build`            | Builds the Docker image.                                                                   |
+| `task playwright:docker`                  | Runs the tests in a Docker container.                                                      |
+| `task playwright:docker:update-snapshots` | Updates the snapshots in a Docker container.                                               |
 
 You can also run a subset of the tests using tags, for example:
 
@@ -245,7 +267,7 @@ npx playwright test --grep @dataset-low
 
 #### Note about Docker usage
 
-To ensure consistency in the snapshots across different machines (local dev vs. CI), the Playwright tests are run in a Docker container. Running the tests locally is useful for creating and debugging, but all snapshots should be updated via the `playwright:docker:update-snapshots` command.
+To ensure consistency in the snapshots across different machines (local dev vs. CI), the Playwright tests are run in a Docker container. Running the tests locally is useful for creating and debugging, but all snapshots should be updated via the `task playwright:docker:update-snapshots` command.
 
 ## Contributing
 
