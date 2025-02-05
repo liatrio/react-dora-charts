@@ -2,7 +2,8 @@ FROM node:18.20.4-slim
 
 WORKDIR /app
 
-COPY package*.json ./
+COPY package.json yarn.lock .yarnrc.yml ./
+COPY .yarn .yarn
 RUN yarn install
 
 RUN npx playwright install --with-deps
