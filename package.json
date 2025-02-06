@@ -109,7 +109,7 @@
     "js-yaml": "^4.1.0",
     "react-tooltip": "^5.28.0",
     "recharts": "^2.12.7",
-    "uuid": "^10.0.0"
+    "uuid": "^11.0.0"
   },
   "optionalDependencies": {
     "@rollup/rollup-linux-x64-gnu": "4.34.3"
