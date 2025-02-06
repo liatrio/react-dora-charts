@@ -1,3 +1,9 @@
+## [1.1.10](https://github.com/liatrio/react-dora-charts/compare/v1.1.9...v1.1.10) (2025-02-06)
+
+### Bug Fixes
+
+* **deps:** update dependency uuid to v11 ([#71](https://github.com/liatrio/react-dora-charts/issues/71)) ([a0fbdbf](https://github.com/liatrio/react-dora-charts/commit/a0fbdbf2d377ba478b3d5cc69e4692f328d34f0e))
+
 ## [1.1.9](https://github.com/liatrio/react-dora-charts/compare/v1.1.8...v1.1.9) (2025-02-05)
 
 
