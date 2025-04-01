@@ -2,7 +2,7 @@ export default `{
   "records": [
     {
       "repository": "test-repo",
-      "team": "test-repo",
+      "service": "test-repo",
       "title": null,
       "user": null,
       "sha": "852684403e84a9da4c1deaa0c63bf36d245a2817",
@@ -19,7 +19,7 @@ export default `{
     },
     {
       "repository": "test-repo",
-      "team": "test-repo",
+      "service": "test-repo",
       "title": null,
       "user": null,
       "sha": "8a47a2436728c45f8e6ed2a03ae4dd596dd70719",
@@ -36,7 +36,7 @@ export default `{
     },
     {
       "repository": "test-repo",
-      "team": "test-repo",
+      "service": "test-repo",
       "title": "feat: set version v0.3.0",
       "user": "adrielp",
       "sha": "93c14a9afbddb28a6b233cb145dfe9f4adee0f06",
@@ -53,7 +53,7 @@ export default `{
     },
     {
       "repository": "test-repo",
-      "team": "test-repo",
+      "service": "test-repo",
       "title": "feat: set version v0.3.0",
       "user": "adrielp",
       "sha": "22857249f82750c547f411e9a1c3c5d3821495c9",
@@ -70,7 +70,7 @@ export default `{
     },
     {
       "repository": "test-repo",
-      "team": "test-repo",
+      "service": "test-repo",
       "title": "feat: set version v0.3.0",
       "user": "adrielp",
       "sha": "7d5237776fa1320962660d0cd18a22512bbddbf9",
@@ -87,7 +87,7 @@ export default `{
     },
     {
       "repository": "test-repo",
-      "team": "test-repo",
+      "service": "test-repo",
       "title": "feat: set version v0.3.0",
       "user": "adrielp",
       "sha": "3c9c274f31623c02868ad5399a8f7a94e00062ec",
@@ -104,7 +104,7 @@ export default `{
     },
     {
       "repository": "test-repo",
-      "team": "test-repo",
+      "service": "test-repo",
       "title": "feat: set version v0.3.0",
       "user": "adrielp",
       "sha": "1e0cf32c418c0805dadc75a8f8efd740c15bb03c",
@@ -121,7 +121,7 @@ export default `{
     },
     {
       "repository": "test-repo",
-      "team": "test-repo",
+      "service": "test-repo",
       "title": "feat: set version v0.3.0",
       "user": "adrielp",
       "sha": "9841232845f4f750e78cc7975111641949f7edb5",
@@ -138,7 +138,7 @@ export default `{
     },
     {
       "repository": "test-repo",
-      "team": "test-repo",
+      "service": "test-repo",
       "title": "feat: set version v0.3.0",
       "user": "adrielp",
       "sha": "75d62e5df7dfd412073e21998eecd55fc0b862d8",
@@ -155,7 +155,7 @@ export default `{
     },
     {
       "repository": "test-repo",
-      "team": "test-repo",
+      "service": "test-repo",
       "title": "feat: set version v0.3.0",
       "user": "adrielp",
       "sha": "39590bec5f4d25c6fb2e65d30af1166e291965a1",
@@ -172,7 +172,7 @@ export default `{
     },
     {
       "repository": "test-repo",
-      "team": "test-repo",
+      "service": "test-repo",
       "title": "feat: set version v0.3.0",
       "user": "adrielp",
       "sha": "c01af70072824a10c9ee254f09f71a0018d2cc88",
@@ -189,7 +189,7 @@ export default `{
     },
     {
       "repository": "test-repo",
-      "team": "test-repo",
+      "service": "test-repo",
       "title": "feat: set version v0.3.0",
       "user": "adrielp",
       "sha": "e156ef29212717cce09dbec777e5d9d3fe23e7d8",
@@ -206,7 +206,7 @@ export default `{
     },
     {
       "repository": "test-repo",
-      "team": "test-repo",
+      "service": "test-repo",
       "title": "feat: set version v0.3.0",
       "user": "adrielp",
       "sha": "6d40844e156eba7e9e0dcf17685a8d51371a4aa3",
@@ -223,7 +223,7 @@ export default `{
     },
     {
       "repository": "test-repo",
-      "team": "test-repo",
+      "service": "test-repo",
       "title": "feat: set version v0.3.0",
       "user": "adrielp",
       "sha": "72a9b112e8d0e532b946fbb9c3624f25e29ca7b4",
@@ -240,7 +240,7 @@ export default `{
     },
     {
       "repository": "test-repo",
-      "team": "test-repo",
+      "service": "test-repo",
       "title": "feat: set version v0.3.0",
       "user": "adrielp",
       "sha": "58044abaef83b7c9a09c05786818d51b40b05a1b",
@@ -257,7 +257,7 @@ export default `{
     },
     {
       "repository": "test-repo",
-      "team": "test-repo",
+      "service": "test-repo",
       "title": "feat: set version v0.3.0",
       "user": "adrielp",
       "sha": "736657c9a1e7d0bec09af322240d2af17bba8616",
@@ -274,7 +274,7 @@ export default `{
     },
     {
       "repository": "test-repo",
-      "team": "test-repo",
+      "service": "test-repo",
       "title": "feat: set version v0.3.0",
       "user": "adrielp",
       "sha": "b11b05caf2f1aa7ca4ef3f98943f6a558fb6147a",
@@ -291,7 +291,7 @@ export default `{
     },
     {
       "repository": "test-repo",
-      "team": "test-repo",
+      "service": "test-repo",
       "title": "feat: set version v0.3.0",
       "user": "adrielp",
       "sha": "3663b4d6ccdc7a5a0c9c3e35f28d6e25e2c63840",
@@ -308,7 +308,7 @@ export default `{
     },
     {
       "repository": "test-repo",
-      "team": "test-repo",
+      "service": "test-repo",
       "title": "feat: set version v0.3.0",
       "user": "adrielp",
       "sha": "5d450072889d87c3e9381618ff44489928bd00d9",
@@ -325,7 +325,7 @@ export default `{
     },
     {
       "repository": "test-repo",
-      "team": "test-repo",
+      "service": "test-repo",
       "title": "feat: set version v0.3.0",
       "user": "adrielp",
       "sha": "c0da624955ff62774c7e41c3b3f14cd9a748271c",
@@ -342,7 +342,7 @@ export default `{
     },
     {
       "repository": "test-repo",
-      "team": "test-repo",
+      "service": "test-repo",
       "title": "feat: set version v0.3.0",
       "user": "adrielp",
       "sha": "ffe5d5334f99076a985093f68f45a69b66a36ee4",
@@ -359,7 +359,7 @@ export default `{
     },
     {
       "repository": "test-repo",
-      "team": "test-repo",
+      "service": "test-repo",
       "title": "feat: set version v0.3.0",
       "user": "adrielp",
       "sha": "377afcc4769290833f70ef5797bf18d13c82f630",
@@ -376,7 +376,7 @@ export default `{
     },
     {
       "repository": "test-repo",
-      "team": "test-repo",
+      "service": "test-repo",
       "title": "feat: set version v0.3.0",
       "user": "adrielp",
       "sha": "cc723c3ec22940fe4ac787f6d9b03965a7e1bcae",
@@ -393,7 +393,7 @@ export default `{
     },
     {
       "repository": "test-repo",
-      "team": "test-repo",
+      "service": "test-repo",
       "title": "feat: set version v0.3.0",
       "user": "adrielp",
       "sha": "d4138352cc938d351ca8b6e6d05540e3c1069ef3",
@@ -410,7 +410,7 @@ export default `{
     },
     {
       "repository": "test-repo",
-      "team": "test-repo",
+      "service": "test-repo",
       "title": "feat: set version v0.3.0",
       "user": "adrielp",
       "sha": "7696d0466a50a08c63a251ff35c7e4e41ee5f8df",
@@ -427,7 +427,7 @@ export default `{
     },
     {
       "repository": "test-repo",
-      "team": "test-repo",
+      "service": "test-repo",
       "title": "feat: set version v0.3.0",
       "user": "adrielp",
       "sha": "77c4612f3012896377a248d063711ca9b63d1fff",
@@ -444,7 +444,7 @@ export default `{
     },
     {
       "repository": "test-repo",
-      "team": "test-repo",
+      "service": "test-repo",
       "title": "feat: set version v0.3.0",
       "user": "adrielp",
       "sha": "fb86dd3ecc12ccd46d42256815cc02986d31ab71",
@@ -461,7 +461,7 @@ export default `{
     },
     {
       "repository": "test-repo",
-      "team": "test-repo",
+      "service": "test-repo",
       "title": "feat: set version v0.3.0",
       "user": "adrielp",
       "sha": "16f2839cadaed8dce2417e68c9fa8310b17d4d01",
@@ -478,7 +478,7 @@ export default `{
     },
     {
       "repository": "test-repo",
-      "team": "test-repo",
+      "service": "test-repo",
       "title": "feat: set version v0.3.0",
       "user": "adrielp",
       "sha": "d37794d4396c31b7262dc95fd6d964c98092a349",
@@ -495,7 +495,7 @@ export default `{
     },
     {
       "repository": "test-repo",
-      "team": "test-repo",
+      "service": "test-repo",
       "title": "feat: set version v0.3.0",
       "user": "adrielp",
       "sha": "e781cd56f0b87c6a026aace127149b2f043ffc60",
@@ -512,7 +512,7 @@ export default `{
     },
     {
       "repository": "test-repo",
-      "team": "test-repo",
+      "service": "test-repo",
       "title": "feat: set version v0.3.0",
       "user": "adrielp",
       "sha": "e55ed1206e50b2e5102a8b2610f437303ed1278b",
@@ -529,7 +529,7 @@ export default `{
     },
     {
       "repository": "test-repo",
-      "team": "test-repo",
+      "service": "test-repo",
       "title": "feat: set version v0.3.0",
       "user": "adrielp",
       "sha": "6e46fb8f870f846a63d21f043b2038a499bda04d",
@@ -546,7 +546,7 @@ export default `{
     },
     {
       "repository": "test-repo",
-      "team": "test-repo",
+      "service": "test-repo",
       "title": "feat: set version v0.3.0",
       "user": "adrielp",
       "sha": "8caf215985daf96885bd41361bf1b4ef8e99f63e",
@@ -563,7 +563,7 @@ export default `{
     },
     {
       "repository": "test-repo",
-      "team": "test-repo",
+      "service": "test-repo",
       "title": "feat: set version v0.3.0",
       "user": "adrielp",
       "sha": "f5c318542f36cf63a1a7e0dc1fbceef9347eb07d",
@@ -580,7 +580,7 @@ export default `{
     },
     {
       "repository": "test-repo",
-      "team": "test-repo",
+      "service": "test-repo",
       "title": "feat: set version v0.3.0",
       "user": "adrielp",
       "sha": "13137dbb72b7c0a8f5099f292d1b511159f44582",
@@ -597,7 +597,7 @@ export default `{
     },
     {
       "repository": "test-repo",
-      "team": "test-repo",
+      "service": "test-repo",
       "title": "feat: set version v0.3.0",
       "user": "adrielp",
       "sha": "d11d3c9449d0d2640c6321edcb07c3a71281f3b6",
@@ -614,7 +614,7 @@ export default `{
     },
     {
       "repository": "test-repo",
-      "team": "test-repo",
+      "service": "test-repo",
       "title": "feat: set version v0.3.0",
       "user": "adrielp",
       "sha": "488497bbee968ef6127f8995d772cadae5d3ceb3",
@@ -631,7 +631,7 @@ export default `{
     },
     {
       "repository": "test-repo",
-      "team": "test-repo",
+      "service": "test-repo",
       "title": "feat: set version v0.3.0",
       "user": "adrielp",
       "sha": "887d2a802ea3080565a5fa7498ef612302be1af7",
@@ -648,7 +648,7 @@ export default `{
     },
     {
       "repository": "test-repo",
-      "team": "test-repo",
+      "service": "test-repo",
       "title": "feat: set version v0.3.0",
       "user": "adrielp",
       "sha": "21fc04e160811911551c7cf79202ba01c98cfa75",

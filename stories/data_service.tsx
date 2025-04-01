@@ -2,7 +2,7 @@ export default `{
   "records": [
     {
       "repository": "etls-falcon-user-profile",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-26T14:05:32Z",
       "user": "adrielp",
       "sha": "9ba25bab770a4ebf9da9e892eba5ae1501d2fba9",
@@ -19,7 +19,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-auth-service",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "4d37b5d70639efdc610a3e0368d2a030e6949ddc",
@@ -36,7 +36,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-auth-service",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "2aaeff58c9a16d8ad3a0cfab89c7308f3f6744ba",
@@ -53,7 +53,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-auth-service",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "4a8d38a1f7f47ab6890ebec10658c790de8268d1",
@@ -70,7 +70,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-auth-service",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "a35734bbb2f78565a84dfa50cb55b1cf49662bff",
@@ -87,7 +87,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-auth-service",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "ffa82d31562eefb33c351ff62ce435c8c0b0cd1d",
@@ -104,7 +104,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-auth-service",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "99e393a09c4c4b2e89d8e2c579cb9074c8718b31",
@@ -121,7 +121,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-auth-service",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "dcf96ef06d24b888915c12a9d1c6600ebc75a56d",
@@ -138,7 +138,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-auth-service",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "47d9a9a0af7531aefbd9b2e730d20138a2659864",
@@ -155,7 +155,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-auth-service",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "d521c4b7115a0d1710558178b8b4edc7b0e02441",
@@ -172,7 +172,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-auth-service",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "bec410b83f974d993d01d267b72a6f31319bcfa5",
@@ -189,7 +189,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-auth-service",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "6a2e37fb6292e8c8756d7894a853bbaf8f70d4fe",
@@ -206,7 +206,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-auth-service",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "7f8c69bd63223dd72b3e048e861e72a130dc565b",
@@ -223,7 +223,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-auth-service",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "41d00c5745d49da4cc5ee822b9cfd1f436e6eba2",
@@ -240,7 +240,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-auth-service",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "ea0ef50046f563a08ba18d3d297da95708ff1020",
@@ -257,7 +257,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-auth-service",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "b96b1cdbf129eec4c1d400b3e91d4b5bec635e16",
@@ -274,7 +274,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-auth-service",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "855f9d9888967215a34623f198edac13af348fd6",
@@ -291,7 +291,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-auth-service",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "8bfa34729d6910f983dbf12ee8837703e598f3ca",
@@ -308,7 +308,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-auth-service",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "72ec8b86b00dd553f1a5864d422335d58d842794",
@@ -325,7 +325,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-auth-service",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "3fa49f5b7a0649768f76fdd799ac380de08ce445",
@@ -342,7 +342,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-auth-service",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "982a6412b5ffcf57c41a1f5cee9a219eac57397d",
@@ -359,7 +359,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-auth-service",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "84f4c2e0be6c925350461c74fb87f21f0ec80d6d",
@@ -376,7 +376,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-auth-service",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "69763974c2443dde1a688c421b27ac73228cf7ae",
@@ -393,7 +393,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-auth-service",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "e000ff7743369c1f3acbfacd7b8ac6ba74434715",
@@ -410,7 +410,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-auth-service",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "04b722fcfaf3b4a8933d51a4e1dd46a8c95ad492",
@@ -427,7 +427,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-auth-service",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-16T17:26:32Z",
       "user": "adrielp",
       "sha": "1603cbbc23fe39412daf7c17dd11d9f7026b4473",
@@ -444,7 +444,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-auth-service",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "5c9035c62f2b0614e0fda7f6015dcda2ccd583c4",
@@ -461,7 +461,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-auth-service",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "768a35d88512ab7f28ae96a96f2e876e3d196f2a",
@@ -478,7 +478,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-auth-service",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "296edbf4304095b6e1695253a7b9388cc6840f91",
@@ -495,7 +495,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-auth-service",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-19T15:58:32Z",
       "user": "adrielp",
       "sha": "ca33bc6b926242dc3b98c98b81bafe8a5298e70a",
@@ -512,7 +512,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-auth-service",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "603a5a6501e07820f25510833a7772d92c322f9c",
@@ -529,7 +529,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-auth-service",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "4a7a259c94585e89bf26fcff26ceeb9fa07d82d3",
@@ -546,7 +546,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-auth-service",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "9610ca2140cdfa661c072772ea121d4550b98cdd",
@@ -563,7 +563,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-auth-service",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-19T17:03:32Z",
       "user": "adrielp",
       "sha": "8e80a56723cc64ee55971b21d6f60cd317c858d0",
@@ -580,7 +580,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-auth-service",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "9b158f408c9155b57e558e12617f3ac43d9c4058",
@@ -597,7 +597,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-auth-service",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "3619fbd2eb950ad615214fa0c5d8e5444b686ef0",
@@ -614,7 +614,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-auth-service",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-19T11:15:32Z",
       "user": "adrielp",
       "sha": "0379a63627f85063ec0430a64ef2f425692a11e6",
@@ -631,7 +631,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-auth-service",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-19T12:20:32Z",
       "user": "adrielp",
       "sha": "90f380365515c8fd32bd67a7d99cad3575606e3d",
@@ -648,7 +648,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-auth-service",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-17T17:38:32Z",
       "user": "adrielp",
       "sha": "44a3eff54d561c18ad7044e10229e13b47e82e4c",
@@ -665,7 +665,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-auth-service",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-29T17:30:32Z",
       "user": "adrielp",
       "sha": "0816424dd1e0b2efc2d5517c2a7a625ba117f432",
@@ -682,7 +682,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-auth-service",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-08-13T17:46:32Z",
       "user": "adrielp",
       "sha": "26b50f5766de7c54659926c09fd4a14bc9b9b9ea",
@@ -699,7 +699,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-auth-service",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-22T17:59:32Z",
       "user": "adrielp",
       "sha": "7879781c6260a2fe99703363d7ae7334371a01b9",
@@ -716,7 +716,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-customer-support",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-19T17:06:32Z",
       "user": "adrielp",
       "sha": "fe65ec02b890d15b614b89fb1d700f6395f3dae5",
@@ -733,7 +733,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-customer-support",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-25T17:27:32Z",
       "user": "adrielp",
       "sha": "4d2e6b11a1d1b5a47de2aa894743f9b8d9c8d38f",
@@ -750,7 +750,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-customer-support",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-30T17:27:32Z",
       "user": "adrielp",
       "sha": "f0ee646fa8d7b76591ab6e23fe90e12ddd0f97c0",
@@ -767,7 +767,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-customer-support",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-08-06T17:39:32Z",
       "user": "adrielp",
       "sha": "4efe68955d18c56076cde11370a12216d1d5c723",
@@ -784,7 +784,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-customer-support",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-08-12T17:14:32Z",
       "user": "adrielp",
       "sha": "9347a039e5d5054edc9e96dd73c249cde7cfc3ad",
@@ -801,7 +801,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-inventory-management",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "bf6c9aa7849112f6d313922949cb79af14eb3cfd",
@@ -818,7 +818,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-inventory-management",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-18T16:13:32Z",
       "user": "adrielp",
       "sha": "732e3847d385715dbae4d7226456e215582f194c",
@@ -835,7 +835,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-payment-gateway",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "658efce8eec91bcad991c31270477d3c3e6f74c3",
@@ -852,7 +852,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-payment-gateway",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-16T17:41:32Z",
       "user": "adrielp",
       "sha": "19da115120c880ec46ef4adb9910ac6e2e6f0b61",
@@ -869,7 +869,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-payment-gateway",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-17T17:57:32Z",
       "user": "adrielp",
       "sha": "18185a8d5669d1cc0f2a1b8840158c273ad42813",
@@ -886,7 +886,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-payment-gateway",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-18T17:31:32Z",
       "user": "adrielp",
       "sha": "faf1495b4a567a5eface062b5edf87bdb395d0f1",
@@ -903,7 +903,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-payment-gateway",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-19T17:45:32Z",
       "user": "adrielp",
       "sha": "4c0b83a049b164bda5eec057f731f77c83abcf2f",
@@ -920,7 +920,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-payment-gateway",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-22T17:53:32Z",
       "user": "adrielp",
       "sha": "7fc908ea1b70323aa32abc5045ec0f78db545d8e",
@@ -937,7 +937,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-payment-gateway",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-22T17:58:32Z",
       "user": "adrielp",
       "sha": "f774f13770a97355d58021d6900cc8029a49805e",
@@ -954,7 +954,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-payment-gateway",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-23T13:23:32Z",
       "user": "adrielp",
       "sha": "3081fcb5f22cc2cc005a93877bd802f2f2c8ef02",
@@ -971,7 +971,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-payment-gateway",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-24T11:17:32Z",
       "user": "adrielp",
       "sha": "c5fe96ebc24b087595c2ccbd84b43b8d637ba937",
@@ -988,7 +988,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-payment-gateway",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-24T17:22:32Z",
       "user": "adrielp",
       "sha": "d9f7cb382ee030b300883ef6c4593d268fc1ae94",
@@ -1005,7 +1005,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-payment-gateway",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-25T11:04:32Z",
       "user": "adrielp",
       "sha": "ff4388d2896ab1ef726f832291598809f53f89e3",
@@ -1022,7 +1022,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-payment-gateway",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-25T11:36:32Z",
       "user": "adrielp",
       "sha": "90e276e3d3246632827fec78f84c39fdb7a47f79",
@@ -1039,7 +1039,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-payment-gateway",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-26T14:30:32Z",
       "user": "adrielp",
       "sha": "df794dbb843e64453cc5e24aad76e58a9e82a5e2",
@@ -1056,7 +1056,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-payment-gateway",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-26T12:22:32Z",
       "user": "adrielp",
       "sha": "8e8c368f84edf0cc76b7cd3e2246edea19f1a6d0",
@@ -1073,7 +1073,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-payment-gateway",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-26T17:06:32Z",
       "user": "adrielp",
       "sha": "1d38339e12189736d728edfaff4457ad439b510c",
@@ -1090,7 +1090,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-payment-gateway",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-29T17:22:32Z",
       "user": "adrielp",
       "sha": "73159b0265c640f1258dfed97151fce6289dac92",
@@ -1107,7 +1107,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-payment-gateway",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-29T17:14:32Z",
       "user": "adrielp",
       "sha": "9f6694d4ec268e8e3019cbe0b155dfe5060b35af",
@@ -1124,7 +1124,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-payment-gateway",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-30T17:56:32Z",
       "user": "adrielp",
       "sha": "d707f30d52f7082cceb387c5fdd23e76a7848b7d",
@@ -1141,7 +1141,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-payment-gateway",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-31T17:50:32Z",
       "user": "adrielp",
       "sha": "7d018ed893e9b15c7ae458a45a3b611e1349f63e",
@@ -1158,7 +1158,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-payment-gateway",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-31T17:54:32Z",
       "user": "adrielp",
       "sha": "3c47ee3dd0095856d9172d8a09a76771f9d730e7",
@@ -1175,7 +1175,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-payment-gateway",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-08-01T16:55:32Z",
       "user": "adrielp",
       "sha": "b3a671a82293576c0c5e34ba4763ca6ca4bfe9a4",
@@ -1192,7 +1192,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-payment-gateway",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-08-01T17:23:32Z",
       "user": "adrielp",
       "sha": "a0d7f264e6a62e2cd910ad5fa4908c0612c1a205",
@@ -1209,7 +1209,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-payment-gateway",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-08-01T17:58:32Z",
       "user": "adrielp",
       "sha": "5b2371c1a5802b1b5d553f9f60705098c0751510",
@@ -1226,7 +1226,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-payment-gateway",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-08-02T17:30:32Z",
       "user": "adrielp",
       "sha": "d9a39a5dccaa44076112f7a8ca6b661636cda14e",
@@ -1243,7 +1243,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-payment-gateway",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-08-05T12:53:32Z",
       "user": "adrielp",
       "sha": "af5256bd641580c6409f88bf02c90e35b1b90832",
@@ -1260,7 +1260,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-payment-gateway",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-08-02T17:39:32Z",
       "user": "adrielp",
       "sha": "85ecb56554d1444d5c8d33f44979ea70089d2a4b",
@@ -1277,7 +1277,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-payment-gateway",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-08-05T17:15:32Z",
       "user": "adrielp",
       "sha": "26f0fd835c4df7967b934d4882347a3bb4c31b3e",
@@ -1294,7 +1294,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-payment-gateway",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-08-05T17:44:32Z",
       "user": "adrielp",
       "sha": "d82c1880eb1f36dc25b5889b5199942969742856",
@@ -1311,7 +1311,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-payment-gateway",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-08-06T17:11:32Z",
       "user": "adrielp",
       "sha": "4f001c96b0b186e9dfe3029b2e8021562de5f576",
@@ -1328,7 +1328,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-payment-gateway",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-08-06T17:57:32Z",
       "user": "adrielp",
       "sha": "033ecb61963ae6cd39d3db4a8cfa4121ab755068",
@@ -1345,7 +1345,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-payment-gateway",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-08-07T12:50:32Z",
       "user": "adrielp",
       "sha": "5da08eccda1015e1c4e94b96e2ee30ea361b4654",
@@ -1362,7 +1362,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-payment-gateway",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-08-08T17:18:32Z",
       "user": "adrielp",
       "sha": "d2aae9edb2f5e5fa7ce946b76af5aa363ba758a9",
@@ -1379,7 +1379,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-payment-gateway",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-08-08T17:45:32Z",
       "user": "adrielp",
       "sha": "4c124bca366ea98574960b3f742411812088f21c",
@@ -1396,7 +1396,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-payment-gateway",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-08-09T10:30:32Z",
       "user": "adrielp",
       "sha": "2baa25ce65d75b4c81552175ebff3427c41315b4",
@@ -1413,7 +1413,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-payment-gateway",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-08-09T17:56:32Z",
       "user": "adrielp",
       "sha": "81f9c2d6546eb4a584f8872ce05763f0d5fca933",
@@ -1430,7 +1430,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-payment-gateway",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-08-12T17:50:32Z",
       "user": "adrielp",
       "sha": "88fda155b257ded59457e26c63c0182d7ffa8cb9",
@@ -1447,7 +1447,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-payment-gateway",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-08-12T12:25:32Z",
       "user": "adrielp",
       "sha": "ad9580ce56e81d1e2af3eb2abfdbcdd964df2f39",
@@ -1464,7 +1464,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-payment-gateway",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-08-12T17:37:32Z",
       "user": "adrielp",
       "sha": "9f393c7135917238080fc107be05d4737976ec10",
@@ -1481,7 +1481,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-payment-gateway",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-08-12T17:52:32Z",
       "user": "adrielp",
       "sha": "3b9cf19a5edd88fb884bd1f9f4ce0d3a04498264",
@@ -1498,7 +1498,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-payment-gateway",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-08-13T17:46:32Z",
       "user": "adrielp",
       "sha": "26b50f5766de7c54659926c09fd4a14bc9b9b9ea",
@@ -1515,7 +1515,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-payment-gateway",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-08-13T12:55:32Z",
       "user": "adrielp",
       "sha": "c16ea254cbb45c8fb8fb05ea1f8374ecb5d1bc17",
@@ -1532,7 +1532,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-analytics-dashboard",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "1a037a464d5922b71900d965c1440a2c64417e90",
@@ -1549,7 +1549,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-order-processing",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "86fe03f59edb6c6c3c36601770a824318e78e44e",
@@ -1566,7 +1566,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-order-processing",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "37c410fa19364a1fe20c8f965cd83bca38aa4217",
@@ -1583,7 +1583,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-order-processing",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "9e1ab641fc1bf155256b5edff9cfb29698764187",
@@ -1600,7 +1600,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-order-processing",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "80677d84ac3354c544ea720fe8afbd3fbd12dce9",
@@ -1617,7 +1617,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-order-processing",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "289b19a1d38f128dbefafee0ba3f1bc88ac1d1c9",
@@ -1634,7 +1634,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-order-processing",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-17T17:58:32Z",
       "user": "adrielp",
       "sha": "e61bda33e37ca52d4fcb2703cb082f9a570235a0",
@@ -1651,7 +1651,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-order-processing",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "7e94ea869e525b60a8f6838e6d8887d5362adf90",
@@ -1668,7 +1668,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-order-processing",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "bcf5a08fc970fa6b5d22c6f38250dcf7e91dc572",
@@ -1685,7 +1685,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-order-processing",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-17T17:44:32Z",
       "user": "adrielp",
       "sha": "b47811fff2b431225ff8d74e51286f2b11c10778",
@@ -1702,7 +1702,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-order-processing",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "05a32c667603e0d56ad3fa8be343bcf80bc0efa3",
@@ -1719,7 +1719,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-order-processing",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-18T17:48:32Z",
       "user": "adrielp",
       "sha": "6b58046732a775effcf9c0803aebcf716766828d",
@@ -1736,7 +1736,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-order-processing",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-19T17:34:32Z",
       "user": "adrielp",
       "sha": "113e013278d32356bfae632eaf41577a1788a3e7",
@@ -1753,7 +1753,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-order-processing",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-19T17:57:32Z",
       "user": "adrielp",
       "sha": "c2fd011d7f92428b9fee7873d40d6d565d1e22f0",
@@ -1770,7 +1770,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-order-processing",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-19T12:45:32Z",
       "user": "adrielp",
       "sha": "e8e92539a2c905f9b02441303e34b49b5180b4d6",
@@ -1787,7 +1787,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-order-processing",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-19T09:13:32Z",
       "user": "adrielp",
       "sha": "4ba48a2cc1c0739dde467ecbcdf096caddec0686",
@@ -1804,7 +1804,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-order-processing",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-19T17:37:32Z",
       "user": "adrielp",
       "sha": "7539c1266436361e8dbcd6b3a00a25d38ba208c5",
@@ -1821,7 +1821,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-order-processing",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-19T13:11:32Z",
       "user": "adrielp",
       "sha": "768656e46b27ddc189f6ea092f69e67fa69d9511",
@@ -1838,7 +1838,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-order-processing",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-23T17:37:32Z",
       "user": "adrielp",
       "sha": "22c03e71bbeea626a5ed65e5f8e57cb1a33d4527",
@@ -1855,7 +1855,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-order-processing",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-26T17:10:32Z",
       "user": "adrielp",
       "sha": "d7ec408bce861fdc1a434f8e10d3d062e95adcaa",
@@ -1872,7 +1872,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-order-processing",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-26T17:14:32Z",
       "user": "adrielp",
       "sha": "8a31340e169f615498d0ba3009d5c468ea7580e7",
@@ -1889,7 +1889,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-order-processing",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-25T11:22:32Z",
       "user": "adrielp",
       "sha": "57eaafe61b31170331f6c26a6a3dbf827480ce89",
@@ -1906,7 +1906,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-order-processing",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-29T17:22:32Z",
       "user": "adrielp",
       "sha": "881c88605419db88775359ece785673255a5a3d3",
@@ -1923,7 +1923,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-order-processing",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-29T17:48:32Z",
       "user": "adrielp",
       "sha": "765768356c0e71c4bfd6c723c66b02e38407f761",
@@ -1940,7 +1940,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-order-processing",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-30T17:49:32Z",
       "user": "adrielp",
       "sha": "9e42a6b8099f35883baafd00fa30f4a5c0ebba06",
@@ -1957,7 +1957,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-order-processing",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-29T17:43:32Z",
       "user": "adrielp",
       "sha": "1371acf5f224eaa38b6a7ae938703bc2487274f9",
@@ -1974,7 +1974,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-order-processing",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-31T11:50:32Z",
       "user": "adrielp",
       "sha": "38a86f4849bdef7e79f8726a708a08e291e1bcdb",
@@ -1991,7 +1991,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-order-processing",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-30T11:11:32Z",
       "user": "adrielp",
       "sha": "56b1a0bca6516c79e574d8ccb581440cbfdfc455",
@@ -2008,7 +2008,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-order-processing",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-08-02T17:12:32Z",
       "user": "adrielp",
       "sha": "06344cbf5b05a29d10b2f0eff2fd2504cfa82964",
@@ -2025,7 +2025,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-order-processing",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-08-05T13:20:32Z",
       "user": "adrielp",
       "sha": "6ffde368207324cdbacf7e702135ceb507516df2",
@@ -2042,7 +2042,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-order-processing",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-31T17:05:32Z",
       "user": "adrielp",
       "sha": "36695f326f0249e066b63637c1866ab2516963a1",
@@ -2059,7 +2059,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-order-processing",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-08-02T17:08:32Z",
       "user": "adrielp",
       "sha": "e989f2fff9ce07dc807a74fdb6ccb49de24e7120",
@@ -2076,7 +2076,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-order-processing",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-08-06T13:42:32Z",
       "user": "adrielp",
       "sha": "b484620c01248b92acc946e001b17194dcd5f294",
@@ -2093,7 +2093,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-order-processing",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-08-05T17:35:32Z",
       "user": "adrielp",
       "sha": "3dfe0edfcad47474d14852c19522b92c740cc6fc",
@@ -2110,7 +2110,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-order-processing",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-08-06T10:59:32Z",
       "user": "adrielp",
       "sha": "c958404a87362b0265830ca207c82525f2dba976",
@@ -2127,7 +2127,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-order-processing",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-08-07T11:29:32Z",
       "user": "adrielp",
       "sha": "d334c029b62c9094b2f217e68233ee54deba7321",
@@ -2144,7 +2144,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-order-processing",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-08-09T15:01:32Z",
       "user": "adrielp",
       "sha": "06ab5e928d71581fb26cd16e0c358d8fe78fefbf",
@@ -2161,7 +2161,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-order-processing",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-08-09T13:20:32Z",
       "user": "adrielp",
       "sha": "066b67322feceab4424dfeda8a5555577f71f1d5",
@@ -2178,7 +2178,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-order-processing",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-08-12T17:50:32Z",
       "user": "adrielp",
       "sha": "88fda155b257ded59457e26c63c0182d7ffa8cb9",
@@ -2195,7 +2195,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-order-processing",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-08-09T14:23:32Z",
       "user": "adrielp",
       "sha": "f9537ccd50d1ae3971c3792150cc33abc54a3876",
@@ -2212,7 +2212,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-order-processing",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-08-09T13:41:32Z",
       "user": "adrielp",
       "sha": "5b9601364217f2e3936982d09b97fdee5da64bb3",
@@ -2229,7 +2229,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-order-processing",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-08-08T17:56:32Z",
       "user": "adrielp",
       "sha": "ceeab213bde632e672f92551b869991429c70c38",
@@ -2246,7 +2246,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-admin-portal",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "a7109253511d64dbb96220dfb1a3b3a5bba04a4e",
@@ -2263,7 +2263,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-admin-portal",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-24T10:08:32Z",
       "user": "adrielp",
       "sha": "8a92e44fde08fbe28aae31fb01e00dacfa9dc682",
@@ -2280,7 +2280,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-shipping-service",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "2a47f388e1226029af1431cf695172a03caa11d9",
@@ -2297,7 +2297,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-shipping-service",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "37157f08caf2877b546d714352c404b31b6aef88",
@@ -2314,7 +2314,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-shipping-service",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "28a3810e5eccf5356183bf2ee1bcc00b826f6e99",
@@ -2331,7 +2331,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-shipping-service",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "70d980474bd950e17e293a95ea43caed32c803ce",
@@ -2348,7 +2348,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-shipping-service",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "bf6a71a8954667116f87ff80579fa304749daf95",
@@ -2365,7 +2365,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-shipping-service",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": null,
       "user": null,
       "sha": "d6a650a6abbbc90da3efa5d1965315c016d41783",
@@ -2382,7 +2382,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-shipping-service",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-16T17:41:32Z",
       "user": "adrielp",
       "sha": "90fbe882e7ad0a01a7a595471d3bb07235681faa",
@@ -2399,7 +2399,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-notifications",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-07-23T17:36:32Z",
       "user": "adrielp",
       "sha": "d1bcab74983386abedb6ae64df6a57b641753b0e",
@@ -2416,7 +2416,7 @@ export default `{
     },
     {
       "repository": "etls-falcon-notifications",
-      "team": "ETLSFalconOps",
+      "service": "ETLSFalconOps",
       "title": "Pull Request for deployment at 2024-08-13T17:21:32Z",
       "user": "adrielp",
       "sha": "eb45063f9664ac7544ce9fd175c721dee9e10d09",
