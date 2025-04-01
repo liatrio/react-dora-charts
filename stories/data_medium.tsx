@@ -2,7 +2,7 @@ export default `{
   "records": [
     {
       "repository": "test-repo",
-      "team": "test-repo",
+      "service": "test-repo",
       "title": null,
       "user": null,
       "sha": "51889fe46be67cf855f1a8c41cce22134c73d045",
@@ -19,7 +19,7 @@ export default `{
     },
     {
       "repository": "test-repo",
-      "team": "test-repo",
+      "service": "test-repo",
       "title": "feat: set version v0.3.0",
       "user": "adrielp",
       "sha": "d5b27a4107eff916aefa7f5f41cac5ddfa485174",
