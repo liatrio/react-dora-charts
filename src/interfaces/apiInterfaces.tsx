@@ -1,6 +1,6 @@
 export interface DoraRecord {
   repository: string;
-  team: string;
+  service: string;
   title?: string;
   user?: string;
   sha: string;

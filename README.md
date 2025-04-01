@@ -95,7 +95,7 @@ This function takes a (`FetchProps`) object with the following properties.
 | ------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `api`                           | true     | This is the url to the API for gathering data.                                                                                                                                                                     |
 | `getAuthHeaderValue`            | false    | This is a function that should provide the value of the `Authorization` HTTP Header for the `api`.<br>If not specified, no auth will be used.                                                                      |
-| `team`                          | false    | The name of the team to show pull data for.                                                                                                                                                                        |
+| `service`                         | false    | The name of the service to show pull data for.                                                                                                                                                                        |
 | `repositories`                  | false    | A list of repository names to pull data for.                                                                                                                                                                       |
 | `daysToPull`                    | false    | The number of days in the past from the current date to pull data for<br>If not specified, 365 is the default.                                                                                                     |
 | `includeWeekendsInCalculations` | false    | When calculating the averages for each metric in the `Board` component, this setting allows you to include/exclude weekends in those calculations.<br>This is useful when you don't have teams that work weekends. |
@@ -184,7 +184,7 @@ The data schema for each chart is as follows:
 {
     records: [{
       repository: string
-      team: string
+      service: string
       title?: string
       user?: string
       sha: string
