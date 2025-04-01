@@ -2,7 +2,7 @@ export default `{
   "records": [
     {
       "repository": "test-repo",
-      "team": "test-repo",
+      "service": "test-repo",
       "title": null,
       "user": null,
       "sha": "c56729247e0f02abc864bced5a221e2a9c49804a",

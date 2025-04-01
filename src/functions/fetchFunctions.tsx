@@ -19,16 +19,16 @@ export const filterFetchedData = (
       props.repositories === undefined ||
       props.repositories.length === 0 ||
       props.repositories.includes(record.repository);
-    const teamMatch = !props.team || record.team === props.team;
+    const serviceMatch = !props.service || record.service === props.service;
 
-    return repositoryMatch && teamMatch;
+    return repositoryMatch && serviceMatch;
   });
 };
 
 export interface FetchProps {
   api?: string;
   getAuthHeaderValue?: () => Promise<string | undefined>;
-  team?: string;
+  service?: string;
   repositories?: string[];
   daysToPull?: number;
   includeWeekendsInCalculations?: boolean;
@@ -59,7 +59,7 @@ export const fetchData = async (
 
   const body = {
     repositories: props.repositories,
-    team: props.team,
+    service: props.service,
     start: start,
     end: end,
   };
