@@ -1,3 +1,13 @@
+## [2.0.0](https://github.com/liatrio/react-dora-charts/compare/v1.1.10...v2.0.0) (2025-04-01)
+
+### ⚠ BREAKING CHANGES
+
+* The component-based API has been replaced with a service-based approach.
+
+### Features
+
+* API to use service instead of component ([#73](https://github.com/liatrio/react-dora-charts/issues/73)) ([638e49a](https://github.com/liatrio/react-dora-charts/commit/638e49a873aa55853cfb1e71f466c8c4e5f2f4a0))
+
 ## [1.1.10](https://github.com/liatrio/react-dora-charts/compare/v1.1.9...v1.1.10) (2025-02-06)
 
 ### Bug Fixes
