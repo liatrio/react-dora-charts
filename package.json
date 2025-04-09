@@ -1,6 +1,6 @@
 {
   "name": "@liatrio/react-dora-charts",
-  "version": "0.0.0",
+  "version": "0.0.18",
   "description": "DORA Metric Charts for React",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
