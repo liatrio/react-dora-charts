@@ -38,8 +38,8 @@ interface ProcessService {
   successful: number;
   failed: number;
   total: number;
-  failureDeployments: Array<{ url: string; repo: string; sha?: string }>;
-  successDeployments: Array<{ url: string; repo: string; sha?: string }>;
+  failureDeployments: Array<{ url: string; repo: string; sha?: string; issueUrl?: string }>;
+  successDeployments: Array<{ url: string; repo: string; sha?: string; }>;
 }
 
 // Helper function to copy SHA to clipboard
@@ -149,25 +149,22 @@ const renderTooltip = (payload: ProcessService) => {
                 <li key={index} style={{ margin: '4px 0', display: 'flex', alignItems: 'center', flexWrap: 'nowrap', paddingLeft: '4px' }}>
                   <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
                     {/* Repository column - fixed width with ellipsis */}
-                    <div style={{ minWidth: '120px', maxWidth: '200px', overflow: 'hidden', textOverflow: 'ellipsis', paddingRight: '12px', flexGrow: 1 }}>
+                    <div style={{ minWidth: '120px', maxWidth: '200px', overflow: 'hidden', textOverflow: 'ellipsis', paddingRight: '12px', flexGrow: 0 }}>
                       <span title={deployment.repo}>{deployment.repo}</span>
                     </div>
                     
-
-                    {/* SHA column - fixed width */}
-                    <div style={{ width: '60px', flexShrink: 0, textAlign: 'left', paddingLeft: '4px', paddingRight: '4px' }}>
-                      <a
-                        className={styles.toolTipLink}
-                        href={deployment.url}
-                        target="_blank"
-                      >
-                        {shortSha || 'Issue'}
-                      </a>
-                    </div>
-                    
-                    {/* Copy button column - fixed width */}
-                    <div style={{ width: '30px', flexShrink: 0, textAlign: 'center' }}>
-                      {shortSha && (
+                    {/* SHA column - with deployment link */}
+                    {deployment.sha && (
+                      <div style={{ width: '60px', flexShrink: 0, textAlign: 'left', paddingLeft: '4px', paddingRight: '4px' }}>
+                        <a
+                          className={styles.toolTipLink}
+                          href={deployment.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          title="View deployment"
+                        >
+                          {shortSha}
+                        </a>
                         <span 
                           onClick={() => copyToClipboard(fullSha)}
                           style={{ 
@@ -180,8 +177,32 @@ const renderTooltip = (payload: ProcessService) => {
                         >
                           ⎘
                         </span>
-                      )}
-                    </div>
+                      </div>
+                    )}
+                    
+                    {/* Link to issue if available */}
+                    {deployment.issueUrl && (
+                      <div style={{ width: '50px', flexShrink: 0, textAlign: 'center', paddingLeft: '16px', paddingRight: '8px' }}>
+                        <a
+                          href={deployment.issueUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          title="View issue"
+                          style={{
+                            color: '#e74c3c',
+                            textDecoration: 'none',
+                            border: '1px solid #e74c3c',
+                            borderRadius: '3px',
+                            padding: '1px 4px',
+                            fontSize: '0.8em',
+                            fontWeight: 'bold'
+                          }}
+                        >
+                          Issue
+                        </a>
+                      </div>
+                    )}
+                    
                   </div>
                 </li>
               );
@@ -190,6 +211,7 @@ const renderTooltip = (payload: ProcessService) => {
           </ul>
         </>
       )}
+
     </div>
   );
 
@@ -235,7 +257,7 @@ export const composeGraphData = (_: ChartProps, data: DoraRecord[]) => {
         failed: 0,
         total: 0,
         failureDeployments: [],
-        successDeployments: [],
+        successDeployments: []
       };
 
       if (record.status && !record.failed_at) {
@@ -245,13 +267,16 @@ export const composeGraphData = (_: ChartProps, data: DoraRecord[]) => {
           repo: repoName,
           sha: record.sha
         });
+
       } else {
         service.failed = 1;
         service.failureDeployments.push({
           url: record.issue_url ?? record.deploy_url,
           repo: repoName,
-          sha: record.sha
+          sha: record.sha,
+          issueUrl: record.issue_url
         });
+
       }
 
       entry.services.set(serviceName, service);
@@ -268,7 +293,8 @@ export const composeGraphData = (_: ChartProps, data: DoraRecord[]) => {
         service.failureDeployments.push({
           url: record.issue_url ?? record.deploy_url,
           repo: repoName,
-          sha: record.sha
+          sha: record.sha,
+          issueUrl: record.issue_url
         });
       }
     }
