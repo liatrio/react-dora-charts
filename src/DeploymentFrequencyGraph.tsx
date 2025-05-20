@@ -138,30 +138,39 @@ const renderTooltip = (payload: ProcessData, service: string) => {
           
           return (
             <li key={index} style={{ margin: '4px 0', display: 'flex', alignItems: 'center', flexWrap: 'nowrap', paddingLeft: '4px' }}>
-              <span style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>{deployment.repo}</span>
-              <span style={{ flexShrink: 0 }}>,</span>
-              <a
-                className={styles.toolTipLink}
-                href={deployment.url}
-                target="_blank"
-                style={{ marginRight: '4px', flexShrink: 0 }}
-              >
-                {shortSha}
-              </a>
-              <span 
-                onClick={() => copyToClipboard(fullSha)}
-                style={{ 
-                  cursor: 'pointer', 
-                  marginLeft: '3px',
-                  fontSize: '1.2em',
-                  color: '#333',
-                  flexShrink: 0,
-                  fontWeight: 'bold'
-                }}
-                title="Copy full SHA"
-              >
-                ⎘
-              </span>
+              <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+                {/* Repository column - fixed width with ellipsis */}
+                <div style={{ minWidth: '120px', maxWidth: '200px', overflow: 'hidden', textOverflow: 'ellipsis', paddingRight: '12px', flexGrow: 1 }}>
+                  <span title={deployment.repo}>{deployment.repo}</span>
+                </div>
+                
+                {/* SHA column - fixed width */}
+                <div style={{ width: '60px', flexShrink: 0, textAlign: 'left', paddingLeft: '4px', paddingRight: '4px' }}>
+                  <a
+                    className={styles.toolTipLink}
+                    href={deployment.url}
+                    target="_blank"
+                  >
+                    {shortSha}
+                  </a>
+                </div>
+                
+                {/* Copy button column - fixed width */}
+                <div style={{ width: '30px', flexShrink: 0, textAlign: 'center' }}>
+                  <span 
+                    onClick={() => copyToClipboard(fullSha)}
+                    style={{ 
+                      cursor: 'pointer', 
+                      fontSize: '1.2em',
+                      color: '#333',
+                      fontWeight: 'bold'
+                    }}
+                    title="Copy full SHA"
+                  >
+                    ⎘
+                  </span>
+                </div>
+              </div>
             </li>
           );
         })}
