@@ -33,6 +33,8 @@ export interface FetchProps {
   daysToPull?: number;
   includeWeekendsInCalculations?: boolean;
   holidays?: Date[];
+  start?: Date;
+  end?: Date;
 }
 
 export const processData = (json: string, props: FetchProps) => {
@@ -52,10 +54,11 @@ export const fetchData = async (
     return;
   }
 
-  const start = props.daysToPull
+  // Use passed dates if available, otherwise use calculated values
+  const start = props.start || (props.daysToPull
     ? getDateDaysInPastUtc(props.daysToPull)
-    : getDateDaysInPastUtc(defaultDaysToPull);
-  const end = getDateDaysInPastUtc(1);
+    : getDateDaysInPastUtc(defaultDaysToPull));
+  const end = props.end || getDateDaysInPastUtc(1);
 
   const body = {
     repositories: props.repositories,

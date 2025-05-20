@@ -28,14 +28,14 @@ import { v4 as uuidv4 } from 'uuid';
 import styles from './chart.module.css';
 import { stripTimeUTC } from './functions/dateFunctions';
 
-interface ProcessRepository {
+interface ProcessService {
   count: number;
-  urls: string[];
+  deployments: Array<{ url: string; repo: string; sha: string }>;
 }
 
 interface ProcessData {
   date: number;
-  repositories: Map<string, ProcessRepository>;
+  services: Map<string, ProcessService>;
 }
 
 export const composeGraphData = (_: ChartProps, data: DoraRecord[]): any[] => {
@@ -53,24 +53,34 @@ export const composeGraphData = (_: ChartProps, data: DoraRecord[]): any[] => {
       if (!entry) {
         entry = {
           date: date,
-          repositories: new Map<string, ProcessRepository>(),
+          services: new Map<string, ProcessService>(),
         };
 
         acc.set(date, entry);
       }
 
-      let repo = entry.repositories.get(record.repository);
+      // Prefer service over repository for v2 API
+      const serviceName = record.service || record.repository;
+      let service = entry.services.get(serviceName);
 
-      if (!repo) {
-        repo = {
+      if (!service) {
+        service = {
           count: 1,
-          urls: [record.deploy_url],
+          deployments: [{ 
+            url: record.deploy_url, 
+            repo: record.repository,
+            sha: record.sha
+          }],
         };
 
-        entry.repositories.set(record.repository, repo);
+        entry.services.set(serviceName, service);
       } else {
-        repo.count++;
-        repo.urls.push(record.deploy_url);
+        service.count++;
+        service.deployments.push({ 
+          url: record.deploy_url, 
+          repo: record.repository,
+          sha: record.sha
+        });
       }
 
       return acc;
@@ -87,35 +97,77 @@ export const composeGraphData = (_: ChartProps, data: DoraRecord[]): any[] => {
   return result;
 };
 
-const renderTooltip = (payload: ProcessData, repository: string) => {
-  const repositoryData = payload.repositories.get(repository);
+const renderTooltip = (payload: ProcessData, service: string) => {
+  const serviceData = payload.services.get(service);
 
-  if (!repositoryData) {
+  if (!serviceData) {
     return;
   }
 
-  const urls = repositoryData.urls.slice(0, 5);
-  const dots = repositoryData.urls.length > 5 ? '...' : '';
+  // Limit to the first 5 deployments to avoid cluttering the tooltip
+  const deployments = serviceData.deployments.slice(0, 5);
+  const dots = serviceData.deployments.length > 5 ? '...' : '';
+  
+  // Function to copy SHA to clipboard
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard.writeText(text).catch(err => {
+      console.error('Could not copy text: ', err);
+    });
+  };
 
   const body = (
-    <>
-      <p>
-        {repository}:
-        {urls.map((url: string, index: number) => {
+    <div style={{ minWidth: '300px', maxWidth: '450px' }}>
+      <p style={{ fontWeight: 'bold', marginBottom: '4px' }}>{service}:</p>
+      
+      {/* Legend row */}
+      <div style={{ 
+        display: 'flex', 
+        fontSize: '0.8em', 
+        color: '#888', 
+        margin: '0 0 4px 0',
+        paddingLeft: '16px'
+      }}>
+        <span style={{ fontStyle: 'italic' }}>[Repository, Deployment SHA]</span>
+      </div>
+      
+      <ul style={{ margin: '0', paddingLeft: '16px', whiteSpace: 'nowrap', listStyleType: 'disc' }}>
+        {deployments.map((deployment, index) => {
+          // Get abbreviated SHA (first 6 chars)
+          const shortSha = deployment.sha?.substring(0, 6) || '';
+          const fullSha = deployment.sha || '';
+          
           return (
-            <a
-              key={uuidv4()}
-              className={styles.toolTipLink}
-              href={url}
-              target="_blank"
-            >
-              {index + 1}
-            </a>
+            <li key={index} style={{ margin: '4px 0', display: 'flex', alignItems: 'center', flexWrap: 'nowrap', paddingLeft: '4px' }}>
+              <span style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>{deployment.repo}</span>
+              <span style={{ flexShrink: 0 }}>,</span>
+              <a
+                className={styles.toolTipLink}
+                href={deployment.url}
+                target="_blank"
+                style={{ marginRight: '4px', flexShrink: 0 }}
+              >
+                {shortSha}
+              </a>
+              <span 
+                onClick={() => copyToClipboard(fullSha)}
+                style={{ 
+                  cursor: 'pointer', 
+                  marginLeft: '3px',
+                  fontSize: '1.2em',
+                  color: '#333',
+                  flexShrink: 0,
+                  fontWeight: 'bold'
+                }}
+                title="Copy full SHA"
+              >
+                ⎘
+              </span>
+            </li>
           );
         })}
-        {dots}
-      </p>
-    </>
+        {dots && <li>...</li>}
+      </ul>
+    </div>
   );
 
   const date = new Date(payload.date).toISOString().split('T')[0];
@@ -124,14 +176,14 @@ const renderTooltip = (payload: ProcessData, repository: string) => {
   return <TooltipContent body={body} title={title} />;
 };
 
-const dataKeyFunc = (obj: ProcessData, repository: string): any => {
-  const repositoryData = obj.repositories.get(repository);
+const dataKeyFunc = (obj: ProcessData, service: string): any => {
+  const serviceData = obj.services.get(service);
 
-  if (!repositoryData) {
+  if (!serviceData) {
     return 0;
   }
 
-  return repositoryData.count;
+  return serviceData.count;
 };
 
 const DeploymentFrequencyGraph: React.FC<ChartProps> = (props: ChartProps) => {
@@ -225,12 +277,12 @@ const DeploymentFrequencyGraph: React.FC<ChartProps> = (props: ChartProps) => {
             allowDecimals={false}
             domain={chartProperties.yDomain}
           />
-          {repositories.map((repository, idx) => {
+          {repositories.map((service, idx) => {
             return (
               <Bar
                 animationDuration={0}
-                key={repository}
-                dataKey={(obj: ProcessData) => dataKeyFunc(obj, repository)}
+                key={service}
+                dataKey={(obj: ProcessData) => dataKeyFunc(obj, service)}
                 stackId="a"
                 fill={colors[idx]}
                 barSize={chartProperties.maxBarWidth}
@@ -240,7 +292,7 @@ const DeploymentFrequencyGraph: React.FC<ChartProps> = (props: ChartProps) => {
                     tooltipId="dfTooltip"
                     tooltipRef={tooltipRef}
                     tooltipContentBuilder={() =>
-                      renderTooltip(props.payload, repository)
+                      renderTooltip(props.payload, service)
                     }
                   />
                 )}
