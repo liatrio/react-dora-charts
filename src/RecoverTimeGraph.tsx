@@ -33,7 +33,8 @@ import { stripTimeUTC } from './functions/dateFunctions';
 
 // Helper function to copy SHA to clipboard
 const copyToClipboard = (text: string) => {
-  navigator.clipboard.writeText(text)
+  navigator.clipboard
+    .writeText(text)
     .then(() => {
       console.log('SHA copied to clipboard');
     })
@@ -49,13 +50,13 @@ interface ProcessService {
   avgLabel: string;
   graphAvgTime: number;
   // Store repository information for detailed tooltips
-  repositoryTimes: Array<{ 
-    repo: string; 
-    time: number; 
-    url?: string; 
+  repositoryTimes: Array<{
+    repo: string;
+    time: number;
+    url?: string;
     sha?: string;
     issueUrl?: string;
-  }>
+  }>;
 }
 
 interface ProcessData {
@@ -88,7 +89,7 @@ export const composeGraphData = (props: ChartProps, data: DoraRecord[]) => {
       const serviceName = record.service || record.repository;
       const repoName = record.repository;
       let service = entry.services.get(serviceName);
-      
+
       const recoverTime = calculateRecoverTime(record);
 
       if (!service) {
@@ -98,15 +99,17 @@ export const composeGraphData = (props: ChartProps, data: DoraRecord[]) => {
           avgTime: recoverTime,
           avgLabel: ' hrs',
           graphAvgTime: 0,
-          repositoryTimes: [{
-            repo: repoName,
-            time: recoverTime,
-            url: record.deploy_url,
-            sha: record.sha,
-            issueUrl: record.issue_url
-          }]
+          repositoryTimes: [
+            {
+              repo: repoName,
+              time: recoverTime,
+              url: record.deploy_url,
+              sha: record.sha,
+              issueUrl: record.issue_url,
+            },
+          ],
         };
-        
+
         entry.services.set(serviceName, service);
       } else {
         service.count++;
@@ -117,7 +120,7 @@ export const composeGraphData = (props: ChartProps, data: DoraRecord[]) => {
           time: recoverTime,
           url: record.deploy_url,
           sha: record.sha,
-          issueUrl: record.issue_url
+          issueUrl: record.issue_url,
         });
       }
 
@@ -141,51 +144,86 @@ const renderTooltip = (payload: ProcessData, service: string) => {
   if (!serviceData) {
     return null;
   }
-  
+
   // Get repository details for better tooltip context
   const repoTimes = serviceData.repositoryTimes || [];
 
   const body = (
     <div style={{ minWidth: '300px', maxWidth: 'none' }}>
       <p style={{ fontWeight: 'bold', marginBottom: '4px' }}>
-        {service}: {serviceData.avgTime.toFixed(2)}{' '}
-        {serviceData.avgLabel}
+        {service}: {serviceData.avgTime.toFixed(2)} {serviceData.avgLabel}
       </p>
-      
+
       {repoTimes.length > 0 && (
         <>
           {/* Legend row */}
-          <div style={{ 
-            display: 'flex', 
-            fontSize: '0.8em', 
-            color: '#888', 
-            margin: '0 0 4px 0',
-            paddingLeft: '16px'
-          }}>
-            <span style={{ fontStyle: 'italic' }}>Recovery times by repository</span>
+          <div
+            style={{
+              display: 'flex',
+              fontSize: '0.8em',
+              color: '#888',
+              margin: '0 0 4px 0',
+              paddingLeft: '16px',
+            }}
+          >
+            <span style={{ fontStyle: 'italic' }}>
+              Recovery times by repository
+            </span>
           </div>
-          
-          <ul style={{ margin: '0', paddingLeft: '16px', whiteSpace: 'nowrap', listStyleType: 'disc' }}>
+
+          <ul
+            style={{
+              margin: '0',
+              paddingLeft: '16px',
+              whiteSpace: 'nowrap',
+              listStyleType: 'disc',
+            }}
+          >
             {repoTimes.map((repo, index) => {
               // Always convert time to minutes to match the label
               let timeValue = repo.time * 60; // Convert hours to minutes
               let timeLabel = ' mins';
-              
+
               // Format SHA for display if available
               const shortSha = repo.sha?.substring(0, 6) || '';
               const fullSha = repo.sha || '';
-              
+
               return (
                 <li key={index} style={{ margin: '4px 0', paddingLeft: '4px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', width: '100%', flexWrap: 'nowrap', justifyContent: 'space-between' }}>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      width: '100%',
+                      flexWrap: 'nowrap',
+                      justifyContent: 'space-between',
+                    }}
+                  >
                     {/* Repository column - fixed width with ellipsis */}
-                    <div style={{ minWidth: '120px', maxWidth: '180px', overflow: 'hidden', textOverflow: 'ellipsis', paddingRight: '12px', flexGrow: 0 }}>
+                    <div
+                      style={{
+                        minWidth: '120px',
+                        maxWidth: '180px',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        paddingRight: '12px',
+                        flexGrow: 0,
+                      }}
+                    >
                       <span title={repo.repo}>{repo.repo}</span>
                     </div>
-                    
+
                     {/* SHA column - with copy button */}
                     {repo.sha && (
-                      <div style={{ width: '60px', flexShrink: 0, textAlign: 'left', paddingLeft: '4px', paddingRight: '4px' }}>
+                      <div
+                        style={{
+                          width: '60px',
+                          flexShrink: 0,
+                          textAlign: 'left',
+                          paddingLeft: '4px',
+                          paddingRight: '4px',
+                        }}
+                      >
                         <a
                           className={styles.toolTipLink}
                           href={repo.url}
@@ -195,13 +233,13 @@ const renderTooltip = (payload: ProcessData, service: string) => {
                         >
                           {shortSha}
                         </a>
-                        <span 
+                        <span
                           onClick={() => copyToClipboard(fullSha)}
-                          style={{ 
-                            cursor: 'pointer', 
+                          style={{
+                            cursor: 'pointer',
                             fontSize: '1.2em',
                             color: '#333',
-                            fontWeight: 'bold'
+                            fontWeight: 'bold',
                           }}
                           title="Copy full SHA"
                         >
@@ -209,10 +247,18 @@ const renderTooltip = (payload: ProcessData, service: string) => {
                         </span>
                       </div>
                     )}
-                    
+
                     {/* Link to issue if available */}
                     {repo.issueUrl && (
-                      <div style={{ width: '50px', flexShrink: 0, textAlign: 'center', paddingLeft: '16px', paddingRight: '8px' }}>
+                      <div
+                        style={{
+                          width: '50px',
+                          flexShrink: 0,
+                          textAlign: 'center',
+                          paddingLeft: '16px',
+                          paddingRight: '8px',
+                        }}
+                      >
                         <a
                           href={repo.issueUrl}
                           target="_blank"
@@ -225,17 +271,25 @@ const renderTooltip = (payload: ProcessData, service: string) => {
                             borderRadius: '3px',
                             padding: '1px 4px',
                             fontSize: '0.8em',
-                            fontWeight: 'bold'
+                            fontWeight: 'bold',
                           }}
                         >
                           Issue
                         </a>
                       </div>
                     )}
-                    
+
                     {/* Time value column - always in minutes */}
-                    <div style={{ width: '90px', flexShrink: 0, textAlign: 'right', paddingLeft: '8px' }}>
-                      {timeValue.toFixed(2)}{timeLabel}
+                    <div
+                      style={{
+                        width: '90px',
+                        flexShrink: 0,
+                        textAlign: 'right',
+                        paddingLeft: '8px',
+                      }}
+                    >
+                      {timeValue.toFixed(2)}
+                      {timeLabel}
                     </div>
                   </div>
                 </li>
@@ -291,27 +345,24 @@ const RecoverTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
     }
 
     composedData.forEach((entry: ProcessData) => {
-      entry.services.forEach(
-        (serviceData: ProcessService, key: string) => {
-          services.push(key);
+      entry.services.forEach((serviceData: ProcessService, key: string) => {
+        services.push(key);
 
-          let multiplier = 1;
-          let label = ' hrs';
+        let multiplier = 1;
+        let label = ' hrs';
 
-          if (serviceData.avgTime > 48) {
-            multiplier = 1 / 24;
-            label = ' days';
-          } else if (serviceData.avgTime < 1) {
-            multiplier = 60;
-            label = ' mins';
-          }
+        if (serviceData.avgTime > 48) {
+          multiplier = 1 / 24;
+          label = ' days';
+        } else if (serviceData.avgTime < 1) {
+          multiplier = 60;
+          label = ' mins';
+        }
 
-          serviceData.graphAvgTime =
-            serviceData.avgTime * graphMultiplier;
-          serviceData.avgTime *= multiplier;
-          serviceData.avgLabel = label;
-        },
-      );
+        serviceData.graphAvgTime = serviceData.avgTime * graphMultiplier;
+        serviceData.avgTime *= multiplier;
+        serviceData.avgLabel = label;
+      });
     });
 
     setUsedServices(Array.from(new Set(services)));
@@ -417,7 +468,12 @@ const RecoverTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
         id="rtTooltip"
         border="1px"
         opacity="1"
-        style={{ position: 'fixed', zIndex: 9999, maxWidth: 'none', overflow: 'visible' }}
+        style={{
+          position: 'fixed',
+          zIndex: 9999,
+          maxWidth: 'none',
+          overflow: 'visible',
+        }}
       />
     </div>
   );

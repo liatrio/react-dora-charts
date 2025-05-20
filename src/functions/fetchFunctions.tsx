@@ -55,9 +55,11 @@ export const fetchData = async (
   }
 
   // Use passed dates if available, otherwise use calculated values
-  const start = props.start || (props.daysToPull
-    ? getDateDaysInPastUtc(props.daysToPull)
-    : getDateDaysInPastUtc(defaultDaysToPull));
+  const start =
+    props.start ||
+    (props.daysToPull
+      ? getDateDaysInPastUtc(props.daysToPull)
+      : getDateDaysInPastUtc(defaultDaysToPull));
   const end = props.end || getDateDaysInPastUtc(1);
 
   const body = {

@@ -66,20 +66,22 @@ export const composeGraphData = (_: ChartProps, data: DoraRecord[]): any[] => {
       if (!service) {
         service = {
           count: 1,
-          deployments: [{ 
-            url: record.deploy_url, 
-            repo: record.repository,
-            sha: record.sha
-          }],
+          deployments: [
+            {
+              url: record.deploy_url,
+              repo: record.repository,
+              sha: record.sha,
+            },
+          ],
         };
 
         entry.services.set(serviceName, service);
       } else {
         service.count++;
-        service.deployments.push({ 
-          url: record.deploy_url, 
+        service.deployments.push({
+          url: record.deploy_url,
           repo: record.repository,
-          sha: record.sha
+          sha: record.sha,
         });
       }
 
@@ -107,7 +109,7 @@ const renderTooltip = (payload: ProcessData, service: string) => {
   // Limit to the first 5 deployments to avoid cluttering the tooltip
   const deployments = serviceData.deployments.slice(0, 5);
   const dots = serviceData.deployments.length > 5 ? '...' : '';
-  
+
   // Function to copy SHA to clipboard
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text).catch(err => {
@@ -118,34 +120,73 @@ const renderTooltip = (payload: ProcessData, service: string) => {
   const body = (
     <div style={{ minWidth: '300px', maxWidth: '450px' }}>
       <p style={{ fontWeight: 'bold', marginBottom: '4px' }}>{service}:</p>
-      
+
       {/* Legend row */}
-      <div style={{ 
-        display: 'flex', 
-        fontSize: '0.8em', 
-        color: '#888', 
-        margin: '0 0 4px 0',
-        paddingLeft: '16px'
-      }}>
-        <span style={{ fontStyle: 'italic' }}>[Repository, Deployment SHA]</span>
+      <div
+        style={{
+          display: 'flex',
+          fontSize: '0.8em',
+          color: '#888',
+          margin: '0 0 4px 0',
+          paddingLeft: '16px',
+        }}
+      >
+        <span style={{ fontStyle: 'italic' }}>
+          [Repository, Deployment SHA]
+        </span>
       </div>
-      
-      <ul style={{ margin: '0', paddingLeft: '16px', whiteSpace: 'nowrap', listStyleType: 'disc' }}>
+
+      <ul
+        style={{
+          margin: '0',
+          paddingLeft: '16px',
+          whiteSpace: 'nowrap',
+          listStyleType: 'disc',
+        }}
+      >
         {deployments.map((deployment, index) => {
           // Get abbreviated SHA (first 6 chars)
           const shortSha = deployment.sha?.substring(0, 6) || '';
           const fullSha = deployment.sha || '';
-          
+
           return (
-            <li key={index} style={{ margin: '4px 0', display: 'flex', alignItems: 'center', flexWrap: 'nowrap', paddingLeft: '4px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', width: '100%' }}>
+            <li
+              key={index}
+              style={{
+                margin: '4px 0',
+                display: 'flex',
+                alignItems: 'center',
+                flexWrap: 'nowrap',
+                paddingLeft: '4px',
+              }}
+            >
+              <div
+                style={{ display: 'flex', alignItems: 'center', width: '100%' }}
+              >
                 {/* Repository column - fixed width with ellipsis */}
-                <div style={{ minWidth: '120px', maxWidth: '200px', overflow: 'hidden', textOverflow: 'ellipsis', paddingRight: '12px', flexGrow: 1 }}>
+                <div
+                  style={{
+                    minWidth: '120px',
+                    maxWidth: '200px',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    paddingRight: '12px',
+                    flexGrow: 1,
+                  }}
+                >
                   <span title={deployment.repo}>{deployment.repo}</span>
                 </div>
-                
+
                 {/* SHA column - fixed width */}
-                <div style={{ width: '60px', flexShrink: 0, textAlign: 'left', paddingLeft: '4px', paddingRight: '4px' }}>
+                <div
+                  style={{
+                    width: '60px',
+                    flexShrink: 0,
+                    textAlign: 'left',
+                    paddingLeft: '4px',
+                    paddingRight: '4px',
+                  }}
+                >
                   <a
                     className={styles.toolTipLink}
                     href={deployment.url}
@@ -154,16 +195,18 @@ const renderTooltip = (payload: ProcessData, service: string) => {
                     {shortSha}
                   </a>
                 </div>
-                
+
                 {/* Copy button column - fixed width */}
-                <div style={{ width: '30px', flexShrink: 0, textAlign: 'center' }}>
-                  <span 
+                <div
+                  style={{ width: '30px', flexShrink: 0, textAlign: 'center' }}
+                >
+                  <span
                     onClick={() => copyToClipboard(fullSha)}
-                    style={{ 
-                      cursor: 'pointer', 
+                    style={{
+                      cursor: 'pointer',
                       fontSize: '1.2em',
                       color: '#333',
-                      fontWeight: 'bold'
+                      fontWeight: 'bold',
                     }}
                     title="Copy full SHA"
                   >

@@ -22,10 +22,10 @@ const CustomDot: React.FC<CustomDotProps> = ({
   tooltipId,
 }) => {
   // Access service data from either repositories (old format) or services (new format)
-  const serviceData = payload.services 
-    ? payload.services.get(repository) 
-    : payload.repositories 
-      ? payload.repositories.get(repository) 
+  const serviceData = payload.services
+    ? payload.services.get(repository)
+    : payload.repositories
+      ? payload.repositories.get(repository)
       : undefined;
 
   if (!serviceData) {
