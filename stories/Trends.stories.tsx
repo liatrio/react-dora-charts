@@ -76,7 +76,7 @@ const Template: StoryFn<ChartProps> = () => {
             <option value={1}>Medium</option>
             <option value={2}>High</option>
             <option value={3}>Elite</option>
-            <option value={4}>Service</option>
+            <option value={4}>Team</option>
           </select>
         </div>
         <div className="editorFieldContainer">
