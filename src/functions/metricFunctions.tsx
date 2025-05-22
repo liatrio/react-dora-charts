@@ -89,7 +89,7 @@ const calculateChangeFailureRateAverage = (
   }
 
   const totalRecords = totalSuccessfulRecords + totalFailedRecords;
-  
+
   return (totalFailedRecords / totalRecords) * 100;
 };
 
