@@ -26,9 +26,21 @@ jobs:
       HUSKY: 0
 
     steps:
+      - name: Get Octo-sts token
+        uses: octo-sts/action@6177b4481c00308b3839969c3eca88c96a91775f
+        id: octo-sts
+        with:
+          scope: 'liatrio/react-dora-charts'
+          identity: semantic-release
+
       - uses: actions/checkout@v4
         with:
-          persist-credentials: false
+          fetch-tags: true
+          fetch-depth: 0
+          token: ${{ steps.octo-sts.outputs.token }}
+
+      - name: Fetch all tags
+        run: git fetch --force --tags
 
       - name: Setup node
         id: node
@@ -36,6 +48,7 @@ jobs:
         with:
           node-version-file: '.nvmrc'
           cache: 'npm'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Install dependencies
         run: yarn install
@@ -45,6 +58,7 @@ jobs:
 
       - name: Bump and Release
         env:
-          GITHUB_TOKEN: ${{ secrets.TAGGING_TOKEN }}
+          GITHUB_TOKEN: ${{ steps.octo-sts.outputs.token }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
