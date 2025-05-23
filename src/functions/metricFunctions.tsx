@@ -88,11 +88,9 @@ const calculateChangeFailureRateAverage = (
     return NaN;
   }
 
-  return (
-    (totalFailedRecords /
-      (totalSuccessfulRecords === 0 ? 1 : totalSuccessfulRecords)) *
-    100
-  );
+  const totalRecords = totalSuccessfulRecords + totalFailedRecords;
+
+  return (totalFailedRecords / totalRecords) * 100;
 };
 
 const calculateChangeLeadTimeAverage = (
