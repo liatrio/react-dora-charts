@@ -18,15 +18,20 @@ const hslToHex = (h: number, s: number, l: number) => {
   return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
 };
 
-export const extractUniqueRepositories = (data: DoraRecord[]) => {
-  const repositorySet = new Set<string>();
+export const extractUniqueServices = (data: DoraRecord[]) => {
+  const serviceSet = new Set<string>();
 
   data.forEach(record => {
-    repositorySet.add(record.repository);
+    // Prefer service over repository for v2 API
+    const serviceName = record.service || record.repository;
+    serviceSet.add(serviceName);
   });
 
-  return Array.from(repositorySet);
+  return Array.from(serviceSet);
 };
+
+// Keep for backward compatibility
+export const extractUniqueRepositories = extractUniqueServices;
 
 export const generateDistinctColors = (count: number) => {
   const colors = [];
@@ -136,7 +141,7 @@ export const useSharedLogic = (
     composedData: any,
   ) => void,
 ): SharedLogicReturnType => {
-  const [repositories, setRepositories] = useState<string[]>([]);
+  const [services, setServices] = useState<string[]>([]);
   const [colors, setColors] = useState<string[]>([]);
   const [noData, setNoData] = useState<boolean>(false);
   const [startDate, setStartDate] = useState<Date>(
@@ -149,7 +154,7 @@ export const useSharedLogic = (
   const organizeData = (data: DoraRecord[], start: Date, end: Date) => {
     if (!data || data.length === 0) {
       setNoData(true);
-      setRepositories([]);
+      setServices([]);
       setGraphData([]);
       setColors([]);
       return;
@@ -167,11 +172,11 @@ export const useSharedLogic = (
 
     setGraphData(composedData);
 
-    const repositories = extractUniqueRepositories(filteredData);
+    const servicesList = extractUniqueServices(filteredData);
 
-    setRepositories(repositories);
+    setServices(servicesList);
 
-    setColors(generateDistinctColors(repositories.length));
+    setColors(generateDistinctColors(servicesList.length));
   };
 
   useEffect(() => {
@@ -188,5 +193,5 @@ export const useSharedLogic = (
     organizeData(componentProps.data, start, end);
   }, [componentProps.data, componentProps.graphEnd, componentProps.graphStart]);
 
-  return [startDate, endDate, colors, repositories, noData];
+  return [startDate, endDate, colors, services, noData];
 };

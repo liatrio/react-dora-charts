@@ -29,68 +29,293 @@ import { stripTimeUTC } from './functions/dateFunctions';
 
 interface ProcessData {
   date: number;
-  repositories: Map<string, ProcessRepository>;
+  services: Map<string, ProcessService>;
 }
 
-interface ProcessRepository {
+interface ProcessService {
   date: number;
-  repository: string;
+  service: string;
   successful: number;
   failed: number;
   total: number;
-  failureUrls: string[];
-  successUrls: string[];
+  failureDeployments: Array<{
+    url: string;
+    repo: string;
+    sha?: string;
+    issueUrl?: string;
+  }>;
+  successDeployments: Array<{ url: string; repo: string; sha?: string }>;
 }
 
-const renderTooltip = (payload: ProcessRepository) => {
-  const successUrls = payload.successUrls.slice(0, 5);
-  const successDots = payload.successUrls.length > 5 ? '...' : '';
-  const failureUrls = payload.failureUrls.slice(0, 5);
-  const failureDots = payload.failureUrls.length > 5 ? '...' : '';
+// Helper function to copy SHA to clipboard
+const copyToClipboard = (text: string) => {
+  navigator.clipboard
+    .writeText(text)
+    .then(() => {
+      console.log('SHA copied to clipboard');
+    })
+    .catch(err => {
+      console.error('Could not copy SHA: ', err);
+    });
+};
+
+const renderTooltip = (payload: ProcessService) => {
+  const service = payload.service;
+  const successDeployments = payload.successDeployments.slice(0, 5);
+  const successDots = payload.successDeployments.length > 5 ? '...' : '';
+  const failureDeployments = payload.failureDeployments.slice(0, 5);
+  const failureDots = payload.failureDeployments.length > 5 ? '...' : '';
 
   const body = (
-    <>
-      <p key={uuidv4()}>
-        {payload.repository}: {(payload.total * 100).toFixed(2)}%
+    <div style={{ minWidth: '300px', maxWidth: 'none' }}>
+      <p style={{ fontWeight: 'bold', marginBottom: '4px' }}>
+        {service}: {(payload.total * 100).toFixed(2)}%
       </p>
+
+      {/* Legend row */}
+      <div
+        style={{
+          display: 'flex',
+          fontSize: '0.8em',
+          color: '#888',
+          margin: '0 0 4px 0',
+          paddingLeft: '16px',
+        }}
+      >
+        <span style={{ fontStyle: 'italic' }}>[Repository, SHA]</span>
+      </div>
+
       {payload.successful > 0 && (
-        <span key={uuidv4()} className={styles.toolTipSpan}>
-          Successes:
-          {successUrls.map((url: string, index: number) => {
-            return (
-              <a
-                key={uuidv4()}
-                className={styles.toolTipLink}
-                target="_blank"
-                href={url}
-              >
-                {index + 1}
-              </a>
-            );
-          })}
-          {successDots}
-        </span>
+        <>
+          <span
+            className={styles.toolTipSpan}
+            style={{ fontWeight: 'bold', display: 'block', marginTop: '8px' }}
+          >
+            Successes:
+          </span>
+          <ul
+            style={{
+              margin: '0',
+              paddingLeft: '16px',
+              whiteSpace: 'nowrap',
+              listStyleType: 'disc',
+            }}
+          >
+            {successDeployments.map((deployment, index) => {
+              // Get abbreviated SHA (first 6 chars)
+              const shortSha = deployment.sha?.substring(0, 6) || '';
+              const fullSha = deployment.sha || '';
+
+              return (
+                <li
+                  key={index}
+                  style={{
+                    margin: '4px 0',
+                    display: 'flex',
+                    alignItems: 'center',
+                    flexWrap: 'nowrap',
+                    paddingLeft: '4px',
+                  }}
+                >
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      width: '100%',
+                    }}
+                  >
+                    {/* Repository column - fixed width with ellipsis */}
+                    <div
+                      style={{
+                        minWidth: '120px',
+                        maxWidth: '200px',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        paddingRight: '12px',
+                        flexGrow: 1,
+                      }}
+                    >
+                      <span title={deployment.repo}>{deployment.repo}</span>
+                    </div>
+
+                    {/* SHA column - fixed width */}
+                    <div
+                      style={{
+                        width: '60px',
+                        flexShrink: 0,
+                        textAlign: 'left',
+                        paddingLeft: '4px',
+                        paddingRight: '4px',
+                      }}
+                    >
+                      <a
+                        className={styles.toolTipLink}
+                        href={deployment.url}
+                        target="_blank"
+                      >
+                        {shortSha || 'Deployment'}
+                      </a>
+                    </div>
+
+                    {/* Copy button column - fixed width */}
+                    <div
+                      style={{
+                        width: '30px',
+                        flexShrink: 0,
+                        textAlign: 'center',
+                      }}
+                    >
+                      {shortSha && (
+                        <span
+                          onClick={() => copyToClipboard(fullSha)}
+                          style={{
+                            cursor: 'pointer',
+                            fontSize: '1.2em',
+                            color: '#333',
+                            fontWeight: 'bold',
+                          }}
+                          title="Copy full SHA"
+                        >
+                          ⎘
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </li>
+              );
+            })}
+            {successDots && <li>...</li>}
+          </ul>
+        </>
       )}
-      {payload.failed > 0 && payload.successful > 0 && <br key={uuidv4()} />}
+
       {payload.failed > 0 && (
-        <span key={uuidv4()} className={styles.toolTipSpan}>
-          Issues:
-          {failureUrls.map((url: string, index: number) => {
-            return (
-              <a
-                key={uuidv4()}
-                className={styles.toolTipLink}
-                target="_blank"
-                href={url}
-              >
-                {index + 1}
-              </a>
-            );
-          })}
-          {failureDots}
-        </span>
+        <>
+          <span
+            className={styles.toolTipSpan}
+            style={{ fontWeight: 'bold', display: 'block', marginTop: '8px' }}
+          >
+            Issues:
+          </span>
+          <ul
+            style={{
+              margin: '0',
+              paddingLeft: '16px',
+              whiteSpace: 'nowrap',
+              listStyleType: 'disc',
+            }}
+          >
+            {failureDeployments.map((deployment, index) => {
+              // Get abbreviated SHA (first 6 chars)
+              const shortSha = deployment.sha?.substring(0, 6) || '';
+              const fullSha = deployment.sha || '';
+
+              return (
+                <li
+                  key={index}
+                  style={{
+                    margin: '4px 0',
+                    display: 'flex',
+                    alignItems: 'center',
+                    flexWrap: 'nowrap',
+                    paddingLeft: '4px',
+                  }}
+                >
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      width: '100%',
+                    }}
+                  >
+                    {/* Repository column - fixed width with ellipsis */}
+                    <div
+                      style={{
+                        minWidth: '120px',
+                        maxWidth: '200px',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        paddingRight: '12px',
+                        flexGrow: 0,
+                      }}
+                    >
+                      <span title={deployment.repo}>{deployment.repo}</span>
+                    </div>
+
+                    {/* SHA column - with deployment link */}
+                    {deployment.sha && (
+                      <div
+                        style={{
+                          width: '60px',
+                          flexShrink: 0,
+                          textAlign: 'left',
+                          paddingLeft: '4px',
+                          paddingRight: '4px',
+                        }}
+                      >
+                        <a
+                          className={styles.toolTipLink}
+                          href={deployment.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          title="View deployment"
+                        >
+                          {shortSha}
+                        </a>
+                        <span
+                          onClick={() => copyToClipboard(fullSha)}
+                          style={{
+                            cursor: 'pointer',
+                            fontSize: '1.2em',
+                            color: '#333',
+                            fontWeight: 'bold',
+                          }}
+                          title="Copy full SHA"
+                        >
+                          ⎘
+                        </span>
+                      </div>
+                    )}
+
+                    {/* Link to issue if available */}
+                    {deployment.issueUrl && (
+                      <div
+                        style={{
+                          width: '50px',
+                          flexShrink: 0,
+                          textAlign: 'center',
+                          paddingLeft: '16px',
+                          paddingRight: '8px',
+                        }}
+                      >
+                        <a
+                          href={deployment.issueUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          title="View issue"
+                          style={{
+                            color: '#e74c3c',
+                            textDecoration: 'none',
+                            border: '1px solid #e74c3c',
+                            borderRadius: '3px',
+                            padding: '1px 4px',
+                            fontSize: '0.8em',
+                            fontWeight: 'bold',
+                          }}
+                        >
+                          Issue
+                        </a>
+                      </div>
+                    )}
+                  </div>
+                </li>
+              );
+            })}
+            {failureDots && <li>...</li>}
+          </ul>
+        </>
       )}
-    </>
+    </div>
   );
 
   const date = new Date(payload.date).toISOString().split('T')[0];
@@ -104,7 +329,7 @@ const tickFormatter = (tick: number) => {
 };
 
 export const composeGraphData = (_: ChartProps, data: DoraRecord[]) => {
-  const allData: ProcessRepository[] = [];
+  const allData: ProcessService[] = [];
 
   const processed = new Map<number, ProcessData>();
 
@@ -115,60 +340,79 @@ export const composeGraphData = (_: ChartProps, data: DoraRecord[]) => {
     if (!entry) {
       entry = {
         date: date,
-        repositories: new Map<string, ProcessRepository>(),
+        services: new Map<string, ProcessService>(),
       };
 
       processed.set(date, entry);
     }
 
-    const key = record.repository;
-    let count = entry.repositories.get(key);
+    // Use service if available, fall back to repository for backward compatibility
+    const serviceName = record.service || record.repository;
+    // Keep track of the actual repository for display
+    const repoName = record.repository;
+    let service = entry.services.get(serviceName);
 
-    if (!count) {
-      count = {
+    if (!service) {
+      service = {
         date: date,
-        repository: key,
+        service: serviceName,
         successful: 0,
         failed: 0,
         total: 0,
-        failureUrls: [],
-        successUrls: [],
+        failureDeployments: [],
+        successDeployments: [],
       };
 
       if (record.status && !record.failed_at) {
-        count.successful = 1;
-        count.successUrls.push(record.deploy_url);
+        service.successful = 1;
+        service.successDeployments.push({
+          url: record.deploy_url,
+          repo: repoName,
+          sha: record.sha,
+        });
       } else {
-        count.failed = 1;
-        count.failureUrls.push(record.issue_url ?? record.deploy_url);
+        service.failed = 1;
+        service.failureDeployments.push({
+          url: record.issue_url ?? record.deploy_url,
+          repo: repoName,
+          sha: record.sha,
+          issueUrl: record.issue_url,
+        });
       }
 
-      entry.repositories.set(key, count);
+      entry.services.set(serviceName, service);
     } else {
       if (record.status && !record.failed_at) {
-        count.successful++;
-        count.successUrls.push(record.deploy_url);
+        service.successful++;
+        service.successDeployments.push({
+          url: record.deploy_url,
+          repo: repoName,
+          sha: record.sha,
+        });
       } else {
-        count.failed++;
-        count.failureUrls.push(record.issue_url ?? record.deploy_url);
+        service.failed++;
+        service.failureDeployments.push({
+          url: record.issue_url ?? record.deploy_url,
+          repo: repoName,
+          sha: record.sha,
+          issueUrl: record.issue_url,
+        });
       }
     }
   });
 
   processed.forEach((data: ProcessData) => {
-    Array.from(data.repositories.keys()).forEach(
-      (key: string, index: number) => {
-        const repoData = data.repositories.get(key)!;
+    Array.from(data.services.keys()).forEach((key: string, index: number) => {
+      const serviceData = data.services.get(key)!;
 
-        const total = repoData.failed + repoData.successful;
+      const total = serviceData.failed + serviceData.successful;
 
-        repoData.total = repoData.failed / (total < 1 ? 1 : total);
+      serviceData.total = serviceData.failed / (total < 1 ? 1 : total);
 
-        repoData.date += index;
+      serviceData.date += index;
 
-        allData.push(repoData);
-      },
-    );
+      allData.push(serviceData);
+    });
   });
 
   allData.sort((l: any, r: any) => r.total - l.total);
@@ -249,9 +493,7 @@ const ChangeFailureRateGraph: React.FC<ChartProps> = (props: ChartProps) => {
             shape={(props: any) => (
               <CustomLayeredBar
                 {...props}
-                color={
-                  colors[repositories.findIndex(r => r === props.repository)]
-                }
+                color={colors[repositories.findIndex(r => r === props.service)]}
                 tooltipId="cfrTooltip"
                 barWidth={chartProperties.maxBarWidth}
                 tooltipContentBuilder={renderTooltip}

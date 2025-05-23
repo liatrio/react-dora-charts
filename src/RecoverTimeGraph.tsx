@@ -31,17 +31,37 @@ import { v4 as uuidv4 } from 'uuid';
 import styles from './chart.module.css';
 import { stripTimeUTC } from './functions/dateFunctions';
 
-interface ProcessRepository {
+// Helper function to copy SHA to clipboard
+const copyToClipboard = (text: string) => {
+  navigator.clipboard
+    .writeText(text)
+    .then(() => {
+      console.log('SHA copied to clipboard');
+    })
+    .catch(err => {
+      console.error('Could not copy SHA: ', err);
+    });
+};
+
+interface ProcessService {
   count: number;
   totalTime: number;
   avgTime: number;
   avgLabel: string;
   graphAvgTime: number;
+  // Store repository information for detailed tooltips
+  repositoryTimes: Array<{
+    repo: string;
+    time: number;
+    url?: string;
+    sha?: string;
+    issueUrl?: string;
+  }>;
 }
 
 interface ProcessData {
   date: number;
-  repositories: Map<string, ProcessRepository>;
+  services: Map<string, ProcessService>;
 }
 
 export const composeGraphData = (props: ChartProps, data: DoraRecord[]) => {
@@ -59,28 +79,49 @@ export const composeGraphData = (props: ChartProps, data: DoraRecord[]) => {
       if (!entry) {
         entry = {
           date: date,
-          repositories: new Map<string, ProcessRepository>(),
+          services: new Map<string, ProcessService>(),
         };
 
         acc.set(date, entry);
       }
 
-      let payload = entry.repositories.get(record.repository);
+      // Use service name if available, fall back to repository for backward compatibility
+      const serviceName = record.service || record.repository;
+      const repoName = record.repository;
+      let service = entry.services.get(serviceName);
 
       const recoverTime = calculateRecoverTime(record);
 
-      if (!payload) {
-        entry.repositories.set(record.repository, {
+      if (!service) {
+        service = {
           count: 1,
           totalTime: recoverTime,
           avgTime: recoverTime,
           avgLabel: ' hrs',
           graphAvgTime: 0,
-        });
+          repositoryTimes: [
+            {
+              repo: repoName,
+              time: recoverTime,
+              url: record.deploy_url,
+              sha: record.sha,
+              issueUrl: record.issue_url,
+            },
+          ],
+        };
+
+        entry.services.set(serviceName, service);
       } else {
-        payload.count++;
-        payload.totalTime += recoverTime;
-        payload.avgTime += payload.totalTime / payload.count;
+        service.count++;
+        service.totalTime += recoverTime;
+        service.avgTime = service.totalTime / service.count;
+        service.repositoryTimes.push({
+          repo: repoName,
+          time: recoverTime,
+          url: record.deploy_url,
+          sha: record.sha,
+          issueUrl: record.issue_url,
+        });
       }
 
       return acc;
@@ -97,20 +138,167 @@ export const composeGraphData = (props: ChartProps, data: DoraRecord[]) => {
   return result;
 };
 
-const renderTooltip = (payload: ProcessData, repository: string) => {
-  const repositoryData = payload.repositories.get(repository);
+const renderTooltip = (payload: ProcessData, service: string) => {
+  const serviceData = payload.services.get(service);
 
-  if (!repositoryData) {
+  if (!serviceData) {
     return null;
   }
 
+  // Get repository details for better tooltip context
+  const repoTimes = serviceData.repositoryTimes || [];
+
   const body = (
-    <>
-      <p key={uuidv4()}>
-        {repository}: {repositoryData.avgTime.toFixed(2)}{' '}
-        {repositoryData.avgLabel}
+    <div style={{ minWidth: '300px', maxWidth: 'none' }}>
+      <p style={{ fontWeight: 'bold', marginBottom: '4px' }}>
+        {service}: {serviceData.avgTime.toFixed(2)} {serviceData.avgLabel}
       </p>
-    </>
+
+      {repoTimes.length > 0 && (
+        <>
+          {/* Legend row */}
+          <div
+            style={{
+              display: 'flex',
+              fontSize: '0.8em',
+              color: '#888',
+              margin: '0 0 4px 0',
+              paddingLeft: '16px',
+            }}
+          >
+            <span style={{ fontStyle: 'italic' }}>
+              Recovery times by repository
+            </span>
+          </div>
+
+          <ul
+            style={{
+              margin: '0',
+              paddingLeft: '16px',
+              whiteSpace: 'nowrap',
+              listStyleType: 'disc',
+            }}
+          >
+            {repoTimes.map((repo, index) => {
+              // Always convert time to minutes to match the label
+              let timeValue = repo.time * 60; // Convert hours to minutes
+              let timeLabel = ' mins';
+
+              // Format SHA for display if available
+              const shortSha = repo.sha?.substring(0, 6) || '';
+              const fullSha = repo.sha || '';
+
+              return (
+                <li key={index} style={{ margin: '4px 0', paddingLeft: '4px' }}>
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      width: '100%',
+                      flexWrap: 'nowrap',
+                      justifyContent: 'space-between',
+                    }}
+                  >
+                    {/* Repository column - fixed width with ellipsis */}
+                    <div
+                      style={{
+                        minWidth: '120px',
+                        maxWidth: '180px',
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        paddingRight: '12px',
+                        flexGrow: 0,
+                      }}
+                    >
+                      <span title={repo.repo}>{repo.repo}</span>
+                    </div>
+
+                    {/* SHA column - with copy button */}
+                    {repo.sha && (
+                      <div
+                        style={{
+                          width: '60px',
+                          flexShrink: 0,
+                          textAlign: 'left',
+                          paddingLeft: '4px',
+                          paddingRight: '4px',
+                        }}
+                      >
+                        <a
+                          className={styles.toolTipLink}
+                          href={repo.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          title="View deployment"
+                        >
+                          {shortSha}
+                        </a>
+                        <span
+                          onClick={() => copyToClipboard(fullSha)}
+                          style={{
+                            cursor: 'pointer',
+                            fontSize: '1.2em',
+                            color: '#333',
+                            fontWeight: 'bold',
+                          }}
+                          title="Copy full SHA"
+                        >
+                          ⎘
+                        </span>
+                      </div>
+                    )}
+
+                    {/* Link to issue if available */}
+                    {repo.issueUrl && (
+                      <div
+                        style={{
+                          width: '50px',
+                          flexShrink: 0,
+                          textAlign: 'center',
+                          paddingLeft: '16px',
+                          paddingRight: '8px',
+                        }}
+                      >
+                        <a
+                          href={repo.issueUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          title="View issue"
+                          style={{
+                            color: '#e74c3c',
+                            textDecoration: 'none',
+                            border: '1px solid #e74c3c',
+                            borderRadius: '3px',
+                            padding: '1px 4px',
+                            fontSize: '0.8em',
+                            fontWeight: 'bold',
+                          }}
+                        >
+                          Issue
+                        </a>
+                      </div>
+                    )}
+
+                    {/* Time value column - always in minutes */}
+                    <div
+                      style={{
+                        width: '90px',
+                        flexShrink: 0,
+                        textAlign: 'right',
+                        paddingLeft: '8px',
+                      }}
+                    >
+                      {timeValue.toFixed(2)}
+                      {timeLabel}
+                    </div>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        </>
+      )}
+    </div>
   );
 
   const date = new Date(payload.date).toISOString().split('T')[0];
@@ -119,20 +307,20 @@ const renderTooltip = (payload: ProcessData, repository: string) => {
   return <TooltipContent body={body} title={title} />;
 };
 
-const dataKeyFunc = (obj: ProcessData, repository: string): any => {
-  const repositoryData = obj.repositories.get(repository);
+const dataKeyFunc = (obj: ProcessData, service: string): any => {
+  const serviceData = obj.services.get(service);
 
-  if (!repositoryData) {
+  if (!serviceData) {
     return NaN;
   }
 
-  return repositoryData.graphAvgTime;
+  return serviceData.graphAvgTime;
 };
 
 const RecoverTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
   const [graphData, setGraphData] = useState<ProcessData[]>([]);
   const tooltipRef = useRef<TooltipRefProps>(null);
-  const [usedRepositories, setUsedRepositories] = useState<string[]>([]);
+  const [usedServices, setUsedServices] = useState<string[]>([]);
   const [yLabel, setYLabel] = useState<any>(' hrs');
 
   const postCompose = (
@@ -142,7 +330,7 @@ const RecoverTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
   ) => {
     const state = buildDoraState(componentProps, data);
 
-    const repositories: string[] = [];
+    const services: string[] = [];
 
     let graphMultiplier = 1;
 
@@ -157,33 +345,30 @@ const RecoverTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
     }
 
     composedData.forEach((entry: ProcessData) => {
-      entry.repositories.forEach(
-        (repositoryData: ProcessRepository, key: string) => {
-          repositories.push(key);
+      entry.services.forEach((serviceData: ProcessService, key: string) => {
+        services.push(key);
 
-          let multiplier = 1;
-          let label = ' hrs';
+        let multiplier = 1;
+        let label = ' hrs';
 
-          if (repositoryData.avgTime > 48) {
-            multiplier = 1 / 24;
-            label = ' days';
-          } else if (repositoryData.avgTime < 1) {
-            multiplier = 60;
-            label = ' mins';
-          }
+        if (serviceData.avgTime > 48) {
+          multiplier = 1 / 24;
+          label = ' days';
+        } else if (serviceData.avgTime < 1) {
+          multiplier = 60;
+          label = ' mins';
+        }
 
-          repositoryData.graphAvgTime =
-            repositoryData.avgTime * graphMultiplier;
-          repositoryData.avgTime *= multiplier;
-          repositoryData.avgLabel = label;
-        },
-      );
+        serviceData.graphAvgTime = serviceData.avgTime * graphMultiplier;
+        serviceData.avgTime *= multiplier;
+        serviceData.avgLabel = label;
+      });
     });
 
-    setUsedRepositories(Array.from(new Set(repositories)));
+    setUsedServices(Array.from(new Set(services)));
   };
 
-  const [startDate, endDate, colors, _, noData] = useSharedLogic(
+  const [startDate, endDate, colors, services, noData] = useSharedLogic(
     props,
     composeGraphData,
     setGraphData,
@@ -239,34 +424,34 @@ const RecoverTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
             tickFormatter={formatDateTicks}
           />
           <YAxis name="Time" unit={yLabel} tick={chartProperties.tickFill} />
-          {usedRepositories.map((repository, idx) => (
+          {usedServices.map((service, idx) => (
             <Line
               connectNulls={true}
               type="monotone"
               animationDuration={0}
-              key={repository}
-              dataKey={(obj: ProcessData) => dataKeyFunc(obj, repository)}
+              key={service}
+              dataKey={(obj: ProcessData) => dataKeyFunc(obj, service)}
               fill={colors[idx]}
               stroke={colors[idx]}
               dot={(props: any) => (
                 <CustomDot
                   {...props}
-                  repository={repository}
+                  repository={service} /* Keep prop name for compatibility */
                   tooltipId="rtTooltip"
                   tooltipRef={tooltipRef}
                   tooltipContentBuilder={() =>
-                    renderTooltip(props.payload, repository)
+                    renderTooltip(props.payload, service)
                   }
                 />
               )}
               activeDot={(props: any) => (
                 <CustomDot
                   {...props}
-                  repository={repository}
+                  repository={service} /* Keep prop name for compatibility */
                   tooltipId="rtTooltip"
                   tooltipRef={tooltipRef}
                   tooltipContentBuilder={() =>
-                    renderTooltip(props.payload, repository)
+                    renderTooltip(props.payload, service)
                   }
                 />
               )}
@@ -283,6 +468,12 @@ const RecoverTimeGraph: React.FC<ChartProps> = (props: ChartProps) => {
         id="rtTooltip"
         border="1px"
         opacity="1"
+        style={{
+          position: 'fixed',
+          zIndex: 9999,
+          maxWidth: 'none',
+          overflow: 'visible',
+        }}
       />
     </div>
   );
