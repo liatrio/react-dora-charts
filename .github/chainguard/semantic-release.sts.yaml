@@ -5,3 +5,5 @@ subject_pattern: repo:liatrio/react-dora-charts:.*
 permissions:
   contents: write
   packages: write
+  issues: write
+  pull_requests: write
