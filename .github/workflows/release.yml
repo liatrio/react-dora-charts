@@ -21,48 +21,51 @@ jobs:
     permissions:
       id-token: write
       contents: write
+      issues: write
+      pull-requests: write
 
     env:
       HUSKY: 0
 
     steps:
-      - name: Get Octo-sts token
-        uses: octo-sts/action@6177b4481c00308b3839969c3eca88c96a91775f
+      - name: Generate Token with Octo-STS
         id: octo-sts
+        uses: octo-sts/action@210248e8ae1ae1550aa6e232c6f192b3ccbf7335
         with:
           scope: 'liatrio/react-dora-charts'
           identity: semantic-release
 
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
-          fetch-tags: true
-          fetch-depth: 0
           token: ${{ steps.octo-sts.outputs.token }}
+          fetch-depth: 0
 
-      - name: Setup node
-        id: node
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
-          cache: 'npm'
+          cache: 'yarn'
 
       - name: Install dependencies
-        run: yarn install
+        run: yarn install --frozen-lockfile
 
       - name: Build the project
         run: yarn rollup
 
-      - name: Get GitHub App User ID
+      - name: Get GitHub App User ID for octo-sts[bot]
         id: get-user-id
-        run: echo "user-id=$(gh api "/users/octo-sts[bot]" --jq .id)" >> "$GITHUB_OUTPUT"
+        run: echo "user_id=$(gh api "/users/octo-sts[bot]" --jq .id)" >> "$GITHUB_OUTPUT"
         env:
           GH_TOKEN: ${{ steps.octo-sts.outputs.token }}
 
-      - name: Bump and Release
+      - name: Configure Git User
+        run: |
+          git config --global user.name "octo-sts[bot]"
+          git config --global user.email "${{ steps.get-user-id.outputs.user_id }}+octo-sts[bot]@users.noreply.github.com"
+
+      - name: Run semantic-release
+        run: npx semantic-release
         env:
           GITHUB_TOKEN: ${{ steps.octo-sts.outputs.token }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: |
-          git config --global user.name 'octo-sts[bot]'
-          git config --global user.email "${{ steps.get-user-id.outputs.user-id }}+octo-sts[bot]@users.noreply.github.com"
-          npx semantic-release
