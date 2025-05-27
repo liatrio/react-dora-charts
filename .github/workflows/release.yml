@@ -60,10 +60,14 @@ jobs:
 
       - name: Bump and Release
         env:
-          GITHUB_TOKEN: ${{ steps.octo-sts.outputs.token }}
+          GITHUB_TOKEN: ${{ steps.octo-sts.outputs.token }} # For semantic-release API calls & push auth
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          GIT_AUTHOR_NAME: octo-sts[bot]
-          GIT_AUTHOR_EMAIL: ${{ steps.get-user-id.outputs.user-id }}+octo-sts[bot]@users.noreply.github.com
-          GIT_COMMITTER_NAME: octo-sts[bot]
-          GIT_COMMITTER_EMAIL: ${{ steps.get-user-id.outputs.user-id }}+octo-sts[bot]@users.noreply.github.com
-        run: npx semantic-release
+        run: |
+          git config --global user.name 'octo-sts[bot]'
+          git config --global user.email "${{ steps.get-user-id.outputs.user-id }}+octo-sts[bot]@users.noreply.github.com"
+
+          # Explicitly set remote URL with the octo-sts token for this repo's origin
+          # This ensures subsequent git pushes by semantic-release use this authenticated URL
+          git remote set-url origin "https://x-access-token:${{ env.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git"
+
+          npx semantic-release
