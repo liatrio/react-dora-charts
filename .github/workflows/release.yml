@@ -57,7 +57,7 @@ jobs:
         run: echo "user-id=$(gh api "/users/octo-sts[bot]" --jq .id)" >> "$GITHUB_OUTPUT"
         env:
           GH_TOKEN: ${{ steps.octo-sts.outputs.token }}
-          
+
       - name: Bump and Release
         env:
           GITHUB_TOKEN: ${{ steps.octo-sts.outputs.token }}
