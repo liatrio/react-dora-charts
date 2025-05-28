@@ -6,6 +6,26 @@
 
 ### Features
 
+* API to use service instead of component ([#73](https://github.com/liatrio/react-dora-charts/issues/73)) ([b69445e](https://github.com/liatrio/react-dora-charts/commit/b69445e4aa3eb24050e2f6a61aa368b9a443b57b))
+* switch from teams to services ([#72](https://github.com/liatrio/react-dora-charts/issues/72)) ([e0f0999](https://github.com/liatrio/react-dora-charts/commit/e0f0999e93730f279d999e507177449ece63de45))
+
+### Bug Fixes
+
+* correct average CFR calculation ([#76](https://github.com/liatrio/react-dora-charts/issues/76)) ([5a046c9](https://github.com/liatrio/react-dora-charts/commit/5a046c9a4cab3397b43ae5fbb53b03853e281466))
+* **deps:** update dependency rollup to v4.41.1 ([#69](https://github.com/liatrio/react-dora-charts/issues/69)) ([861555f](https://github.com/liatrio/react-dora-charts/commit/861555fd128381bb9e710f6c98a3d817f681d076))
+
+### Reverts
+
+* reverting main back to v1.1.10 ([#75](https://github.com/liatrio/react-dora-charts/issues/75)) ([ae08be5](https://github.com/liatrio/react-dora-charts/commit/ae08be55a3715e1966303140a1f14bd7d6482f83))
+
+## [2.0.0](https://github.com/liatrio/react-dora-charts/compare/v1.1.10...v2.0.0) (2025-05-28)
+
+### ⚠ BREAKING CHANGES
+
+* The component-based API has been replaced with a service-based approach.
+
+### Features
+
 * API to use service instead of component ([#73](https://github.com/liatrio/react-dora-charts/issues/73)) ([638e49a](https://github.com/liatrio/react-dora-charts/commit/638e49a873aa55853cfb1e71f466c8c4e5f2f4a0))
 
 ### Bug Fixes
