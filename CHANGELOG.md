@@ -1,3 +1,9 @@
+## [2.0.1](https://github.com/liatrio/react-dora-charts/compare/v2.0.0...v2.0.1) (2025-05-28)
+
+### Bug Fixes
+
+* fixing package.json ([8abb891](https://github.com/liatrio/react-dora-charts/commit/8abb891135315e25b2e13ffaa63763c9953672de))
+
 ## [2.0.0](https://github.com/liatrio/react-dora-charts/compare/v1.1.10...v2.0.0) (2025-05-28)
 
 ### ⚠ BREAKING CHANGES
