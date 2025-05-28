@@ -19,8 +19,10 @@ jobs:
     runs-on: ubuntu-latest
     concurrency: release
     permissions:
+      packages: write
       id-token: write
       contents: write
+      attestations: write
 
     env:
       HUSKY: 0
