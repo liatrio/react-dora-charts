@@ -1,3 +1,20 @@
+## [1.2.0](https://github.com/liatrio/react-dora-charts/compare/v1.1.10...v1.2.0) (2025-05-28)
+
+### Features
+
+* API to use service instead of component ([#73](https://github.com/liatrio/react-dora-charts/issues/73)) ([46da467](https://github.com/liatrio/react-dora-charts/commit/46da467d752b192ce53d143961b589b905fc8493))
+* switch from teams to services ([#72](https://github.com/liatrio/react-dora-charts/issues/72)) ([e0f0999](https://github.com/liatrio/react-dora-charts/commit/e0f0999e93730f279d999e507177449ece63de45))
+
+### Bug Fixes
+
+* correct average CFR calculation ([#76](https://github.com/liatrio/react-dora-charts/issues/76)) ([7ba45c0](https://github.com/liatrio/react-dora-charts/commit/7ba45c04fe3dd636555b8068a799487e2cb1f1a0))
+* **deps:** update dependency rollup to v4.41.1 ([#69](https://github.com/liatrio/react-dora-charts/issues/69)) ([0a7311f](https://github.com/liatrio/react-dora-charts/commit/0a7311f4cd35d856ed98088b8473dd3010d9ac0f))
+* fixing package.json ([ba18aa3](https://github.com/liatrio/react-dora-charts/commit/ba18aa3d0f1baa8b9f6bd456ed34698c7f28559d))
+
+### Reverts
+
+* reverting main back to v1.1.10 ([#75](https://github.com/liatrio/react-dora-charts/issues/75)) ([81dfab3](https://github.com/liatrio/react-dora-charts/commit/81dfab36796799dc212ab4e80fdfc7ca00a5d37f))
+
 ## [1.1.10](https://github.com/liatrio/react-dora-charts/compare/v1.1.9...v1.1.10) (2025-02-06)
 
 ### Bug Fixes
