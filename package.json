@@ -92,7 +92,7 @@
     "react-datepicker": "^7.3.0",
     "react-dom": "^18.0.0",
     "resize-observer-polyfill": "^1.5.1",
-    "rimraf": "^5.0.7",
+    "rimraf": "^6.0.0",
     "rollup": "4.41.1",
     "rollup-plugin-dts": "^6.1.1",
     "rollup-plugin-peer-deps-external": "^2.2.4",
