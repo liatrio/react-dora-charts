@@ -29,7 +29,7 @@ jobs:
 
     steps:
       - name: Get Octo-sts token
-        uses: octo-sts/action@6177b4481c00308b3839969c3eca88c96a91775f
+        uses: octo-sts/action@f16dbe546c4de7f01aac84e4c0d165e633ff2eb5
         id: octo-sts
         with:
           scope: 'liatrio/react-dora-charts'
